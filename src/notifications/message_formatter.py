@@ -16,19 +16,45 @@ def _legs(bet: Bet) -> str:
     return " + ".join(f"{leg.home} ({leg.outcome.value})" for leg in bet.legs)
 
 
-def format_daily_plan(plan: DailyPlan, target_bankroll: float = 1000.0) -> str:
-    """Report mattutino: le bet del giorno + stima EV."""
+def format_daily_plan(
+    plan: DailyPlan,
+    target_bankroll: float = 1000.0,
+    is_mock: bool = False,
+    n_matches: int | None = None,
+) -> str:
+    """
+    Report mattutino: le bet del giorno + stima EV.
+
+    `is_mock=True`   → antepone un avviso: i dati NON sono reali (manca la chiave).
+    `n_matches==0`   → segnala che oggi non ci sono partite in finestra (24-30h),
+                       invece del messaggio "nessuna bet di valore".
+    """
     progresso = min(plan.bankroll / target_bankroll, 1.0) if target_bankroll else 0.0
-    lines = [
-        _LINE,
+    lines = [_LINE]
+    if is_mock:
+        lines += [
+            "⚠️ DATI DI ESEMPIO — queste NON sono partite reali.",
+            "   Per le partite vere serve la chiave ODDS_API_KEY (vedi guida).",
+            "",
+        ]
+    lines += [
         f"☀️ PIANO DI GIOCO — {plan.plan_date:%d/%m/%Y}",
         "",
         f"💰 Bankroll: €{plan.bankroll:.2f} | 🎯 Obiettivo: €{target_bankroll:.0f}",
         f"📊 Budget oggi: €{plan.budget:.2f} | Stake: €{plan.stake:.2f}",
         f"📈 Progresso: {progresso:.1%}",
-        "",
-        f"═══ LE TUE {len(plan.all_bets)} BET DI OGGI ═══",
     ]
+
+    if n_matches == 0 and not is_mock:
+        lines += [
+            "",
+            "📅 Nessuna partita in programma nelle prossime ore.",
+            "   Nessuna bet oggi: a domani.",
+            _LINE,
+        ]
+        return "\n".join(lines)
+
+    lines += ["", f"═══ LE TUE {len(plan.all_bets)} BET DI OGGI ═══"]
 
     if plan.singole:
         lines.append("\n🎯 SINGOLE")

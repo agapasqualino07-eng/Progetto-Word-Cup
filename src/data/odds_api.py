@@ -13,15 +13,29 @@ Usa solo la standard library (urllib), così il core resta senza dipendenze.
 from __future__ import annotations
 
 import json
+import os
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 
 from ..constants import group_of
 
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"
 SPORT_KEY = "soccer_fifa_world_cup"
+
+
+def _default_window_hours() -> float:
+    """Finestra temporale di default (ore): solo partite nelle prossime N ore.
+    Così il piano del mattino contiene le partite di OGGI, non tutto il calendario.
+    Sovrascrivibile con la variabile d'ambiente PLAN_WINDOW_HOURS."""
+    try:
+        return float(os.environ.get("PLAN_WINDOW_HOURS", 30.0))
+    except (TypeError, ValueError):
+        return 30.0
+
+
+DEFAULT_WINDOW_HOURS = _default_window_hours()
 
 
 @dataclass
@@ -34,12 +48,50 @@ class MatchOdds:
     odds_2: float          # vittoria trasferta
     source: str            # "the-odds-api:<book>" oppure "MOCK"
     commence_date: date | None = None
+    commence_time: datetime | None = None   # orario di inizio (UTC), per il filtro
     group: str | None = None
     matchday: int | None = None
 
     @property
     def is_mock(self) -> bool:
         return self.source == "MOCK"
+
+
+def _parse_iso(value: str | None) -> datetime | None:
+    """Parsa un timestamp ISO 8601 (es. '2026-06-12T18:00:00Z') in datetime UTC."""
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def filter_upcoming(
+    matches: list["MatchOdds"],
+    within_hours: float | None,
+    now: datetime | None = None,
+) -> list["MatchOdds"]:
+    """
+    Tiene solo le partite che iniziano da adesso fino a `within_hours` ore dopo.
+    Le partite senza orario noto vengono escluse (non sappiamo collocarle: meglio
+    ometterle che mostrarle nel giorno sbagliato). `within_hours=None` → nessun filtro.
+    """
+    if within_hours is None:
+        return matches
+    now = now or datetime.now(timezone.utc)
+    horizon = now + timedelta(hours=within_hours)
+    kept = []
+    for m in matches:
+        ct = m.commence_time
+        if ct is None:
+            continue
+        if ct.tzinfo is None:
+            ct = ct.replace(tzinfo=timezone.utc)
+        if now <= ct <= horizon:
+            kept.append(m)
+    return kept
 
 
 # ---------------------------------------------------------------------------
@@ -87,18 +139,25 @@ class OddsCollector:
         self.regions = regions
 
     def get_odds(
-        self, use_mock: bool | None = None, plan_date: date | None = None
+        self,
+        use_mock: bool | None = None,
+        plan_date: date | None = None,
+        within_hours: float | None = DEFAULT_WINDOW_HOURS,
     ) -> list[MatchOdds]:
         """
         use_mock=None  → auto (mock se manca la chiave)
         use_mock=True  → forza mock
         use_mock=False → forza API (errore se manca la chiave)
+
+        Sui dati REALI (API) applica il filtro `within_hours`: tiene solo le
+        partite in programma nelle prossime ore. I dati MOCK non vengono filtrati
+        (sono deterministici, per demo/test). `within_hours=None` → nessun filtro.
         """
         if use_mock is True or (use_mock is None and not self.api_key):
             return mock_matchday(plan_date)
         if not self.api_key:
             raise RuntimeError("ODDS_API_KEY mancante: impossibile usare The Odds API")
-        return self._fetch_api()
+        return filter_upcoming(self._fetch_api(), within_hours)
 
     def _fetch_api(self) -> list[MatchOdds]:
         url = (
@@ -129,6 +188,7 @@ class OddsCollector:
         ox = prices.get("Draw")
         if not (o1 and ox and o2):
             return None
+        ct = _parse_iso(ev.get("commence_time"))
         return MatchOdds(
             match_id=ev.get("id", f"{home}-{away}"),
             home=home,
@@ -137,5 +197,7 @@ class OddsCollector:
             odds_x=float(ox),
             odds_2=float(o2),
             source=f"the-odds-api:{book.get('key', '?')}",
+            commence_date=ct.date() if ct else None,
+            commence_time=ct,
             group=group_of(home),
         )
