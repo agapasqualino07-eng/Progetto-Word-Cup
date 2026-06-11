@@ -36,11 +36,11 @@ def _load_model():
     return None, None
 
 
-def _today_plan(bankroll: float | None = None) -> tuple[DailyPlan, bool, int, str | None]:
+def _today_plan(bankroll: float | None = None):
     """
-    Genera il piano di oggi. Ritorna (piano, is_mock, n_partite, nota_modello).
-    Senza chiave Odds API i dati sono MOCK (etichettati); con chiave sono reali
-    e filtrati alle partite delle prossime ore. Usa rating reali se disponibili.
+    Genera il piano di oggi. Ritorna (piano, is_mock, n_partite, nota_modello,
+    odds, model). Senza chiave Odds API i dati sono MOCK (etichettati); con chiave
+    sono reali e filtrati alle partite delle prossime ore. Usa rating reali se ci sono.
     """
     collector = OddsCollector(settings.odds_api_key)
     odds = collector.get_odds()
@@ -48,7 +48,7 @@ def _today_plan(bankroll: float | None = None) -> tuple[DailyPlan, bool, int, st
     model, model_note = _load_model()
     plan = generate_plan(odds, bankroll or settings.initial_bankroll, date.today(),
                          model=model)
-    return plan, is_mock, len(odds), model_note
+    return plan, is_mock, len(odds), model_note, odds, model
 
 
 def send_daily_plan(
@@ -62,13 +62,19 @@ def send_daily_plan(
     Invia (o stampa, in dry-run) il piano di giornata con i pulsanti di conferma.
     Usa il client stdlib: nessuna dipendenza esterna. Ritorna il testo inviato.
     """
+    forecasts_text = ""
     if plan is None:
-        plan, is_mock, n_matches, model_note = _today_plan()
+        plan, is_mock, n_matches, model_note, odds, model = _today_plan()
+        # Pronostici per OGNI partita in finestra (a prescindere dalle scommesse).
+        from ..services.forecast import build_forecasts, format_forecasts
+        forecasts_text = format_forecasts(build_forecasts(odds, model))
     else:
         is_mock, n_matches, model_note = False, None, None
     text = format_daily_plan(plan, settings.target_bankroll,
                              is_mock=is_mock, n_matches=n_matches,
                              model_note=model_note)
+    if forecasts_text:
+        text += "\n\n" + forecasts_text
 
     token = token or settings.telegram_token
     chat_id = chat_id or settings.telegram_chat_id
