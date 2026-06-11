@@ -58,8 +58,26 @@ sola standard library) e coperto da test:
 ```bash
 python -m unittest discover -s tests   # 77 test (solo standard library)
 python -m examples.demo_piano          # demo: piano 4-4-2
-python -m src.backtest.backtester      # backtest su dati di esempio
+python -m src.backtest.backtester      # backtest (dati reali se presenti, altrimenti sample)
 ```
+
+### Backtest con dati storici REALI
+
+Il backtester è il **gate prima del denaro reale**: ha senso solo su partite vere.
+
+1. Copia il template e riempilo con partite reali (Mondiale 2022, Euro 2024…),
+   quote di **apertura** e **chiusura** incluse:
+   ```bash
+   cp data/history_template.csv data/raw/history.csv   # poi compila il CSV
+   python -m src.backtest.backtester                    # gira sui tuoi dati reali
+   ```
+   In alternativa indica un percorso: `WCE_HISTORY_CSV=/percorso/file.csv python -m src.backtest.backtester`
+2. Il loader **valida** ogni riga (esito 1/X/2, quote > 1.0) e **non inventa nulla**:
+   se il file manca, avvisa e ripiega sul sample etichettato (risultato *non* indicativo).
+3. Regola d'oro: **live solo se ROI > 0 e CLV medio > 0** sul backtest reale.
+
+> ⚠️ Inserisci solo quote/risultati **verificati**. Il file reale (`data/raw/`) non
+> viene versionato.
 
 👉 **Cosa devi fare tu** (chiavi API, repo GitHub, run sul tuo PC, dati storici):
 vedi **[`ISTRUZIONI.md`](ISTRUZIONI.md)**.
@@ -110,7 +128,9 @@ implementati (vedi `ISTRUZIONI.md` §5):
   (ECE < 0.05), Optuna, SHAP. *Una calibrazione base (shrinkage) c'è già.*
 - **News engine avanzato:** più testate, sentiment con modello calibrato (oggi:
   RSS + lessico trasparente), risoluzione automatica partita↔squadre.
-- **Loader dati storici reali** per il backtest (oggi gira su dati sintetici).
+- ~~**Loader dati storici reali** per il backtest~~ ✅ **FATTO**
+  (`src/backtest/history_loader.py`): carica partite reali da CSV con validazione;
+  serve ancora popolare il dataset (`data/raw/history.csv`). Vedi sotto.
 - **Market movement detector** + integrazione live del cashout advisor.
 - **Update live** Telegram durante le partite (oggi: piano mattutino + report serale).
 - **Dashboard** Plotly Dash via WebSocket.

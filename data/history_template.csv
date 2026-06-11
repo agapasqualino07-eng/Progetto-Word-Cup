@@ -1,0 +1,14 @@
+# Template per i dati storici REALI del backtester.
+# Copia questo file in  data/raw/history.csv  e riempilo con partite VERE
+# (es. Mondiale 2022, Euro 2024) con quote di apertura e chiusura reali.
+# Righe vuote e righe che iniziano con '#' vengono ignorate.
+#
+# Colonne (obbligatorie):
+#   home,away  = squadre        actual = esito reale: 1 | X | 2
+#   open_*     = quote 1/X/2 all'apertura (alla scommessa)
+#   close_*    = quote 1/X/2 alla chiusura (per il calcolo del CLV)
+#
+# ATTENZIONE: NON inventare quote o risultati. Inserisci solo dati verificati
+# da una fonte affidabile (bookmaker / archivio quote). Riga sotto = SOLO formato.
+home,away,actual,open_1,open_x,open_2,close_1,close_x,close_2
+# ESEMPIO_DI_FORMATO,DA_CANCELLARE,1,1.80,3.50,4.50,1.75,3.55,4.70
