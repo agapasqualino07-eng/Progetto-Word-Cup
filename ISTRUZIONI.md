@@ -1,6 +1,6 @@
 # ISTRUZIONI — cosa resta da fare a te
 
-Il **codice** è pronto e gira (38 test verdi, API + backtester + bot funzionanti
+Il **codice** è pronto e gira (77 test verdi, API + backtester + bot funzionanti
 con dati mock). Quello che segue è ciò che **solo tu** puoi fare: serve la TUA
 macchina, i TUOI account/chiavi e il TUO repo. Tutto il resto (codice) lo faccio io.
 

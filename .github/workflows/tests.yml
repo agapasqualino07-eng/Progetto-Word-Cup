@@ -1,0 +1,21 @@
+# Esegue la suite di test ad ogni push e pull request.
+# Il core gira con la sola standard library: nessuna dipendenza da installare,
+# quindi la CI è veloce e affidabile (verde = il core funziona davvero).
+name: Test
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Esegui i test (stdlib, zero dipendenze)
+        run: python -m unittest discover -s tests -v

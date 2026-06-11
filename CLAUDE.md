@@ -32,7 +32,7 @@ MANCANTE`, mai notizie inventate (i `mock_news` sono solo per demo/test).
 ## Comandi
 
 ```bash
-python -m unittest discover -s tests   # 38 test (standard library, zero deps)
+python -m unittest discover -s tests   # 77 test (standard library, zero deps)
 python -m examples.demo_piano          # demo end-to-end
 python -m src.backtest.backtester      # backtest (dati di esempio)
 uvicorn src.main:app --reload          # API (richiede fastapi+uvicorn)

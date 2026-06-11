@@ -1,5 +1,7 @@
 # WorldCupEdge ⚽🎯
 
+[![Test](https://github.com/agapasqualino07-eng/Progetto-Word-Cup/actions/workflows/tests.yml/badge.svg)](https://github.com/agapasqualino07-eng/Progetto-Word-Cup/actions/workflows/tests.yml)
+
 Sistema di **ricerca quantitativa** sulle scommesse per la **FIFA World Cup 2026**
 (48 nazionali, 104 partite, 11 giugno – 19 luglio 2026).
 
@@ -54,7 +56,7 @@ sola standard library) e coperto da test:
 ### Avvio rapido (senza installare nulla)
 
 ```bash
-python -m unittest discover -s tests   # 38 test (solo standard library)
+python -m unittest discover -s tests   # 77 test (solo standard library)
 python -m examples.demo_piano          # demo: piano 4-4-2
 python -m src.backtest.backtester      # backtest su dati di esempio
 ```
@@ -138,7 +140,7 @@ worldcupedge/
 │       ├── value_engine.py · correlation_matrix.py
 │       ├── daily_allocator.py  # allocazione 4-4-2
 │       └── risk_manager.py
-├── tests/                      # 38 test (unittest, zero dipendenze)
+├── tests/                      # 77 test (unittest, zero dipendenze)
 ├── examples/demo_piano.py      # demo end-to-end
 ├── requirements.txt · Dockerfile · docker-compose.yml
 ├── .env.example · pytest.ini
