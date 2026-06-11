@@ -118,4 +118,20 @@ class Backtester:
 
 
 if __name__ == "__main__":
-    print(Backtester().run().summary())
+    # Preferisci dati storici REALI (data/raw/history.csv o $WCE_HISTORY_CSV);
+    # se assenti, ripiega sul sample ETICHETTATO avvisando l'utente.
+    from .history_loader import HistoryLoadError, load_real_history
+
+    try:
+        real = load_real_history()
+    except HistoryLoadError as exc:
+        print(f"⚠️  Dati storici non validi: {exc}")
+        raise SystemExit(1)
+
+    if real:
+        print(f"📂 Dati storici REALI: {len(real)} partite caricate.")
+        print(Backtester().run(real).summary())
+    else:
+        print("⚠️  Nessun dato storico reale trovato (data/raw/history.csv).")
+        print("    Backtest su dati DI ESEMPIO (sintetici): risultato NON indicativo.")
+        print(Backtester().run().summary())
