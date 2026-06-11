@@ -31,6 +31,7 @@ def format_daily_plan(
     target_bankroll: float = 1000.0,
     is_mock: bool = False,
     n_matches: int | None = None,
+    model_note: str | None = None,
 ) -> str:
     """
     Report mattutino: le bet del giorno + stima EV.
@@ -54,6 +55,8 @@ def format_daily_plan(
         f"📊 Budget oggi: €{plan.budget:.2f} | Stake: €{plan.stake:.2f}",
         f"📈 Progresso: {progresso:.1%}",
     ]
+    if model_note:
+        lines.append(model_note)
 
     if n_matches == 0 and not is_mock:
         lines += [

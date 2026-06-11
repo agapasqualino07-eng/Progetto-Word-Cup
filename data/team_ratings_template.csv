@@ -1,0 +1,60 @@
+# Template rating squadre per il modello (punto di forza per nazionale).
+# Copia in  data/raw/team_ratings.csv  e compila la colonna 'rating'.
+#
+# Cosa mettere in 'rating': un numero di forza da una fonte REALE e coerente
+# per tutte le squadre. Vanno bene scale diverse purche' la STESSA per tutti:
+#   - ELO nazionali (eloratings.net), tipicamente ~1300-2100, oppure
+#   - punti del FIFA/Coca-Cola World Ranking (fifa.com), tipicamente ~1000-2000.
+# Conta la posizione relativa: i valori vengono normalizzati (z-score).
+#
+# REGOLE: non inventare i numeri (usa una fonte verificabile). Le righe lasciate
+# vuote vengono ignorate (la squadra usa la stima 'a fascia' di base).
+team,rating
+Algeria,
+Arabia Saudita,
+Argentina,
+Australia,
+Austria,
+Belgio,
+Bosnia-Erzegovina,
+Brasile,
+Canada,
+Capo Verde,
+Cechia,
+Colombia,
+Congo DR,
+Corea del Sud,
+Costa d'Avorio,
+Croazia,
+Curaçao,
+Ecuador,
+Egitto,
+Francia,
+Germania,
+Ghana,
+Giappone,
+Giordania,
+Haiti,
+Inghilterra,
+Iran,
+Iraq,
+Marocco,
+Messico,
+Norvegia,
+Nuova Zelanda,
+Olanda,
+Panama,
+Paraguay,
+Portogallo,
+Qatar,
+Scozia,
+Senegal,
+Spagna,
+Sudafrica,
+Svezia,
+Svizzera,
+Tunisia,
+Turchia,
+USA,
+Uruguay,
+Uzbekistan,

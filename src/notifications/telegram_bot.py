@@ -21,17 +21,34 @@ from .message_formatter import format_daily_plan, format_help
 from .telegram_client import CONFIRM_BUTTONS, send_message
 
 
-def _today_plan(bankroll: float | None = None) -> tuple[DailyPlan, bool, int]:
+def _load_model():
+    """PoissonModel con rating REALI se presenti, altrimenti modello base a fasce.
+    Ritorna (model_or_None, nota_per_il_messaggio)."""
+    from ..ml.ratings_loader import RatingsLoadError, load_ratings_model
+
+    try:
+        model = load_ratings_model()
+    except RatingsLoadError as exc:
+        print(f"[ratings] file rating non valido: {exc} → uso le fasce base")
+        return None, None
+    if model is not None:
+        return model, "🧠 Modello: rating reali"
+    return None, None
+
+
+def _today_plan(bankroll: float | None = None) -> tuple[DailyPlan, bool, int, str | None]:
     """
-    Genera il piano di oggi. Ritorna (piano, is_mock, n_partite).
+    Genera il piano di oggi. Ritorna (piano, is_mock, n_partite, nota_modello).
     Senza chiave Odds API i dati sono MOCK (etichettati); con chiave sono reali
-    e filtrati alle partite delle prossime ore.
+    e filtrati alle partite delle prossime ore. Usa rating reali se disponibili.
     """
     collector = OddsCollector(settings.odds_api_key)
     odds = collector.get_odds()
     is_mock = bool(odds) and any(o.is_mock for o in odds)
-    plan = generate_plan(odds, bankroll or settings.initial_bankroll, date.today())
-    return plan, is_mock, len(odds)
+    model, model_note = _load_model()
+    plan = generate_plan(odds, bankroll or settings.initial_bankroll, date.today(),
+                         model=model)
+    return plan, is_mock, len(odds), model_note
 
 
 def send_daily_plan(
@@ -46,11 +63,12 @@ def send_daily_plan(
     Usa il client stdlib: nessuna dipendenza esterna. Ritorna il testo inviato.
     """
     if plan is None:
-        plan, is_mock, n_matches = _today_plan()
+        plan, is_mock, n_matches, model_note = _today_plan()
     else:
-        is_mock, n_matches = False, None
+        is_mock, n_matches, model_note = False, None, None
     text = format_daily_plan(plan, settings.target_bankroll,
-                             is_mock=is_mock, n_matches=n_matches)
+                             is_mock=is_mock, n_matches=n_matches,
+                             model_note=model_note)
 
     token = token or settings.telegram_token
     chat_id = chat_id or settings.telegram_chat_id
@@ -104,10 +122,11 @@ def run_bot(token: str | None = None) -> None:
     async def oggi(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         odds = _today_odds(ctx)
         is_mock = bool(odds) and any(o.is_mock for o in odds)
-        plan = generate_plan(odds, settings.initial_bankroll, date.today())
+        model, model_note = _load_model()
+        plan = generate_plan(odds, settings.initial_bankroll, date.today(), model=model)
         await update.message.reply_text(
-            format_daily_plan(plan, settings.target_bankroll,
-                              is_mock=is_mock, n_matches=len(odds)),
+            format_daily_plan(plan, settings.target_bankroll, is_mock=is_mock,
+                              n_matches=len(odds), model_note=model_note),
             reply_markup=_plan_keyboard(odds),
         )
 
