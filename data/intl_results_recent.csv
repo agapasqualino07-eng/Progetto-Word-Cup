@@ -1,0 +1,309 @@
+# Risultati internazionali REALI tra le 48 nazionali del Mondiale 2026 (dal 2024-01-01).
+# Fonte: dataset pubblico 'martj42/international_results' (GitHub), risultati verificabili.
+# Usato per il backtest di ACCURATEZZA del modello (NON servono quote).
+date,home,away,home_score,away_score,neutral
+2024-01-05,Qatar,Giordania,1,2,false
+2024-01-06,Iraq,Corea del Sud,0,1,true
+2024-01-09,Giappone,Giordania,6,1,true
+2024-01-10,Tunisia,Capo Verde,2,0,false
+2024-01-14,Ghana,Capo Verde,1,2,true
+2024-01-18,Egitto,Ghana,2,2,true
+2024-01-19,Iraq,Giappone,2,1,true
+2024-01-20,Giordania,Corea del Sud,2,2,true
+2024-01-21,Marocco,Congo DR,1,1,true
+2024-01-22,Capo Verde,Egitto,2,2,true
+2024-01-23,Australia,Uzbekistan,1,1,true
+2024-01-24,Sudafrica,Tunisia,0,0,true
+2024-01-28,Egitto,Congo DR,1,1,true
+2024-01-29,Costa d'Avorio,Senegal,1,1,false
+2024-01-29,Iraq,Giordania,2,3,true
+2024-01-30,Arabia Saudita,Corea del Sud,1,1,true
+2024-01-30,Marocco,Sudafrica,0,2,true
+2024-02-02,Australia,Corea del Sud,1,2,true
+2024-02-03,Capo Verde,Sudafrica,0,0,true
+2024-02-03,Iran,Giappone,2,1,true
+2024-02-03,Qatar,Uzbekistan,1,1,false
+2024-02-06,Giordania,Corea del Sud,2,0,true
+2024-02-07,Costa d'Avorio,Congo DR,1,0,false
+2024-02-07,Qatar,Iran,3,2,false
+2024-02-10,Qatar,Giordania,3,1,false
+2024-02-10,Sudafrica,Congo DR,0,0,true
+2024-03-21,Panama,Messico,0,3,true
+2024-03-21,Portogallo,Svezia,5,2,false
+2024-03-22,Egitto,Nuova Zelanda,1,0,false
+2024-03-22,Norvegia,Cechia,1,2,false
+2024-03-22,Olanda,Scozia,4,0,false
+2024-03-22,Spagna,Colombia,0,1,true
+2024-03-23,Francia,Germania,0,2,false
+2024-03-23,Inghilterra,Brasile,0,1,false
+2024-03-23,Tunisia,Croazia,0,0,true
+2024-03-24,USA,Messico,2,0,false
+2024-03-26,Algeria,Sudafrica,3,3,false
+2024-03-26,Austria,Turchia,6,1,false
+2024-03-26,Costa d'Avorio,Uruguay,2,1,true
+2024-03-26,Egitto,Croazia,2,4,false
+2024-03-26,Germania,Olanda,2,1,false
+2024-03-26,Inghilterra,Belgio,2,2,false
+2024-03-26,Nuova Zelanda,Tunisia,0,0,true
+2024-03-26,Spagna,Brasile,3,3,false
+2024-06-03,Inghilterra,Bosnia-Erzegovina,3,0,false
+2024-06-05,Messico,Uruguay,0,4,true
+2024-06-06,Olanda,Canada,4,0,false
+2024-06-06,Senegal,Congo DR,1,1,false
+2024-06-08,Messico,Brasile,2,3,true
+2024-06-08,Portogallo,Croazia,1,2,false
+2024-06-08,Svizzera,Austria,1,1,false
+2024-06-08,USA,Colombia,1,5,false
+2024-06-09,Argentina,Ecuador,1,0,true
+2024-06-09,Francia,Canada,0,0,false
+2024-06-11,Arabia Saudita,Giordania,1,2,false
+2024-06-11,Iran,Uzbekistan,0,0,false
+2024-06-12,USA,Brasile,1,1,false
+2024-06-14,Germania,Scozia,5,1,false
+2024-06-15,Spagna,Croazia,3,0,true
+2024-06-16,Panama,Paraguay,0,1,false
+2024-06-17,Austria,Francia,0,1,true
+2024-06-18,Portogallo,Cechia,2,1,true
+2024-06-19,Scozia,Svizzera,1,1,true
+2024-06-20,Argentina,Canada,2,0,true
+2024-06-21,Olanda,Francia,0,0,true
+2024-06-22,Turchia,Portogallo,0,3,true
+2024-06-23,Germania,Svizzera,1,1,false
+2024-06-23,Uruguay,Panama,3,1,true
+2024-06-24,Colombia,Paraguay,2,1,true
+2024-06-25,Olanda,Austria,2,3,true
+2024-06-26,Cechia,Turchia,1,2,true
+2024-06-27,USA,Panama,1,2,false
+2024-06-28,Paraguay,Brasile,1,4,true
+2024-06-30,Messico,Ecuador,0,0,true
+2024-07-01,Francia,Belgio,1,0,true
+2024-07-01,USA,Uruguay,0,1,false
+2024-07-02,Austria,Turchia,1,2,true
+2024-07-02,Brasile,Colombia,1,1,true
+2024-07-04,Argentina,Ecuador,1,1,true
+2024-07-05,Germania,Spagna,1,2,false
+2024-07-05,Portogallo,Francia,0,0,true
+2024-07-06,Colombia,Panama,5,0,true
+2024-07-06,Inghilterra,Svizzera,1,1,true
+2024-07-06,Olanda,Turchia,2,1,true
+2024-07-06,Uruguay,Brasile,0,0,true
+2024-07-09,Argentina,Canada,2,0,true
+2024-07-09,Spagna,Francia,2,1,true
+2024-07-10,Olanda,Inghilterra,1,2,true
+2024-07-10,Uruguay,Colombia,0,1,true
+2024-07-13,Canada,Uruguay,2,2,true
+2024-07-14,Argentina,Colombia,1,0,true
+2024-07-14,Spagna,Inghilterra,2,1,true
+2024-09-05,Portogallo,Croazia,2,1,false
+2024-09-06,Brasile,Ecuador,1,0,false
+2024-09-06,Egitto,Capo Verde,3,0,false
+2024-09-06,Uruguay,Paraguay,0,0,false
+2024-09-07,Messico,Nuova Zelanda,3,0,true
+2024-09-07,Olanda,Bosnia-Erzegovina,5,2,false
+2024-09-07,USA,Canada,1,2,false
+2024-09-08,Portogallo,Scozia,2,1,false
+2024-09-08,Svizzera,Spagna,1,4,false
+2024-09-09,Francia,Belgio,2,0,false
+2024-09-09,Norvegia,Austria,2,1,false
+2024-09-10,Colombia,Argentina,2,1,false
+2024-09-10,Messico,Canada,0,0,true
+2024-09-10,Olanda,Germania,2,2,false
+2024-09-10,Paraguay,Brasile,1,0,false
+2024-09-10,USA,Nuova Zelanda,1,1,false
+2024-10-10,Arabia Saudita,Giappone,0,2,false
+2024-10-10,Ecuador,Paraguay,0,0,false
+2024-10-10,Giordania,Corea del Sud,0,2,false
+2024-10-10,Uzbekistan,Iran,0,0,false
+2024-10-11,Bosnia-Erzegovina,Germania,1,2,false
+2024-10-12,Croazia,Scozia,2,1,false
+2024-10-12,USA,Panama,2,0,false
+2024-10-13,Austria,Norvegia,5,1,false
+2024-10-14,Belgio,Francia,1,2,false
+2024-10-14,Germania,Olanda,1,0,false
+2024-10-15,Canada,Panama,2,1,false
+2024-10-15,Corea del Sud,Iraq,3,2,false
+2024-10-15,Giappone,Australia,1,1,false
+2024-10-15,Iran,Qatar,4,1,true
+2024-10-15,Messico,USA,2,0,false
+2024-10-15,Scozia,Portogallo,0,0,false
+2024-10-15,Uruguay,Ecuador,0,0,false
+2024-11-14,Australia,Arabia Saudita,0,0,false
+2024-11-14,Iraq,Giordania,0,0,false
+2024-11-14,Paraguay,Argentina,2,1,false
+2024-11-14,Qatar,Uzbekistan,3,2,false
+2024-11-15,Capo Verde,Egitto,1,1,false
+2024-11-15,Scozia,Croazia,1,0,false
+2024-11-15,Uruguay,Colombia,3,2,false
+2024-11-16,Germania,Bosnia-Erzegovina,7,0,false
+2024-11-18,Croazia,Portogallo,1,1,false
+2024-11-18,Spagna,Svizzera,3,2,false
+2024-11-19,Bosnia-Erzegovina,Olanda,1,1,false
+2024-11-19,Brasile,Uruguay,1,1,false
+2024-11-19,Colombia,Ecuador,0,1,false
+2024-12-28,Iraq,Arabia Saudita,1,3,true
+2025-01-22,Uzbekistan,Giordania,0,0,true
+2025-03-20,Brasile,Colombia,2,1,false
+2025-03-20,Canada,Messico,0,2,true
+2025-03-20,Croazia,Francia,2,0,false
+2025-03-20,Olanda,Spagna,2,2,false
+2025-03-20,USA,Panama,0,1,false
+2025-03-21,Uruguay,Argentina,0,1,false
+2025-03-23,Francia,Croazia,2,0,false
+2025-03-23,Panama,Messico,1,2,true
+2025-03-23,Spagna,Olanda,3,3,false
+2025-03-23,USA,Canada,1,2,false
+2025-03-25,Argentina,Brasile,4,1,false
+2025-03-25,Colombia,Paraguay,2,2,false
+2025-03-25,Corea del Sud,Giordania,1,1,false
+2025-03-25,Giappone,Arabia Saudita,0,0,false
+2025-03-25,Iran,Uzbekistan,2,2,false
+2025-05-30,Arabia Saudita,Giordania,2,0,false
+2025-06-04,Germania,Portogallo,1,2,false
+2025-06-05,Australia,Giappone,1,0,false
+2025-06-05,Ecuador,Brasile,0,0,false
+2025-06-05,Iraq,Corea del Sud,0,2,false
+2025-06-05,Paraguay,Uruguay,2,0,false
+2025-06-05,Qatar,Iran,1,0,false
+2025-06-05,Spagna,Francia,5,4,true
+2025-06-06,Marocco,Tunisia,2,0,false
+2025-06-07,Costa d'Avorio,Nuova Zelanda,0,1,true
+2025-06-07,Messico,Svizzera,2,4,true
+2025-06-07,USA,Turchia,1,2,false
+2025-06-08,Germania,Francia,0,2,false
+2025-06-08,Portogallo,Spagna,2,2,true
+2025-06-09,Croazia,Cechia,5,1,false
+2025-06-10,Arabia Saudita,Australia,1,2,false
+2025-06-10,Argentina,Colombia,1,1,false
+2025-06-10,Brasile,Paraguay,1,0,false
+2025-06-10,Canada,Costa d'Avorio,0,0,false
+2025-06-10,Giordania,Iraq,0,1,false
+2025-06-10,Haiti,Curaçao,1,5,true
+2025-06-10,Inghilterra,Senegal,1,3,false
+2025-06-10,Messico,Turchia,1,0,true
+2025-06-10,Svezia,Algeria,4,3,false
+2025-06-10,USA,Svizzera,0,4,false
+2025-06-10,Uzbekistan,Qatar,3,0,false
+2025-06-15,Haiti,Arabia Saudita,0,1,true
+2025-06-19,USA,Arabia Saudita,1,0,false
+2025-06-21,Curaçao,Canada,1,1,true
+2025-06-22,USA,Haiti,2,1,false
+2025-06-28,Messico,Arabia Saudita,2,0,true
+2025-07-06,USA,Messico,1,2,false
+2025-09-04,Paraguay,Ecuador,0,0,false
+2025-09-05,Australia,Nuova Zelanda,1,0,false
+2025-09-06,Messico,Giappone,0,0,true
+2025-09-06,USA,Corea del Sud,0,2,false
+2025-09-07,Turchia,Spagna,0,6,false
+2025-09-08,Cechia,Arabia Saudita,1,1,false
+2025-09-09,Bosnia-Erzegovina,Austria,1,2,false
+2025-09-09,Congo DR,Senegal,2,3,false
+2025-09-09,Ecuador,Argentina,1,0,false
+2025-09-09,Messico,Corea del Sud,2,2,true
+2025-09-09,Nuova Zelanda,Australia,1,3,false
+2025-09-09,USA,Giappone,2,0,false
+2025-10-09,Cechia,Croazia,0,0,false
+2025-10-10,Canada,Australia,0,1,false
+2025-10-10,Corea del Sud,Brasile,0,5,false
+2025-10-10,Giappone,Paraguay,2,2,false
+2025-10-10,Svezia,Svizzera,0,2,false
+2025-10-10,USA,Ecuador,1,1,false
+2025-10-11,Messico,Colombia,0,4,true
+2025-10-13,Uzbekistan,Uruguay,1,2,true
+2025-10-14,Arabia Saudita,Iraq,0,0,false
+2025-10-14,Canada,Colombia,0,0,true
+2025-10-14,Corea del Sud,Paraguay,2,0,false
+2025-10-14,Giappone,Brasile,3,2,false
+2025-10-14,Messico,Ecuador,1,1,false
+2025-10-14,Norvegia,Nuova Zelanda,1,1,false
+2025-10-14,USA,Australia,2,1,false
+2025-11-13,Canada,Ecuador,0,0,false
+2025-11-13,Iran,Capo Verde,0,0,true
+2025-11-14,Arabia Saudita,Costa d'Avorio,1,0,false
+2025-11-14,Giappone,Ghana,2,0,false
+2025-11-14,Tunisia,Giordania,3,2,false
+2025-11-14,Uzbekistan,Egitto,2,0,true
+2025-11-15,Brasile,Senegal,2,0,true
+2025-11-15,Colombia,Nuova Zelanda,2,1,true
+2025-11-15,Messico,Uruguay,0,0,false
+2025-11-15,Svizzera,Svezia,4,1,false
+2025-11-15,USA,Paraguay,2,1,false
+2025-11-17,Capo Verde,Egitto,1,1,true
+2025-11-18,Arabia Saudita,Algeria,0,2,false
+2025-11-18,Austria,Bosnia-Erzegovina,1,1,false
+2025-11-18,Brasile,Tunisia,1,1,true
+2025-11-18,Colombia,Australia,3,0,true
+2025-11-18,Corea del Sud,Ghana,1,0,false
+2025-11-18,Ecuador,Nuova Zelanda,2,0,true
+2025-11-18,Iran,Uzbekistan,0,0,true
+2025-11-18,Messico,Paraguay,1,2,true
+2025-11-18,Spagna,Turchia,2,2,false
+2025-11-18,USA,Uruguay,5,1,false
+2025-12-07,Qatar,Tunisia,0,3,false
+2025-12-08,Marocco,Arabia Saudita,1,0,true
+2025-12-09,Algeria,Iraq,2,0,true
+2025-12-09,Egitto,Giordania,0,3,true
+2025-12-12,Giordania,Iraq,1,0,true
+2025-12-15,Arabia Saudita,Giordania,0,1,true
+2025-12-18,Giordania,Marocco,2,3,true
+2025-12-26,Egitto,Sudafrica,1,0,true
+2025-12-27,Senegal,Congo DR,1,1,true
+2026-01-06,Algeria,Congo DR,1,0,true
+2026-01-10,Egitto,Costa d'Avorio,3,2,true
+2026-01-14,Senegal,Egitto,1,0,true
+2026-01-18,Marocco,Senegal,3,0,false
+2026-01-22,Panama,Messico,0,1,false
+2026-03-26,Brasile,Francia,1,2,true
+2026-03-26,Colombia,Croazia,1,2,true
+2026-03-27,Arabia Saudita,Egitto,0,4,false
+2026-03-27,Austria,Ghana,5,1,false
+2026-03-27,Inghilterra,Uruguay,1,1,false
+2026-03-27,Marocco,Ecuador,1,1,true
+2026-03-27,Olanda,Norvegia,2,1,false
+2026-03-27,Sudafrica,Panama,1,1,false
+2026-03-27,Svizzera,Germania,3,4,false
+2026-03-28,Costa d'Avorio,Corea del Sud,4,0,true
+2026-03-28,Haiti,Tunisia,0,1,true
+2026-03-28,Messico,Portogallo,0,0,false
+2026-03-28,Scozia,Giappone,0,1,false
+2026-03-28,USA,Belgio,2,5,false
+2026-03-29,Colombia,Francia,1,3,true
+2026-03-30,Germania,Ghana,2,1,false
+2026-03-31,Algeria,Uruguay,0,0,true
+2026-03-31,Australia,Curaçao,5,1,false
+2026-03-31,Austria,Corea del Sud,1,0,false
+2026-03-31,Brasile,Croazia,3,1,true
+2026-03-31,Canada,Tunisia,0,0,false
+2026-03-31,Costa d'Avorio,Scozia,1,0,true
+2026-03-31,Inghilterra,Giappone,0,1,false
+2026-03-31,Marocco,Paraguay,2,1,true
+2026-03-31,Messico,Belgio,1,1,true
+2026-03-31,Norvegia,Svizzera,0,0,false
+2026-03-31,Olanda,Ecuador,1,1,false
+2026-03-31,Spagna,Egitto,0,0,false
+2026-03-31,Sudafrica,Panama,1,2,false
+2026-03-31,USA,Portogallo,0,2,false
+2026-05-22,Messico,Ghana,2,0,false
+2026-05-30,Ecuador,Arabia Saudita,2,1,true
+2026-05-30,Messico,Australia,1,0,true
+2026-05-30,Scozia,Curaçao,4,1,false
+2026-05-31,Brasile,Panama,6,2,false
+2026-05-31,Svizzera,Giordania,4,1,false
+2026-05-31,USA,Senegal,3,2,false
+2026-06-01,Austria,Tunisia,1,0,false
+2026-06-01,Canada,Uzbekistan,2,0,false
+2026-06-01,Norvegia,Svezia,3,1,false
+2026-06-02,Croazia,Belgio,0,2,false
+2026-06-02,Haiti,Nuova Zelanda,4,0,true
+2026-06-03,Olanda,Algeria,0,1,false
+2026-06-04,Francia,Costa d'Avorio,1,2,false
+2026-06-04,Spagna,Iraq,1,1,false
+2026-06-06,Australia,Svizzera,1,1,true
+2026-06-06,Belgio,Tunisia,5,0,false
+2026-06-06,Brasile,Egitto,2,1,true
+2026-06-06,Inghilterra,Nuova Zelanda,1,0,true
+2026-06-06,Panama,Bosnia-Erzegovina,1,1,true
+2026-06-06,USA,Germania,1,2,false
+2026-06-07,Giordania,Colombia,0,2,true
+2026-06-07,Marocco,Norvegia,1,1,true
+2026-06-08,Olanda,Uzbekistan,2,1,true
+2026-06-09,Arabia Saudita,Senegal,0,0,true
