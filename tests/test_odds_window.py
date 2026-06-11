@@ -77,6 +77,14 @@ class TestMockBanner(unittest.TestCase):
         text = format_daily_plan(plan, 1000.0, is_mock=False, n_matches=0)
         self.assertIn("Nessuna partita in programma", text)
 
+    def test_skipped_matches_shown_with_reason(self):
+        # Il mock contiene partite senza valore: devono comparire come "saltate".
+        plan = generate_plan(mock_matchday(), 100.0, date(2026, 6, 16))
+        self.assertTrue(plan.skipped, "ci si aspetta partite scartate nel mock")
+        text = format_daily_plan(plan, 1000.0)
+        self.assertIn("Altre partite di oggi", text)
+        self.assertIn("nessun valore", text)
+
 
 if __name__ == "__main__":
     unittest.main()

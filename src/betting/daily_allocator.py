@@ -103,6 +103,7 @@ class DailyAllocator:
             singole=singole,
             doppie=doppie,
             triple=triple,
+            considered=list(selections),
         )
 
     @staticmethod
