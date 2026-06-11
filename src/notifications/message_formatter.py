@@ -6,14 +6,24 @@ testare il testo senza una connessione Telegram.
 """
 from __future__ import annotations
 
-from ..anti_hallucination import VERIFY_ODDS
-from ..models.schemas import Bet, DailyPlan
+from ..anti_hallucination import VERIFY_ODDS, is_betable
+from ..betting.value_engine import MIN_EDGE_SINGLE
+from ..models.schemas import Bet, DailyPlan, Selection
 
 _LINE = "━" * 28
 
 
 def _legs(bet: Bet) -> str:
     return " + ".join(f"{leg.home} ({leg.outcome.value})" for leg in bet.legs)
+
+
+def _skip_reason(s: Selection) -> str:
+    """Spiega in una riga perché una partita è stata saltata (trasparenza)."""
+    if not is_betable(s.confidence, s.data_completeness):
+        return "dati insufficienti"
+    if s.edge < MIN_EDGE_SINGLE:
+        return f"edge {s.edge:+.1%} < 5% → nessun valore"
+    return "non selezionata (priorità ad altre)"
 
 
 def format_daily_plan(
@@ -77,6 +87,14 @@ def format_daily_plan(
 
     if not plan.all_bets:
         lines.append("\n⚠️ Nessuna bet di valore oggi. Si salta (edge < 5%).")
+
+    # Trasparenza: partite di oggi valutate ma SENZA bet (così sai che il
+    # sistema le ha viste e perché le ha saltate).
+    skipped = plan.skipped
+    if skipped:
+        lines.append("\n📋 Altre partite di oggi (nessuna bet):")
+        for s in skipped:
+            lines.append(f"  • {s.home} - {s.away}: {_skip_reason(s)}")
 
     lines += ["", f"📊 Totale puntato: €{plan.total_staked:.2f}",
               f"⚠️ Quote: {VERIFY_ODDS} prima di piazzare.", _LINE]

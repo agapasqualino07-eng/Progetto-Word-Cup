@@ -109,10 +109,29 @@ class DailyPlan:
     singole: list[Bet] = field(default_factory=list)
     doppie: list[Bet] = field(default_factory=list)
     triple: list[Bet] = field(default_factory=list)
+    # Tutte le selezioni VALUTATE nel giorno (anche quelle scartate): serve a
+    # mostrare in modo trasparente le partite considerate ma saltate (no valore).
+    considered: list[Selection] = field(default_factory=list)
 
     @property
     def all_bets(self) -> list[Bet]:
         return [*self.singole, *self.doppie, *self.triple]
+
+    @property
+    def bet_match_ids(self) -> set[str]:
+        return {leg.match_id for b in self.all_bets for leg in b.legs}
+
+    @property
+    def skipped(self) -> list[Selection]:
+        """Partite valutate ma non finite in nessuna bet (di solito: edge < 5%)."""
+        used = self.bet_match_ids
+        seen: set[str] = set()
+        out: list[Selection] = []
+        for s in self.considered:
+            if s.match_id not in used and s.match_id not in seen:
+                seen.add(s.match_id)
+                out.append(s)
+        return out
 
     @property
     def total_staked(self) -> float:
