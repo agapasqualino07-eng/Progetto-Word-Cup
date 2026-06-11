@@ -124,6 +124,10 @@ implementati (vedi `ISTRUZIONI.md` §5):
 
 - **Scraper SNAI** (Playwright, LIV 1) + dati squadre (FBref/Transfermarkt/ELO/
   ranking FIFA). *La fonte quote The Odds API (LIV 2) c'è già.*
+  ✅ **Iniezione rating reali nel modello** già pronta
+  (`src/ml/ratings_loader.py`): basta popolare `data/raw/team_ratings.csv`
+  (template + 48 squadre in `data/team_ratings_template.csv`) e il Poisson usa
+  forza continua reale al posto delle fasce. Resta da automatizzare il *fetch*.
 - **Ensemble ML:** Logistic/RF/XGBoost/LightGBM + stacking, calibrazione avanzata
   (ECE < 0.05), Optuna, SHAP. *Una calibrazione base (shrinkage) c'è già.*
 - **News engine avanzato:** più testate, sentiment con modello calibrato (oggi:
