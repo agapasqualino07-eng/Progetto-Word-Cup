@@ -76,5 +76,21 @@ class TestLoadFromDisk(unittest.TestCase):
             self.assertIn("Brasile", model.attack)
 
 
+class TestCommittedRatings(unittest.TestCase):
+    """Protegge il file rating reale committato (data/team_ratings.csv)."""
+
+    def test_committed_file_loads_with_48_wc_teams(self):
+        from src.constants import GROUPS
+
+        path = Path("data/team_ratings.csv")
+        if not path.exists():
+            self.skipTest("file rating committato assente")
+        model = load_ratings_model(path)
+        self.assertIsNotNone(model)
+        wc_teams = [t for g in GROUPS.values() for t in g]
+        for team in wc_teams:
+            self.assertIn(team, model.attack, f"rating mancante per {team}")
+
+
 if __name__ == "__main__":
     unittest.main()

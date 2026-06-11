@@ -29,7 +29,10 @@ from pathlib import Path
 
 from .poisson_model import PoissonModel
 
-DEFAULT_RATINGS_PATH = "data/raw/team_ratings.csv"
+# Percorsi cercati in ordine: prima un file privato (data/raw/, non versionato),
+# poi quello committato nel repo (dati pubblici → usato anche dal bot su GitHub).
+DEFAULT_RATINGS_PATHS = ("data/raw/team_ratings.csv", "data/team_ratings.csv")
+DEFAULT_RATINGS_PATH = DEFAULT_RATINGS_PATHS[0]  # retro-compatibilità
 ENV_RATINGS_PATH = "WCE_RATINGS_CSV"
 
 # Mappa z-score (deviazioni standard dalla media) → attacco/difesa, nella stessa
@@ -125,9 +128,10 @@ def load_ratings_model(path: str | os.PathLike | None = None) -> PoissonModel | 
     File assente → None (il chiamante usa il modello base a fasce).
     File malformato → RatingsLoadError.
     """
-    chosen = path or os.environ.get(ENV_RATINGS_PATH) or DEFAULT_RATINGS_PATH
-    p = Path(chosen)
-    if not p.exists():
+    explicit = path or os.environ.get(ENV_RATINGS_PATH)
+    candidates = [explicit] if explicit else list(DEFAULT_RATINGS_PATHS)
+    p = next((Path(c) for c in candidates if c and Path(c).exists()), None)
+    if p is None:
         return None
     try:
         text = p.read_text(encoding="utf-8")

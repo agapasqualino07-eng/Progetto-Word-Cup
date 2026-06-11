@@ -1,0 +1,53 @@
+# Rating squadre = punti FIFA/Coca-Cola Men's World Ranking.
+# Fonte: FIFA (inside.fifa.com) - aggiornamento dell'11 giugno 2026.
+# Dati pubblici e verificati (forniti dall'utente dalla pagina FIFA).
+# Usati dal modello come forza continua (normalizzati z-score). Aggiornabili.
+team,rating
+Algeria,1571.03
+Arabia Saudita,1423.88
+Argentina,1877.27
+Australia,1579.34
+Austria,1597.4
+Belgio,1742.24
+Bosnia-Erzegovina,1387.22
+Brasile,1765.86
+Canada,1559.48
+Capo Verde,1371.11
+Cechia,1505.74
+Colombia,1698.35
+Congo DR,1474.43
+Corea del Sud,1591.63
+Costa d'Avorio,1540.87
+Croazia,1714.87
+Curaçao,1294.77
+Ecuador,1598.52
+Egitto,1562.37
+Francia,1870.7
+Germania,1735.77
+Ghana,1346.88
+Giappone,1661.58
+Giordania,1387.74
+Haiti,1293.1
+Inghilterra,1828.02
+Iran,1619.58
+Iraq,1446.28
+Marocco,1755.1
+Messico,1700.98
+Norvegia,1557.44
+Nuova Zelanda,1275.58
+Olanda,1753.57
+Panama,1539.16
+Paraguay,1505.35
+Portogallo,1767.85
+Qatar,1450.31
+Scozia,1503.34
+Senegal,1684.07
+Spagna,1874.71
+Sudafrica,1414.88
+Svezia,1509.79
+Svizzera,1650.06
+Tunisia,1476.41
+Turchia,1605.73
+USA,1671.23
+Uruguay,1673.07
+Uzbekistan,1458.73
