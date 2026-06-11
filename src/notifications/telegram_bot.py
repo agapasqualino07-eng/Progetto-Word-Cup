@@ -21,11 +21,17 @@ from .message_formatter import format_daily_plan, format_help
 from .telegram_client import CONFIRM_BUTTONS, send_message
 
 
-def _today_plan(bankroll: float | None = None) -> DailyPlan:
-    """Genera il piano di oggi (mock se manca la chiave Odds API)."""
+def _today_plan(bankroll: float | None = None) -> tuple[DailyPlan, bool, int]:
+    """
+    Genera il piano di oggi. Ritorna (piano, is_mock, n_partite).
+    Senza chiave Odds API i dati sono MOCK (etichettati); con chiave sono reali
+    e filtrati alle partite delle prossime ore.
+    """
     collector = OddsCollector(settings.odds_api_key)
     odds = collector.get_odds()
-    return generate_plan(odds, bankroll or settings.initial_bankroll, date.today())
+    is_mock = bool(odds) and any(o.is_mock for o in odds)
+    plan = generate_plan(odds, bankroll or settings.initial_bankroll, date.today())
+    return plan, is_mock, len(odds)
 
 
 def send_daily_plan(
@@ -39,8 +45,12 @@ def send_daily_plan(
     Invia (o stampa, in dry-run) il piano di giornata con i pulsanti di conferma.
     Usa il client stdlib: nessuna dipendenza esterna. Ritorna il testo inviato.
     """
-    plan = plan or _today_plan()
-    text = format_daily_plan(plan, settings.target_bankroll)
+    if plan is None:
+        plan, is_mock, n_matches = _today_plan()
+    else:
+        is_mock, n_matches = False, None
+    text = format_daily_plan(plan, settings.target_bankroll,
+                             is_mock=is_mock, n_matches=n_matches)
 
     token = token or settings.telegram_token
     chat_id = chat_id or settings.telegram_chat_id
@@ -93,9 +103,11 @@ def run_bot(token: str | None = None) -> None:
 
     async def oggi(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         odds = _today_odds(ctx)
+        is_mock = bool(odds) and any(o.is_mock for o in odds)
         plan = generate_plan(odds, settings.initial_bankroll, date.today())
         await update.message.reply_text(
-            format_daily_plan(plan, settings.target_bankroll),
+            format_daily_plan(plan, settings.target_bankroll,
+                              is_mock=is_mock, n_matches=len(odds)),
             reply_markup=_plan_keyboard(odds),
         )
 
