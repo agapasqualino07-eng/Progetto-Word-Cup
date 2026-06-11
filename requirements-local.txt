@@ -1,0 +1,5 @@
+# Dipendenze minime per far girare l'app in LOCALE (Dashboard + API + report).
+# Il "cuore" del sistema gira anche senza queste; servono solo per il web server.
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6

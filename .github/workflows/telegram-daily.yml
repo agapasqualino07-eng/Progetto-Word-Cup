@@ -1,0 +1,29 @@
+# Invia il piano di giornata su Telegram, ogni mattina, senza server.
+# Gestibile interamente da telefono: imposti i Secrets dal sito/app GitHub.
+#
+# Secrets richiesti (Settings → Secrets and variables → Actions):
+#   TELEGRAM_BOT_TOKEN  — token di @BotFather
+#   TELEGRAM_CHAT_ID    — il tuo chat_id
+#   ODDS_API_KEY        — (opzionale) chiave The Odds API; senza → dati mock
+name: Piano Telegram giornaliero
+
+on:
+  schedule:
+    # 06:00 UTC = 08:00 in Italia (CEST, ora legale estiva: il Mondiale è giu–lug).
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}   # consente l'avvio manuale dal tab Actions (anche da telefono)
+
+jobs:
+  invia-piano:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Invia piano su Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m src.notifications.send_today
