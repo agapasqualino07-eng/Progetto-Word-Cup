@@ -137,8 +137,11 @@ implementati (vedi `ISTRUZIONI.md` §5):
 - **News engine avanzato:** più testate, sentiment con modello calibrato (oggi:
   RSS + lessico trasparente), risoluzione automatica partita↔squadre.
 - ~~**Loader dati storici reali** per il backtest~~ ✅ **FATTO**
-  (`src/backtest/history_loader.py`): carica partite reali da CSV con validazione;
-  serve ancora popolare il dataset (`data/raw/history.csv`). Vedi sotto.
+  (`src/backtest/history_loader.py`): carica partite reali da CSV con validazione.
+  ✅ **Raccoglitore quote live** (`src/data/odds_history.py` + workflow
+  `collect-odds.yml`): durante il Mondiale salva quote apertura/chiusura + risultati
+  reali e costruisce `data/history.csv` da solo → abilita il backtest ROI/CLV vero.
+- ✅ **Backtest di accuratezza** (`src/backtest/accuracy.py`) su risultati reali.
 - **Market movement detector** + integrazione live del cashout advisor.
 - **Update live** Telegram durante le partite (oggi: piano mattutino + report serale).
 - **Dashboard** Plotly Dash via WebSocket.

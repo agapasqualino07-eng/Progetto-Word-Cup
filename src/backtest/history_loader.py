@@ -30,8 +30,10 @@ from pathlib import Path
 
 from .sample_data import HistoricalMatch
 
-# Percorso di default per i dati reali (non versionato: vedi .gitignore).
-DEFAULT_HISTORY_PATH = "data/raw/history.csv"
+# Percorsi cercati in ordine: prima il file privato (non versionato), poi quello
+# committato che il raccoglitore quote aggiorna (data/history.csv).
+DEFAULT_HISTORY_PATHS = ("data/raw/history.csv", "data/history.csv")
+DEFAULT_HISTORY_PATH = DEFAULT_HISTORY_PATHS[0]  # retro-compatibilità
 # Variabile d'ambiente per sovrascrivere il percorso.
 ENV_HISTORY_PATH = "WCE_HISTORY_CSV"
 
@@ -138,11 +140,13 @@ def load_real_history(path: str | os.PathLike | None = None) -> list[HistoricalM
     Tenta di caricare dati storici REALI.
 
     Ordine del percorso: argomento `path` > variabile d'ambiente WCE_HISTORY_CSV
-    > default 'data/raw/history.csv'. Se il file non esiste restituisce None
-    (il chiamante può ripiegare sul sample ETICHETTATO). Se il file esiste ma è
-    malformato lancia HistoryLoadError: meglio fermarsi che fidarsi di dati sporchi.
+    > default (data/raw/history.csv, poi data/history.csv). Se nessun file esiste
+    restituisce None (il chiamante può ripiegare sul sample ETICHETTATO). Se il
+    file esiste ma è malformato lancia HistoryLoadError: meglio fermarsi.
     """
-    chosen = path or os.environ.get(ENV_HISTORY_PATH) or DEFAULT_HISTORY_PATH
-    if not Path(chosen).exists():
+    explicit = path or os.environ.get(ENV_HISTORY_PATH)
+    candidates = [explicit] if explicit else list(DEFAULT_HISTORY_PATHS)
+    chosen = next((c for c in candidates if c and Path(c).exists()), None)
+    if chosen is None:
         return None
     return load_history_csv(chosen)
