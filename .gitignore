@@ -14,7 +14,8 @@ venv/
 *.local
 
 # Dati (non versionare dataset/scarichi)
-data/raw/
+data/raw/*
+!data/raw/README.md
 data/processed/
 *.sqlite
 
