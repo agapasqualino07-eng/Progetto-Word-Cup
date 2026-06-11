@@ -130,6 +130,10 @@ implementati (vedi `ISTRUZIONI.md` §5):
   forza continua reale al posto delle fasce. Resta da automatizzare il *fetch*.
 - **Ensemble ML:** Logistic/RF/XGBoost/LightGBM + stacking, calibrazione avanzata
   (ECE < 0.05), Optuna, SHAP. *Una calibrazione base (shrinkage) c'è già.*
+  ✅ **Ossatura ensemble pronta** (`src/ml/ensemble.py`): classificatore
+  (LogisticRegression) su feature Poisson+mercato, **gated** — si allena solo con
+  scikit-learn installato e storico reale (`data/raw/history.csv`); altrimenti
+  ripiega sul Poisson calibrato. Da estendere con feature ricche + XGBoost/Optuna.
 - **News engine avanzato:** più testate, sentiment con modello calibrato (oggi:
   RSS + lessico trasparente), risoluzione automatica partita↔squadre.
 - ~~**Loader dati storici reali** per il backtest~~ ✅ **FATTO**
