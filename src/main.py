@@ -17,10 +17,13 @@ from __future__ import annotations
 from datetime import date
 
 from .anti_hallucination import TRUTH_RULES
+from .betting.daily_allocator import DailyAllocator
 from .config import settings
 from .data.news.collector import NewsCollector
 from .data.odds_api import MatchOdds, OddsCollector
+from .models.schemas import DailyPlan, Selection
 from .services.match_report import build_match_report
+from .services.model_provider import get_default_model
 from .services.pipeline import build_selections, generate_plan
 from .services.serializers import plan_to_dict
 
@@ -33,10 +36,21 @@ except ImportError:  # il core funziona anche senza FastAPI/pydantic
     BaseModel = object  # type: ignore
 
 
+def build_plan(
+    selections: list[Selection],
+    bankroll: float,
+    plan_date: date | None = None,
+) -> DailyPlan:
+    """Incapsula il flusso Selection[] → DailyPlan (riusabile fuori da FastAPI).
+    È l'entrypoint documentato in CLAUDE.md e usato da examples/demo_piano."""
+    return DailyAllocator().allocate(selections, plan_date or date.today(), bankroll)
+
+
 def build_plan_from_mock(bankroll: float, plan_date: date | None = None) -> dict:
     """Genera un piano da dati mock e lo serializza. Riusabile fuori da FastAPI."""
     odds = OddsCollector().get_odds(use_mock=True, plan_date=plan_date)
-    plan = generate_plan(odds, bankroll, plan_date or date.today())
+    model, _ = get_default_model()
+    plan = generate_plan(odds, bankroll, plan_date or date.today(), model=model)
     return plan_to_dict(plan)
 
 
@@ -102,15 +116,18 @@ if FastAPI is not None:
             nc = NewsCollector()
             nh = nc.for_team(home, use_mock=news_demo)
             na = nc.for_team(away, use_mock=news_demo)
+        model, _ = get_default_model()
         return build_match_report(
-            home, away, odds=odds, bankroll=bankroll, news_home=nh, news_away=na
+            home, away, odds=odds, bankroll=bankroll, news_home=nh, news_away=na,
+            model=model,
         ).to_dict()
 
     @app.get("/dashboard", response_class=HTMLResponse)
     def dashboard() -> str:
         """Dashboard minimale: partite di oggi + modulo per interrogare una partita."""
         odds = OddsCollector(settings.odds_api_key).get_odds()
-        sels = build_selections(odds)
+        model, _ = get_default_model()
+        sels = build_selections(odds, model)
         righe = "".join(
             f"<tr><td>{s.home} - {s.away}</td><td><b>{s.outcome.value}</b></td>"
             f"<td>{s.model_prob:.0%}</td><td>{s.edge:+.1%}</td>"
@@ -152,5 +169,6 @@ Quota 1: <input name="odds_1" size="4"> X: <input name="odds_x" size="4">
             ]
         if not odds:
             return {"errore": "Nessuna partita fornita e nessuna fonte quote attiva."}
-        plan = generate_plan(odds, req.bankroll, date.today())
+        model, _ = get_default_model()
+        plan = generate_plan(odds, req.bankroll, date.today(), model=model)
         return plan_to_dict(plan)

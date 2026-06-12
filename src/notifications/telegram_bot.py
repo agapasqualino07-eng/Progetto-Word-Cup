@@ -22,18 +22,10 @@ from .telegram_client import CONFIRM_BUTTONS, send_message
 
 
 def _load_model():
-    """PoissonModel con rating REALI se presenti, altrimenti modello base a fasce.
-    Ritorna (model_or_None, nota_per_il_messaggio)."""
-    from ..ml.ratings_loader import RatingsLoadError, load_ratings_model
+    """PoissonModel con rating REALI se presenti (vedi services.model_provider)."""
+    from ..services.model_provider import get_default_model
 
-    try:
-        model = load_ratings_model()
-    except RatingsLoadError as exc:
-        print(f"[ratings] file rating non valido: {exc} → uso le fasce base")
-        return None, None
-    if model is not None:
-        return model, "🧠 Modello: rating reali"
-    return None, None
+    return get_default_model()
 
 
 def _today_plan(bankroll: float | None = None):

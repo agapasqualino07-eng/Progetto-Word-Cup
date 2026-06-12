@@ -56,7 +56,7 @@ sola standard library) e coperto da test:
 ### Avvio rapido (senza installare nulla)
 
 ```bash
-python -m unittest discover -s tests   # 77 test (solo standard library)
+python -m unittest discover -s tests   # 132 test (solo standard library)
 python -m examples.demo_piano          # demo: piano 4-4-2
 python -m src.backtest.backtester      # backtest (dati reali se presenti, altrimenti sample)
 ```
@@ -171,7 +171,7 @@ worldcupedge/
 │       ├── value_engine.py · correlation_matrix.py
 │       ├── daily_allocator.py  # allocazione 4-4-2
 │       └── risk_manager.py
-├── tests/                      # 77 test (unittest, zero dipendenze)
+├── tests/                      # 132 test (unittest, zero dipendenze)
 ├── examples/demo_piano.py      # demo end-to-end
 ├── requirements.txt · Dockerfile · docker-compose.yml
 ├── .env.example · pytest.ini

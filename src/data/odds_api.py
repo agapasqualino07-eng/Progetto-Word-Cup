@@ -189,6 +189,10 @@ class OddsCollector:
         if not (o1 and ox and o2):
             return None
         ct = _parse_iso(ev.get("commence_time"))
+        # Normalizza ai nomi canonici (IT): senza, rating/gironi/correlazioni
+        # non troverebbero la squadra (lookup falliti in silenzio).
+        from .team_names import normalize_team
+        home, away = normalize_team(home), normalize_team(away)
         return MatchOdds(
             match_id=ev.get("id", f"{home}-{away}"),
             home=home,
