@@ -176,6 +176,7 @@ def build_match_report(
     model: PoissonModel | None = None,
     news_home: "list[NewsItem] | None" = None,
     news_away: "list[NewsItem] | None" = None,
+    model_weight: float | None = None,
 ) -> MatchReport:
     model = model or PoissonModel()
     probs = model.predict_match(home, away, venue_country)
@@ -209,9 +210,13 @@ def build_match_report(
         return report  # niente quote → solo pronostico, nessun consiglio
 
     # Con le quote: calibra verso il mercato. Le probabilità calibrate diventano
-    # quelle di riferimento (più affidabili dei prior grezzi).
+    # quelle di riferimento (più affidabili dei prior grezzi). `model_weight`
+    # permette di pesare di più il mercato (es. pronostici: 0.30).
     market_fair = remove_margin(odds["1"], odds["X"], odds["2"])
-    cal = calibrate_1x2(base, market_fair)
+    if model_weight is None:
+        cal = calibrate_1x2(base, market_fair)
+    else:
+        cal = calibrate_1x2(base, market_fair, weight=model_weight)
     report.prob_1, report.prob_x, report.prob_2 = cal["1"], cal["X"], cal["2"]
     # Pronostico = esito PIÙ PROBABILE (calibrato).
     report.pronostico = max(cal, key=cal.get)

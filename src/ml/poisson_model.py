@@ -53,9 +53,19 @@ class PoissonModel:
     """
     Rating attack/defense per squadra. Di default si parte dai prior per tier
     (constants), ma si possono iniettare rating calibrati su dati reali.
+
+    Parametri di forma (default neutri = comportamento storico):
+      - rho: correzione Dixon-Coles sui punteggi bassi. Il Poisson indipendente
+        SOTTOSTIMA i pareggi; rho < 0 rialza P(0-0) e P(1-1). Tarato su
+        risultati reali (vedi src/ml/tuning.py).
+      - home_adv: vantaggio campo generico quando la partita NON è in campo
+        neutro (amichevoli/qualificazioni). Al Mondiale le partite sono in
+        campo neutro (venue=None) salvo le nazioni ospitanti → invariato.
     """
     attack: dict[str, float] = field(default_factory=dict)
     defense: dict[str, float] = field(default_factory=dict)
+    rho: float = 0.0
+    home_adv: float = 0.0
 
     def _attack(self, team: str) -> float:
         return self.attack.get(team, base_attack(team))
@@ -64,12 +74,28 @@ class PoissonModel:
         return self.defense.get(team, base_defense(team))
 
     def _home_advantage(self, home: str, venue_country: str | None) -> float:
-        """Vantaggio host: pieno se gioca nel proprio paese, ridotto altrove."""
+        """Vantaggio campo: host nel proprio paese > host altrove > casa generica."""
         if home in HOSTS and venue_country == home:
             return 0.25
         if home in HOSTS:
             return 0.10
+        if venue_country == home:
+            return self.home_adv  # in casa propria (non-Mondiale o calibrazione)
         return 0.0
+
+    def _dc_tau(self, i: int, j: int, lh: float, la: float) -> float:
+        """Fattore Dixon-Coles per i punteggi bassi (1.0 se rho=0)."""
+        if self.rho == 0.0:
+            return 1.0
+        if i == 0 and j == 0:
+            return max(0.0, 1.0 - lh * la * self.rho)
+        if i == 0 and j == 1:
+            return max(0.0, 1.0 + lh * self.rho)
+        if i == 1 and j == 0:
+            return max(0.0, 1.0 + la * self.rho)
+        if i == 1 and j == 1:
+            return max(0.0, 1.0 - self.rho)
+        return 1.0
 
     def expected_goals(
         self, home: str, away: str, venue_country: str | None = None
@@ -94,7 +120,8 @@ class PoissonModel:
         over = 0.0
         for i, ph in enumerate(home_pmf):
             for j, pa in enumerate(away_pmf):
-                p = ph * pa
+                # Correzione Dixon-Coles sui punteggi bassi (pareggi realistici).
+                p = ph * pa * self._dc_tau(i, j, lambda_home, lambda_away)
                 if i > j:
                     p1 += p
                 elif i == j:
@@ -104,10 +131,11 @@ class PoissonModel:
                 if i + j > 2:
                     over += p
 
-        # Rinormalizza per la coda troncata, così le probabilità sommano a 1.
+        # Rinormalizza (coda troncata + correzione DC), così sommano a 1.
         total = p1 + px + p2
         if total > 0:
             p1, px, p2 = p1 / total, px / total, p2 / total
+            over = over / total
         over = min(max(over, 0.0), 1.0)
 
         return MatchProbabilities(

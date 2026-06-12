@@ -28,6 +28,12 @@ _CONF_EMOJI = {
     ConfidenceLevel.INSUFFICIENTE: "⚪",
 }
 
+# Peso del MODELLO nel blend per i PRONOSTICI (il resto è mercato de-vigato).
+# Più basso del 0.5 usato per il value betting, di proposito: per AZZECCARE
+# l'esito la stima più accurata è la quota (dottrina CLV del progetto); per
+# TROVARE VALORE serve invece l'indipendenza del modello. Due scopi, due pesi.
+FORECAST_MODEL_WEIGHT = 0.30
+
 
 @dataclass
 class Forecast:
@@ -38,6 +44,7 @@ class Forecast:
     score_home: int         # risultato esatto più probabile (coerente con outcome)
     score_away: int
     confidence: ConfidenceLevel
+    odds: float | None = None   # quota dell'esito previsto (se disponibile)
 
 
 def _confidence_from_prob(prob: float) -> ConfidenceLevel:
@@ -85,28 +92,75 @@ def build_forecasts(
         odds = None if m.is_mock else {"1": m.odds_1, "X": m.odds_x, "2": m.odds_2}
         rep = build_match_report(
             m.home, m.away, odds=odds, venue_country=_venue_for(m.home), model=model,
+            model_weight=FORECAST_MODEL_WEIGHT,
         )
         sh, sa = most_likely_score(rep.lambda_home, rep.lambda_away, rep.pronostico)
+        all_odds = {"1": m.odds_1, "X": m.odds_x, "2": m.odds_2}
         out.append(Forecast(
             home=m.home, away=m.away,
             outcome=rep.pronostico, prob=rep.pronostico_prob,
             score_home=sh, score_away=sa,
             confidence=_confidence_from_prob(rep.pronostico_prob),
+            odds=all_odds.get(rep.pronostico),
         ))
     return out
 
 
-def format_forecasts(forecasts: list[Forecast]) -> str:
-    """Sezione 'Pronostici' per il messaggio del mattino."""
+def build_schedina(forecasts: list[Forecast], size: int = 3) -> list[Forecast]:
+    """
+    La multipla con la MASSIMA probabilità di vincere: matematicamente è la
+    combinazione degli esiti più probabili (P(tutte) = prodotto delle prob).
+    Diversa dalle combo del piano scommesse (che massimizzano l'EDGE, non la
+    probabilità di vincita). Una gamba per partita, le `size` più probabili.
+    """
+    ranked = sorted(forecasts, key=lambda f: f.prob, reverse=True)
+    return ranked[:size]
+
+
+def schedina_stats(legs: list[Forecast]) -> tuple[float, float | None]:
+    """(probabilità combinata, quota combinata se tutte le quote sono note)."""
+    joint = 1.0
+    quota: float | None = 1.0
+    for leg in legs:
+        joint *= leg.prob
+        quota = quota * leg.odds if (quota is not None and leg.odds) else None
+    return joint, (round(quota, 2) if quota else None)
+
+
+def _leg_label(f: Forecast) -> str:
+    squadra = f.home if f.outcome == "1" else f.away if f.outcome == "2" else "pareggio"
+    return f"{f.outcome} ({squadra})" if f.outcome != "X" else "X (pareggio)"
+
+
+def format_forecasts(forecasts: list[Forecast], stake_demo: float = 10.0) -> str:
+    """Sezione 'Pronostici' per il messaggio del mattino (+ schedina più probabile)."""
     if not forecasts:
         return ""
     lines = ["📊 PRONOSTICI DI OGGI (prossime 30h)"]
     for f in forecasts:
-        squadra = f.home if f.outcome == "1" else f.away if f.outcome == "2" else "pareggio"
-        esito = f"{f.outcome} ({squadra})" if f.outcome != "X" else "X (pareggio)"
         lines.append(
-            f"  {_CONF_EMOJI[f.confidence]} {f.home} - {f.away}: {esito} {f.prob:.0%} "
+            f"  {_CONF_EMOJI[f.confidence]} {f.home} - {f.away}: {_leg_label(f)} {f.prob:.0%} "
             f"· ipotesi {f.score_home}-{f.score_away} · {f.confidence.value}"
         )
-    lines.append("ℹ️ Stima del modello (rating FIFA), non una certezza.")
+
+    # Schedina a massima probabilità di vincita (se ci sono almeno 2 partite).
+    if len(forecasts) >= 2:
+        legs = build_schedina(forecasts, size=min(3, len(forecasts)))
+        joint, quota = schedina_stats(legs)
+        lines.append("")
+        lines.append(f"🎫 SCHEDINA PIÙ PROBABILE ({len(legs)} esiti)")
+        def _leg_short(l: Forecast) -> str:
+            if l.outcome == "1":
+                return f"{l.home} (1)"
+            if l.outcome == "2":
+                return f"{l.away} (2)"
+            return f"{l.home}-{l.away} (X)"
+        lines.append("  " + " + ".join(_leg_short(l) for l in legs))
+        riga = f"  Prob. di vincerla: {joint:.0%}"
+        if quota:
+            riga += f" · quota ~{quota} → €{stake_demo:.0f} ➜ €{stake_demo*quota:.2f} potenziali"
+        lines.append(riga)
+        lines.append("  ℹ️ Massimizza la probabilità di vincita, non il valore atteso.")
+
+    lines.append("ℹ️ Stima del modello (rating FIFA + mercato), non una certezza.")
     return "\n".join(lines)
