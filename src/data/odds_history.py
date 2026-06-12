@@ -145,8 +145,13 @@ def build_history(snapshots: list[dict], outcomes: dict[str, str]) -> list[dict]
         commence = opening.get("commence_time") or ""
         before = [s for s in snaps if not commence or s["captured_at"] <= commence]
         closing = (before or snaps)[-1]
+        # Normalizza i nomi anche qui: gli snapshot più vecchi (pre-fix) sono
+        # stati salvati coi nomi inglesi dell'API.
+        from .team_names import normalize_team
         rows.append({
-            "home": opening["home"], "away": opening["away"], "actual": outcomes[mid],
+            "home": normalize_team(opening["home"]),
+            "away": normalize_team(opening["away"]),
+            "actual": outcomes[mid],
             "open_1": opening["odds_1"], "open_x": opening["odds_x"], "open_2": opening["odds_2"],
             "close_1": closing["odds_1"], "close_x": closing["odds_x"], "close_2": closing["odds_2"],
         })

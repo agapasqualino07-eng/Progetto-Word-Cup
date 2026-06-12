@@ -46,7 +46,7 @@ python -m examples.demo_piano
 # 3) backtester (dati di esempio)
 python -m src.backtest.backtester
 ```
-✅ **Fatto se:** i test dicono `OK` (57 test), la demo stampa un piano, il
+✅ **Fatto se:** i test dicono `OK` (132 test), la demo stampa un piano, il
 backtester stampa un verdetto PASS/FAIL.
 
 ---
