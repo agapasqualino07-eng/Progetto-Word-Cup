@@ -149,6 +149,7 @@ def build_history(snapshots: list[dict], outcomes: dict[str, str]) -> list[dict]
         # stati salvati coi nomi inglesi dell'API.
         from .team_names import normalize_team
         rows.append({
+            "date": (opening.get("commence_time") or "")[:10],  # YYYY-MM-DD
             "home": normalize_team(opening["home"]),
             "away": normalize_team(opening["away"]),
             "actual": outcomes[mid],
@@ -162,7 +163,7 @@ def write_history_csv(rows: list[dict], path: str | Path = HISTORY_OUT_PATH) -> 
     """Scrive le righe nel formato consumato dal backtester (history_loader)."""
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
-    cols = ["home", "away", "actual", "open_1", "open_x", "open_2",
+    cols = ["date", "home", "away", "actual", "open_1", "open_x", "open_2",
             "close_1", "close_x", "close_2"]
     with p.open("w", encoding="utf-8", newline="") as f:
         f.write("# Quote storiche REALI raccolte durante il Mondiale 2026.\n")

@@ -15,7 +15,7 @@ sui rischi). Questo file è la guida operativa al codice.
 
 ## Stato: fondazione, non sistema completo
 
-Implementato e testato (147 test): core quantitativo (constants, Poisson, value
+Implementato e testato (154 test): core quantitativo (constants, Poisson, value
 engine, allocatore 4-4-2, correlazione, risk manager, anti-allucinazione),
 **collector quote** (The Odds API + mock), **calibrazione** (shrinkage al mercato),
 **pipeline** end-to-end, **backtester** (ROI+CLV), **portafoglio** SQLite,
@@ -32,7 +32,7 @@ MANCANTE`, mai notizie inventate (i `mock_news` sono solo per demo/test).
 ## Comandi
 
 ```bash
-python -m unittest discover -s tests   # 147 test (standard library, zero deps)
+python -m unittest discover -s tests   # 154 test (standard library, zero deps)
 python -m examples.demo_piano          # demo end-to-end
 python -m src.backtest.backtester      # backtest (dati di esempio)
 uvicorn src.main:app --reload          # API (richiede fastapi+uvicorn)

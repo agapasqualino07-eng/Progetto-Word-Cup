@@ -51,6 +51,8 @@ class Performance:
     flat_close: StrategyResult
     value: StrategyResult
     avg_clv: float
+    schedina: SchedinaRecord
+    calibration: list[tuple[str, int, float, float]]
 
     @property
     def hit_rate(self) -> float:
@@ -61,12 +63,83 @@ class Performance:
         return self.n_matches >= MIN_MEANINGFUL
 
 
-def _pronostico(model: PoissonModel, m: HistoricalMatch) -> str:
-    """Esito previsto (1/X/2) col peso mercato dei pronostici."""
-    odds = {"1": m.open_1, "X": m.open_x, "2": m.open_2}
-    rep = build_match_report(m.home, m.away, odds=odds, venue_country=None,
-                             model=model, model_weight=FORECAST_MODEL_WEIGHT)
-    return rep.pronostico
+@dataclass
+class MatchPred:
+    date: str
+    pronostico: str
+    prob: float
+    win: bool
+    open_odds: float   # quota dell'esito previsto all'apertura
+    close_odds: float
+
+
+def _predict_all(model: PoissonModel, history: list[HistoricalMatch]) -> list[MatchPred]:
+    """Pronostico (peso mercato) + esito reale per ogni partita, una volta sola."""
+    out = []
+    for m in history:
+        o_open = {"1": m.open_1, "X": m.open_x, "2": m.open_2}
+        rep = build_match_report(m.home, m.away, odds=o_open, venue_country=None,
+                                 model=model, model_weight=FORECAST_MODEL_WEIGHT)
+        pick = rep.pronostico
+        out.append(MatchPred(
+            date=m.date, pronostico=pick, prob=rep.pronostico_prob,
+            win=(pick == m.actual),
+            open_odds={"1": m.open_1, "X": m.open_x, "2": m.open_2}[pick],
+            close_odds={"1": m.close_1, "X": m.close_x, "2": m.close_2}[pick],
+        ))
+    return out
+
+
+@dataclass
+class SchedinaRecord:
+    n_days: int
+    won: int
+    profit: float        # P&L virtuale €10/giorno
+
+    @property
+    def roi(self) -> float:
+        staked = self.n_days * STAKE
+        return self.profit / staked if staked else 0.0
+
+
+def schedina_record(preds: list[MatchPred], size: int = 3) -> SchedinaRecord:
+    """Schedina giornaliera = i `size` esiti più probabili del giorno (€10/giorno).
+    Vince solo se TUTTE le gambe azzeccano. Richiede la data delle partite."""
+    by_day: dict[str, list[MatchPred]] = {}
+    for p in preds:
+        if p.date:
+            by_day.setdefault(p.date, []).append(p)
+    won = 0
+    profit = 0.0
+    days = 0
+    for day, ps in by_day.items():
+        if len(ps) < 2:
+            continue  # una multipla ha senso da 2 gambe in su
+        days += 1
+        legs = sorted(ps, key=lambda x: x.prob, reverse=True)[:size]
+        if all(l.win for l in legs):
+            won += 1
+            quota = 1.0
+            for l in legs:
+                quota *= l.open_odds
+            profit += STAKE * (quota - 1.0)
+        else:
+            profit -= STAKE
+    return SchedinaRecord(n_days=days, won=won, profit=round(profit, 2))
+
+
+def calibration_table(preds: list[MatchPred]) -> list[tuple[str, int, float, float]]:
+    """Affidabilità: per fascia di probabilità prevista, (etichetta, n, prob media, hit reale)."""
+    bands = [(0.0, 0.45), (0.45, 0.55), (0.55, 0.70), (0.70, 1.01)]
+    out = []
+    for lo, hi in bands:
+        grp = [p for p in preds if lo <= p.prob < hi]
+        if not grp:
+            continue
+        avg_p = sum(p.prob for p in grp) / len(grp)
+        hit = sum(p.win for p in grp) / len(grp)
+        out.append((f"{int(lo*100)}-{int(hi*100)}%", len(grp), avg_p, hit))
+    return out
 
 
 def evaluate_performance(
@@ -74,19 +147,10 @@ def evaluate_performance(
     model: PoissonModel | None = None,
 ) -> Performance:
     model = model or PoissonModel()
-    correct = 0
-    p_open = p_close = 0.0
-    wins_open = wins_close = 0
-    for m in history:
-        pick = _pronostico(model, m)
-        win = pick == m.actual
-        correct += win
-        o_open = {"1": m.open_1, "X": m.open_x, "2": m.open_2}[pick]
-        o_close = {"1": m.close_1, "X": m.close_x, "2": m.close_2}[pick]
-        p_open += STAKE * (o_open - 1) if win else -STAKE
-        p_close += STAKE * (o_close - 1) if win else -STAKE
-        wins_open += win
-        wins_close += win
+    preds = _predict_all(model, history)
+    correct = sum(p.win for p in preds)
+    p_open = sum(STAKE * (p.open_odds - 1) if p.win else -STAKE for p in preds)
+    p_close = sum(STAKE * (p.close_odds - 1) if p.win else -STAKE for p in preds)
 
     # Strategia VALUE: la usa il backtester (edge ≥ 5%, quota apertura, + CLV).
     bt = Backtester(model=model, stake=STAKE).run(history)
@@ -95,10 +159,12 @@ def evaluate_performance(
     return Performance(
         n_matches=n,
         pronostici_correct=correct,
-        flat_open=StrategyResult("Flat €10 @apertura", n, wins_open, round(p_open, 2)),
-        flat_close=StrategyResult("Flat €10 @chiusura", n, wins_close, round(p_close, 2)),
+        flat_open=StrategyResult("Flat €10 @apertura", n, correct, round(p_open, 2)),
+        flat_close=StrategyResult("Flat €10 @chiusura", n, correct, round(p_close, 2)),
         value=StrategyResult("Value bet (edge≥5%)", bt.n_bets, bt.n_wins, bt.profit),
         avg_clv=bt.avg_clv,
+        schedina=schedina_record(preds),
+        calibration=calibration_table(preds),
     )
 
 
@@ -121,6 +187,18 @@ def format_performance_report(perf: Performance) -> str:
         _fmt(perf.flat_close),
         _fmt(perf.value) + f"  · CLV {perf.avg_clv:+.1%}",
     ]
+
+    sc = perf.schedina
+    if sc.n_days:
+        out += ["",
+                f"🎫 Schedina giornaliera (top-3): vinte {sc.won}/{sc.n_days} "
+                f"· P&L €{sc.profit:+.2f} (ROI {sc.roi:+.1%})"]
+
+    if perf.calibration:
+        out += ["", "🎚️ Affidabilità (previsto → reale):"]
+        for label, k, avg_p, hit in perf.calibration:
+            spia = "✅" if abs(avg_p - hit) <= 0.10 else "⚠️"
+            out.append(f"  {spia} fascia {label}: dice {avg_p:.0%}, esce {hit:.0%} (n={k})")
     if not perf.meaningful:
         out += ["",
                 f"⚠️ Solo {perf.n_matches} partite: campione PICCOLO, numeri ancora "

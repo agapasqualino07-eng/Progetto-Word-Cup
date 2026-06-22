@@ -115,6 +115,7 @@ def parse_history_csv(text: str) -> list[HistoricalMatch]:
                 close_1=_parse_odds(row["close_1"], field="close_1", line=src_line),
                 close_x=_parse_odds(row["close_x"], field="close_x", line=src_line),
                 close_2=_parse_odds(row["close_2"], field="close_2", line=src_line),
+                date=(row.get("date") or "").strip(),  # opzionale
             )
         )
     return matches
