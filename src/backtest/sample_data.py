@@ -23,6 +23,7 @@ class HistoricalMatch:
     close_1: float
     close_x: float
     close_2: float
+    date: str = ""         # data partita "YYYY-MM-DD" (per schedina/serie storiche)
 
 
 # Righe sintetiche etichettate. Mix di favorite confermate e sorprese,
