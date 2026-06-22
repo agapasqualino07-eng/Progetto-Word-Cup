@@ -10,7 +10,7 @@ on-demand per partita, integrando quote dei bookmaker e notizie dalle testate.
 Comunicazione in italiano, codice in inglese. Vedi `README.md` e `CLAUDE.md`.
 
 ## Stato attuale: fondazione completa e testata
-- **142 test verdi** (`python -m unittest discover -s tests`), zero dipendenze nel core.
+- **147 test verdi** (`python -m unittest discover -s tests`), zero dipendenze nel core.
 - Implementato: modello Poisson, calibrazione (shrinkage al mercato), value engine
   (edge ≥ 5% o SKIP), allocatore 4-4-2, correlazione, warm-up, risk manager,
   cashout advisor, portafoglio SQLite, backtester (ROI+CLV), collector quote

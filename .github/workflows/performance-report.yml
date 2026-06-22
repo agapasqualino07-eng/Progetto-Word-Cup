@@ -1,0 +1,27 @@
+# Report serale automatico: 'come sta andando' sulle partite reali già giocate
+# (pronostici azzeccati + ROI/CLV delle strategie). Si aggiorna da solo man mano
+# che il raccoglitore aggiunge partite concluse a data/history.csv.
+#
+# Richiede i Secret TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (ODDS_API_KEY opzionale).
+# Gira ogni sera alle 23:00 ora italiana. Avvio manuale dal tab Actions.
+name: Report prestazioni serale
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 21:00 UTC = 23:00 in Italia (ora legale)
+  workflow_dispatch: {}
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Invia il report prestazioni su Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -m src.notifications.send_performance
