@@ -1,7 +1,6 @@
 # Quote storiche REALI raccolte durante il Mondiale 2026.
 # Generato da src/data/odds_history.py (snapshot + risultati reali).
 date,home,away,actual,open_1,open_x,open_2,close_1,close_x,close_2
-2026-06-23,Portogallo,Uzbekistan,1,1.21,5.8,8.5,1.13,9.5,17.0
 2026-06-23,Inghilterra,Ghana,X,1.28,5.0,7.5,1.18,7.75,14.5
 2026-06-23,Panama,Croazia,2,5.5,3.85,1.49,6.75,4.7,1.46
 2026-06-24,Colombia,Congo DR,1,1.53,4.2,7.5,1.5,4.25,7.5
