@@ -1,12 +1,6 @@
 # Quote storiche REALI raccolte durante il Mondiale 2026.
 # Generato da src/data/odds_history.py (snapshot + risultati reali).
 date,home,away,actual,open_1,open_x,open_2,close_1,close_x,close_2
-2026-06-24,Bosnia-Erzegovina,Qatar,1,1.57,3.9,5.9,1.39,5.55,8.3
-2026-06-24,Svizzera,Canada,1,2.1,3.2,3.4,2.54,3.05,3.33
-2026-06-24,Scozia,Brasile,2,7.5,4.35,1.45,10.5,5.75,1.32
-2026-06-24,Marocco,Haiti,1,1.27,5.2,9.5,1.15,7.8,17.0
-2026-06-25,Cechia,Messico,2,3.8,3.2,1.64,3.8,4.0,1.96
-2026-06-25,Sudafrica,Corea del Sud,1,4.0,3.25,1.58,6.05,3.95,1.65
 2026-06-25,Curaçao,Costa d'Avorio,2,8.5,5.0,1.15,16.0,8.0,1.2
 2026-06-25,Ecuador,Germania,1,4.0,3.35,1.56,4.7,4.8,1.56
 2026-06-25,Giappone,Svezia,X,1.94,3.15,3.15,2.02,3.5,4.12
@@ -19,3 +13,7 @@ date,home,away,actual,open_1,open_x,open_2,close_1,close_x,close_2
 2026-06-27,Uruguay,Spagna,2,5.3,3.8,1.57,6.2,3.6,1.62
 2026-06-27,Nuova Zelanda,Belgio,2,9.85,5.58,1.3,15.0,8.2,1.2
 2026-06-27,Egitto,Iran,X,2.38,3.08,3.62,2.67,2.6,3.36
+2026-06-27,Croazia,Ghana,1,1.57,3.7,5.5,1.85,3.1,5.2
+2026-06-27,Panama,Inghilterra,2,8.2,5.7,1.27,17.0,9.0,1.13
+2026-06-27,Colombia,Portogallo,X,3.6,3.3,2.12,3.5,3.85,1.96
+2026-06-27,Congo DR,Uzbekistan,1,2.15,3.1,2.8,1.73,3.95,5.2
