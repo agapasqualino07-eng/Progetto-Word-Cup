@@ -1,10 +1,12 @@
 # Quote storiche REALI raccolte durante il Mondiale 2026.
 # Generato da src/data/odds_history.py (snapshot + risultati reali).
 date,home,away,actual,open_1,open_x,open_2,close_1,close_x,close_2
-2026-06-28,Sudafrica,Canada,2,4.9,3.4,1.74,5.75,3.6,1.71
+2026-07-02,USA,Bosnia-Erzegovina,1,1.57,3.75,4.4,1.41,5.2,9.6
 2026-06-29,Brasile,Giappone,1,1.75,3.85,5.0,1.77,3.7,5.35
 2026-06-30,Olanda,Marocco,X,2.1,3.4,3.75,2.38,3.2,3.45
 2026-06-29,Germania,Paraguay,X,1.4,4.8,7.8,1.33,5.2,9.5
 2026-06-30,Costa d'Avorio,Norvegia,2,3.95,3.6,1.94,3.5,3.4,2.12
 2026-06-30,Francia,Svezia,1,1.41,4.7,7.8,1.29,6.25,11.0
 2026-07-01,Messico,Ecuador,1,2.18,3.2,3.95,2.28,2.85,4.1
+2026-07-01,Inghilterra,Congo DR,1,1.29,5.1,10.0,1.3,5.2,15.0
+2026-07-01,Belgio,Senegal,1,2.1,3.3,3.7,2.1,3.4,3.6
