@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- TEMPLATE HOME STORE — sintassi Mustache. Segnaposto: ../design-system.md §6. Stesse regole di onestà della pagina prodotto. -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negozio Esempio — Oggetti utili per la casa, spediti con tempi chiari.</title>
+<meta name="description" content="ESEMPIO — Lampada LED da scrivania pieghevole con 3 tonalità di luce. Spedizione e resi chiari.">
+<link rel="canonical" href="https://esempio.invalid/prodotti/lampada-led-pieghevole">
+<link rel="preload" href="../template/assets/fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../template/assets/store.css">
+<style>:root{--c-brand:#0F5E57;--c-brand-strong:#0B4A44;--c-brand-soft:#E6F2F0;}</style>
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Organization", "name": "Azienda Esempio S.r.l.", "url": "../template/", "email": "assistenza@esempio.invalid", "vatID": "IT00000000000 (esempio)" }
+</script>
+</head>
+<body>
+<div style="background:#92400E;color:#fff;text-align:center;font:700 14px/1.4 system-ui,sans-serif;padding:6px 12px">ANTEPRIMA — tutti i contenuti sono DATI DI ESEMPIO, non reali</div>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<div class="topbar">Spedizione gratuita · Consegna stimata 7–12 giorni lavorativi · <a href="legal/resi.html">Resi entro 14 giorni</a></div>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html" aria-current="page">
+      
+      <span>Negozio Esempio</span>
+    </a>
+    <nav class="nav" aria-label="Principale">
+      <a href="#prodotti">Prodotti</a>
+      <a class="nav-secondary" href="legal/spedizioni.html">Spedizioni</a>
+      <a class="nav-secondary" href="legal/resi.html">Resi</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="container hero">
+    <div>
+      <h1>Oggetti utili, prezzi chiari, resi semplici.</h1>
+      <p class="lead">Testo di esempio: pochi prodotti scelti, con tempi di consegna reali e 14 giorni per ripensarci.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#prodotti">Vedi i prodotti</a>
+        <a class="btn btn-secondary" href="#come-funziona">Spedizioni e resi</a>
+      </div>
+    </div>
+    <img class="hero-img" src="img/hero.svg" alt="Immagine di esempio" width="800" height="600" fetchpriority="high">
+  </section>
+
+  <div class="container">
+    <ul class="trust-strip" aria-label="In breve">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Spedizione gratuita</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Reso entro 14 giorni</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Garanzia legale 2 anni</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>Risposta entro 1 giorno lavorativo</li>
+    </ul>
+  </div>
+
+  <section id="prodotti" class="container section" aria-labelledby="h-prod">
+    <h2 id="h-prod">I nostri prodotti</h2>
+    <ul class="grid-products">
+      <li class="card-product">
+        <a href="product.html">
+          <img src="img/prod-a.svg" alt="Immagine di esempio" width="600" height="600" loading="lazy" decoding="async">
+          <span class="name">Lampada LED pieghevole (esempio)</span>
+          <span class="p">€ 29,90</span>
+          <span class="small muted">Prezzo più basso ultimi 30 gg: <s>€ 34,90</s></span>
+        </a>
+      </li><li class="card-product">
+        <a href="product.html">
+          <img src="img/prod-b.svg" alt="Immagine di esempio" width="600" height="600" loading="lazy" decoding="async">
+          <span class="name">Organizer da scrivania (esempio)</span>
+          <span class="p">€ 19,90</span>
+          <span class="small muted">Prezzo più basso ultimi 30 gg: <s>€ 34,90</s></span>
+        </a>
+      </li><li class="card-product">
+        <a href="product.html">
+          <img src="img/prod-c.svg" alt="Immagine di esempio" width="600" height="600" loading="lazy" decoding="async">
+          <span class="name">Supporto per laptop (esempio)</span>
+          <span class="p">€ 24,90</span>
+          <span class="small muted">Prezzo più basso ultimi 30 gg: <s>€ 34,90</s></span>
+        </a>
+      </li><li class="card-product">
+        <a href="product.html">
+          <img src="img/prod-d.svg" alt="Immagine di esempio" width="600" height="600" loading="lazy" decoding="async">
+          <span class="name">Tappetino da scrivania (esempio)</span>
+          <span class="p">€ 14,90</span>
+          <span class="small muted">Prezzo più basso ultimi 30 gg: <s>€ 34,90</s></span>
+        </a>
+      </li>
+    </ul>
+    
+  </section>
+
+  <section id="come-funziona" class="section-alt" aria-labelledby="h-how">
+    <div class="container">
+      <h2 id="h-how">Come funziona un ordine</h2>
+      <ol class="steps">
+        <li><div><h3>Ordini e paghi</h3><p class="muted">Prezzi IVA inclusa, nessun costo nascosto al checkout.</p></div></li>
+        <li><div><h3>Spediamo da Cina (magazzino del fornitore)</h3><p class="muted">Consegna stimata 7–12 giorni lavorativi, con tracciamento via email.</p></div></li>
+        <li><div><h3>Hai 14 giorni per ripensarci</h3><p class="muted">Recesso senza motivazione, rimborso con lo stesso metodo di pagamento. <a href="legal/resi.html">Leggi come</a>.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  
+
+  <section id="contatti" class="container section" aria-labelledby="h-contact">
+    <div class="contact-card">
+      <h2 id="h-contact">Contatti</h2>
+      <p class="muted">Siamo Azienda Esempio S.r.l.. Ti risponde una persona entro 1 giorno lavorativo.</p>
+      <p><strong>Email:</strong> <a href="mailto:assistenza@esempio.invalid">assistenza@esempio.invalid</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h2>Negozio Esempio</h2><p>Oggetti utili per la casa, spediti con tempi chiari.</p><p><a href="mailto:assistenza@esempio.invalid">assistenza@esempio.invalid</a></p></div>
+      <div><h2>Assistenza</h2><ul><li><a href="legal/spedizioni.html">Spedizioni</a></li><li><a href="legal/resi.html">Resi e rimborsi</a></li><li><a href="#contatti">Contatti</a></li></ul></div>
+      <div><h2>Note legali</h2><ul><li><a href="legal/privacy.html">Privacy</a></li><li><a href="legal/cookie.html">Cookie</a></li><li><a href="legal/termini.html">Condizioni di vendita</a></li></ul></div>
+      <div><h2>Pagamenti</h2><p>carta di credito/debito, PayPal (esempio)</p></div>
+    </div>
+    <p class="legal-line">© 2026 Azienda Esempio S.r.l. · Via Esempio 1, 00000 Città (XX) · P.IVA IT00000000000 (esempio) · REA XX-000000 (esempio) · PEC esempio@pec.invalid</p>
+  </div>
+</footer>
+</body>
+</html>
