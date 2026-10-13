@@ -227,3 +227,64 @@ Le piattaforme non vietano il dropshipping in quanto tale, ma sospendono spesso 
 - [ ] ROAS soglia calcolato per ogni prodotto con costi reali; regole di stop impostate
 - [ ] Riserva di cassa separata (doc 02 §6)
 - [ ] Code di approvazione umana attive nell'app (§2.3)
+
+---
+
+## 9. Validare senza P.IVA
+
+> Aggiornamento: il fondatore non ha la Partita IVA e vuole prima verificare se
+> l'idea funziona. Strategia e gate nel doc 01 §8; budget nel doc 02 §10. Il confine
+> tra "valutare un'idea" e "esercitare un'attività commerciale" dipende dai fatti
+> concreti: **va confermato con un commercialista** prima di iniziare.
+
+### 9.1 Cosa si può fare legalmente PRIMA di aprirla
+
+Regola di fondo: **nessun incasso, nessuna vendita, nessuna promessa vincolante di vendita.** Entro questo perimetro:
+
+- **Interviste** a potenziali clienti (di persona, videochiamata, questionario): chiedere il consenso a usare le risposte; non vendere durante l'intervista.
+- **Analisi dati** da discussioni online pubbliche (§9.3 per i limiti).
+- **Preventivi e documentazione** dai fornitori; **campioni** acquistati come privato per valutazione (non rivenderli).
+- **Landing di validazione con lista d'attesa**, senza carrello né pagamento, con una **dichiarazione trasparente** visibile sopra il modulo, ad esempio:
+  > *"Questo prodotto non è ancora in vendita. Stiamo verificando se interessa. Lasciando la tua email riceverai un solo messaggio se e quando sarà disponibile, con prezzo e condizioni. Nessun impegno, nessun pagamento."*
+- **Test di domanda con ads verso la waitlist**: consentito come privato sulle principali piattaforme (IPOTESI: **verificare** le policy al momento, in particolare quelle su "landing page" e su prodotti non disponibili). L'inserzione deve essere coerente con la landing: niente "Acquista ora", niente prezzi barrati, niente "ultimi pezzi".
+- **Domanda sul prezzo** (sondaggio o pulsanti "lo comprerei a X €"): è una rilevazione, non un'offerta.
+
+**Da NON fare prima della P.IVA:** pre-ordini con pagamento o caparra; raccolta dati di carta "per prenotare"; checkout finto che si interrompe al pagamento (ingannevole); "una vendita di prova" da store o marketplace; dropshipping su marketplace come privato.
+
+### 9.2 Obblighi che valgono anche senza P.IVA
+
+- **GDPR**: chi raccoglie email di terzi per uno scopo che non è puramente personale è titolare del trattamento anche da privato. Servono: informativa privacy (chi sei, finalità "avvisarti del lancio", base giuridica consenso, conservazione limitata, diritti), **consenso libero e specifico** (casella non pre-spuntata), meglio **doppio opt-in**, strumento email con dati in UE o garanzie adeguate, cancellazione della lista se il progetto non parte.
+- **Cookie e pixel**: banner conforme alle linee guida del Garante; il pixel delle ads (necessario per misurare il CPL) parte solo dopo il consenso. Questo riduce i dati misurati: tenerne conto nella lettura del CPL.
+- **Correttezza della comunicazione**: le regole sulle pratiche commerciali scorrette tutelano il consumatore anche nella fase promozionale; la dichiarazione "non ancora in vendita" protegge sia il cliente sia il test.
+- **Uso dei dati raccolti**: se il prodotto non parte, scrivere una sola email per dirlo (o non scrivere) e cancellare la lista; non cederla né riutilizzarla per altro.
+
+### 9.3 Raccolta dati dalle discussioni online
+
+- Rispettare i **termini d'uso** dei siti: preferire API ufficiali o raccolta manuale; lo scraping può essere vietato contrattualmente anche su contenuti pubblici.
+- I post pubblici possono contenere **dati personali** (nomi utente, dettagli di salute): il GDPR si applica anche ai dati resi pubblici. Pratica consigliata: conservare solo il testo del problema, **pseudonimizzato/aggregato**, senza identificativi; non profilare singole persone; nessuna categoria particolare di dati (salute) salvata.
+- Non contattare in privato gli autori dei post per vendere.
+
+### 9.4 Quando serve aprirla e quanto costa (IPOTESI)
+
+**Serve aprirla prima della prima vendita**, cioè quando si passa a vendere online in modo abituale e organizzato: è attività d'impresa commerciale. Passi tipici (doc 03 §6.1): Partita IVA con codice ATECO corretto → iscrizione al Registro delle Imprese (Camera di Commercio) con PEC tramite Comunicazione Unica → INPS gestione commercianti → SCIA/comunicazione al SUAP per il commercio elettronico. Poi **KYC** su Stripe/PayPal/Shopify Payments con i dati dell'attività.
+
+| Voce | Costo indicativo | Nota |
+| --- | --- | --- |
+| Apertura Partita IVA | 0 € (IPOTESI) | L'attribuzione del numero è gratuita; costi solo se tramite intermediario |
+| Pratica Comunicazione Unica / Registro Imprese (diritti e bolli) | 50–100 € una tantum (IPOTESI) | Varia per Camera di Commercio |
+| Diritto annuale camerale | ~50–60 €/anno (IPOTESI) | |
+| PEC | 5–30 €/anno (IPOTESI) | Obbligatoria per le imprese |
+| Firma digitale / SPID | 0–70 € (IPOTESI) | Spesso già disponibili |
+| Commercialista | 400–1.000 €/anno (IPOTESI; nel doc 02 usati 720 €/anno) | Chiedere 2–3 preventivi |
+| **Contributi INPS commercianti (minimale)** | ~4.400–4.500 €/anno (IPOTESI) | Dovuti anche senza utili; possibile riduzione per i forfettari che la richiedono; casi particolari se già dipendenti — **DA VERIFICARE** |
+| Imposta sul reddito | Regime forfettario: imposta sostitutiva ridotta nei primi anni se ricorrono i requisiti, poi ordinaria del regime, calcolata su ricavi × coefficiente di redditività del codice ATECO (IPOTESI, **DA VERIFICARE**); regime ordinario: IRPEF su utile | |
+
+**Regime forfettario:** opzione da valutare con il commercialista: semplifica la contabilità e non applica l'IVA sulle vendite in Italia, ma rende indetraibile l'IVA sugli acquisti e più cara la pubblicità estera (reverse charge) — effetto calcolato nel doc 02 §7.3. Verificare limite di ricavi e compatibilità con OSS/IOSS.
+
+**Domande da portare al commercialista:**
+1. Le attività del §9.1 (landing con waitlist senza incasso, ads verso la waitlist, campioni) sono compatibili con lo stato di privato senza P.IVA nel mio caso?
+2. Quale codice ATECO 2025 e quale regime (forfettario/ordinario)?
+3. INPS: importo esatto, riduzione forfettari, effetto di eventuale lavoro dipendente.
+4. Costo delle ads estere in forfettario (reverse charge) e IVA su campioni/merce importata.
+5. OSS/IOSS: servono subito se vendo solo in Italia da fornitore UE?
+6. Preventivo annuale e cosa include (dichiarazioni, F24, pratiche di apertura).

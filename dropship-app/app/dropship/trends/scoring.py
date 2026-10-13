@@ -72,7 +72,7 @@ def score_candidate(candidate, signal, thresholds, pricing_cfg, market_price=Non
 
     return TrendResult(
         candidate=candidate, signal=signal, score=score, passed=passed,
-        reasons=tuple(reasons), estimated_margin=margin,
+        reasons=tuple(reasons), estimated_margin=margin, market_price=price,
     )
 
 

@@ -65,7 +65,7 @@ Nota: l'INPS è il costo fisso più pesante. Se il commercialista conferma che n
 | Dominio + creatività di base | 15 | IPOTESI |
 | **Totale** | **1.165** | |
 
-Sul budget dichiarato di 2.000 € restano ~835 € come **riserva di cassa** (non inclusa nelle spese: serve per payout ritardati e rimborsi, §6).
+Sul budget dichiarato di 2.000 € restano ~835 € come **riserva di cassa** (non inclusa nelle spese: serve per payout ritardati e rimborsi, §6). **Aggiornamento:** prima di queste spese c'è la **Fase 0 di validazione senza P.IVA** (§10): campioni e dominio si spendono già lì, più ~330 € (IPOTESI) di ads verso la waitlist e strumenti. Se si prosegue, la spesa totale di avvio diventa ~1.495 € e la riserva scende a ~505 €.
 
 ### 2.4 Volumi (ordini/giorno, mesi 1→12)
 
@@ -201,6 +201,7 @@ In regime forfettario il venditore **non addebita IVA** sulle vendite in Italia,
 
 - **Il margine:** nello scenario base ogni ordine lascia **1,00 €** dopo ads e resi; al volume di piano il margine è **−3%**. Non è un business finché quel numero non sale.
 - **La riga da guardare:** il **CPA**. Da 15 € a 18 € la contribuzione diventa −2,00 €; da 15 € a 12 € il break-even passa da 19 a 5 ordini al giorno (§5).
+- **Fase 0:** prima di tutto questo, ~495 € (IPOTESI) di validazione senza P.IVA (§10); se i gate non passano, la perdita si ferma lì e non partono INPS e costi fissi.
 - **Cassa:** nello scenario base servono **5.587 €** prima che si ripaghi (non succede nell'anno 1); il budget di 2.000 € si esaurisce nel mese 2. A questo va aggiunto il capitale circolante per i payout ritardati (§6).
 - **Tre leve:** scontrino (+4,10 € di contribuzione con bundle a 44,90 €), CPA (−3 € di CPA = +3 € di contribuzione), costi fissi (aiutano poco finché la contribuzione è vicina a zero).
 - **Condizioni del board sul denaro** (doc 01 §2.4): "contribuzione positiva dopo CPA e resi con preventivi reali" → **non verificata** (nessun preventivo); "break-even ROAS calcolato" → **fatto** (§4); "ROAS reale misurato" → **da fare** con i test.
@@ -238,3 +239,53 @@ Quando arrivano preventivi e dati di test reali, sostituire le IPOTESI una per u
 | 12 | 10 | −251 € | −5.587 € | −15.337 € | 37.884 € |
 
 (I cumulati includono le spese di avvio di 1.165 €.)
+
+---
+
+## 10. Budget di validazione pre-P.IVA (Fase 0)
+
+> Aggiornamento richiesto dal fondatore (nessuna P.IVA finché l'idea non è
+> verificata). Strategia e gate nel doc 01 §8; aspetti legali nel doc 03 §9.
+> **Nessun ricavo** in questa fase: è solo spesa per comprare informazione.
+
+### 10.1 Il budget
+
+| Voce | € | Nota |
+| --- | ---: | --- |
+| Campioni prodotto (2–3 candidati) | 150 | IPOTESI — già incluso nei 1.165 € di avvio (§2.3), qui solo anticipato |
+| Dominio | 15 | IPOTESI — già incluso nei 1.165 € (§2.3) |
+| Landing + email (piani gratuiti/entry) | 30 | IPOTESI — nuova spesa |
+| Ads verso la waitlist | 300 | IPOTESI — nuova spesa |
+| Interviste, analisi dati da discussioni online, panel simulato | 0 | Solo tempo del fondatore |
+| **Totale Fase 0** | **495** | di cui **330 € aggiuntivi** rispetto agli scenari §3 |
+
+Costi fissi in Fase 0: **0 €/mese** di INPS, commercialista, piattaforma store (IPOTESI: nessuna attività d'impresa ancora avviata — da confermare con il commercialista, doc 03 §9).
+
+### 10.2 Come cambiano gli scenari
+
+| Esito | Spesa totale | Cosa succede |
+| --- | ---: | --- |
+| **Fase 0 non superata** | ~495 € | Stop: nessuna P.IVA, nessun INPS. È lo scenario in cui la validazione "si ripaga": evita di entrare nello scenario base/pessimo (perdita anno 1 da −4.422 € a −14.172 € operativi, §3) |
+| Fase 0 superata → scenario base | 1.165 € + 330 € = 1.495 € di avvio | I cumulati del §3 peggiorano di 330 €: cassa necessaria base 5.587 € → ~5.917 € |
+| Fase 0 superata → scenario ottimo | 1.495 € di avvio | Rientro ancora nel mese 3 (cumulato mese 3: 467 € − 330 € = ~137 €) |
+| Fase 0 molto forte | possibile riduzione della spesa test post-P.IVA (800 €) | IPOTESI: una waitlist qualificata riduce i prodotti da scartare; non contarci in anticipo |
+
+Riparto del budget di 2.000 € (IPOTESI): Fase 0 495 € → (se passa) avvio post-P.IVA ~1.000 € → riserva ~505 €.
+
+### 10.3 Dalla waitlist al CPA: il calcolo del gate
+
+**CPA implicito = costo per iscrizione (CPL) ÷ tasso iscritto→acquirente.** Il secondo numero non si può misurare senza vendere: si usa un'IPOTESI prudente (5–10%) e si verifica al lancio.
+
+| CPL misurato | Iscritti con 300 € | CPA implicito se il 10% compra | CPA implicito se il 5% compra | Verdetto vs CPA massimo base 16 € (sostenibile ~11–12 €) |
+| ---: | ---: | ---: | ---: | --- |
+| 0,50 € | 600 | 5,00 € | 10,00 € | Passa anche nel caso prudente |
+| 0,80 € | 375 | 8,00 € | 16,00 € | Passa al 10%; al limite al 5% |
+| 1,20 € | 250 | 12,00 € | 24,00 € | Al limite; non passa al 5% |
+| 1,50 € | 200 | 15,00 € | 30,00 € | Non passa (contribuzione ~0 anche al 10%) |
+| 3,00 € | 100 | 30,00 € | 60,00 € | Non passa |
+
+Regole di lettura:
+- **Gate proposto:** CPA implicito ≤ 12 € con l'ipotesi **prudente** (5%) → CPL ≤ ~0,60 €; oppure ≤ 12 € al 10% (CPL ≤ ~1,20 €) **più** una risposta al prezzo positiva e interviste convincenti (doc 01 §8.4). Soglie IPOTESI, da decidere prima di lanciare le ads.
+- **Campione piccolo:** con 100–300 iscritti la stima è rumorosa; differenze di CPL di ±30% tra due angoli non sono significative.
+- **Consenso cookie:** con il pixel attivo solo dopo consenso, parte delle conversioni non viene misurata; confrontare con il conteggio iscritti reale sulla lista, non con quello della piattaforma.
+- **Bias ottimistico:** iscriversi è gratis, comprare no. La Fase 0 è un filtro per dire *no* a basso costo, non una prova di profitto (doc 01 §8.6).

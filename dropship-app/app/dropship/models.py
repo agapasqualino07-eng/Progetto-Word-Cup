@@ -43,6 +43,7 @@ class TrendResult:
     passed: bool
     reasons: Tuple[str, ...]
     estimated_margin: Optional[float]
+    market_price: Optional[Decimal] = None
 
 
 @dataclass(frozen=True)
