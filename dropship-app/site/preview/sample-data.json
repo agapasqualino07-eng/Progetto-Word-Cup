@@ -76,9 +76,9 @@
   "hero_image": { "src": "img/hero.svg", "alt": "Immagine di esempio", "width": 800, "height": 600 },
   "products_title": "I nostri prodotti",
   "products": [
-    { "url": "product.html", "title": "Lampada LED pieghevole (esempio)", "price": "€ 29,90", "price_reference": "€ 34,90", "image_src": "img/prod-a.svg", "image_alt": "Immagine di esempio" },
-    { "url": "product.html", "title": "Organizer da scrivania (esempio)", "price": "€ 19,90", "image_src": "img/prod-b.svg", "image_alt": "Immagine di esempio" },
-    { "url": "product.html", "title": "Supporto per laptop (esempio)", "price": "€ 24,90", "image_src": "img/prod-c.svg", "image_alt": "Immagine di esempio" },
-    { "url": "product.html", "title": "Tappetino da scrivania (esempio)", "price": "€ 14,90", "image_src": "img/prod-d.svg", "image_alt": "Immagine di esempio" }
+    { "url": "product.html", "title": "Lampada LED pieghevole (esempio)", "price": "€ 29,90", "lowest_30d": "€ 34,90", "image_src": "img/prod-a.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Organizer da scrivania (esempio)", "price": "€ 19,90", "lowest_30d": null, "image_src": "img/prod-b.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Supporto per laptop (esempio)", "price": "€ 24,90", "lowest_30d": null, "image_src": "img/prod-c.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Tappetino da scrivania (esempio)", "price": "€ 14,90", "lowest_30d": null, "image_src": "img/prod-d.svg", "image_alt": "Immagine di esempio" }
   ]
 }

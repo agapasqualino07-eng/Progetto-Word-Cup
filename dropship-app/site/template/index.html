@@ -64,7 +64,7 @@
           <img src="{{image_src}}" alt="{{image_alt}}" width="600" height="600" loading="lazy" decoding="async">
           <span class="name">{{title}}</span>
           <span class="p">{{price}}</span>
-          {{#price_reference}}<span class="small muted">Prezzo più basso ultimi 30 gg: <s>{{price_reference}}</s></span>{{/price_reference}}
+          {{#lowest_30d}}<span class="small muted">Prezzo più basso ultimi 30 gg: <s>{{lowest_30d}}</s></span>{{/lowest_30d}}
         </a>
       </li>{{/products}}
     </ul>
@@ -95,7 +95,7 @@
   <section id="contatti" class="container section" aria-labelledby="h-contact">
     <div class="contact-card">
       <h2 id="h-contact">Contatti</h2>
-      <p class="muted">Siamo {{company_name}}. Ti risponde una persona entro {{contact_response_time}}.</p>
+      <p class="muted">Ti risponde una persona del nostro team ({{company_name}}) entro {{contact_response_time}}.</p>
       <p><strong>Email:</strong> <a href="mailto:{{contact_email}}">{{contact_email}}</a>{{#contact_phone}}<br><strong>Telefono:</strong> <a href="tel:{{contact_phone_e164}}">{{contact_phone}}</a> ({{contact_hours}}){{/contact_phone}}</p>
     </div>
   </section>

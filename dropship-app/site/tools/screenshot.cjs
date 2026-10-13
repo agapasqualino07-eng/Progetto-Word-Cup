@@ -17,7 +17,15 @@ const { chromium } = require("playwright");
     const page = await ctx.newPage();
     await page.goto(url, { waitUntil: "load" });
     await page.evaluate(() => document.fonts.ready);
-    await page.screenshot({ path: path.join(site, s.file), fullPage: true });
+    if (s.isMobile) {
+      // primo schermo reale (con barra d'acquisto sticky in basso)
+      await page.screenshot({ path: path.join(site, s.file) });
+      // pagina intera: la barra fixed nasconderebbe contenuti a metà, la togliamo solo nello screenshot
+      await page.addStyleTag({ content: ".buy-bar{display:none!important}" });
+      await page.screenshot({ path: path.join(site, "preview", "product-mobile-full.png"), fullPage: true });
+    } else {
+      await page.screenshot({ path: path.join(site, s.file), fullPage: true });
+    }
     console.log("scritto", s.file);
     await ctx.close();
   }

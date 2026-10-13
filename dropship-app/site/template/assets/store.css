@@ -169,7 +169,7 @@ details.acc > div { padding: 0 0 var(--s-4); color: var(--c-text-muted); }
   .nav .nav-secondary { display: inline-flex; }
   .product { grid-template-columns: 1.1fr 1fr; gap: var(--s-7); align-items: start; padding-top: var(--s-2); }
   .gallery { margin: 0; position: sticky; top: var(--s-4); }
-  .gallery-track { padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); overflow: visible; }
+  .gallery-track { padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
   .gallery-track li:first-child { grid-column: 1 / -1; }
   .gallery-hint { display: none; }
   .buy-bar { display: none; }

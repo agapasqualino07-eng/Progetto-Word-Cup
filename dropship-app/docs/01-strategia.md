@@ -8,8 +8,9 @@
 > **Ipotesi di partenza dichiarate**
 > - Fondatore: una persona sola, senza dipendenti, con ore limitate (IPOTESI: 15–20 h/settimana nei primi 6 mesi).
 > - Budget iniziale: **2.000 €** (IPOTESI, centro della forchetta 1.000–3.000 €). Con 1.000 € il piano sotto si accorcia a un solo ciclo di test; con 3.000 € se ne fanno due.
-> - Mercato: Italia per primo, poi UE. Nicchia: **non ancora scelta** (è la prima decisione da prendere, vedi §6).
+> - Mercato: Italia per primo, poi UE. Nicchia: **non ancora scelta**; la sceglieranno i dati, con il criterio "prodotti che risolvono problemi reali" emersi da discussioni online (§8.2).
 > - Canale di vendita: store proprio (es. Shopify) + ads a pagamento (Meta/TikTok/Google).
+> - **Decisioni del fondatore (aggiornamento):** (1) vende lui, con store proprio: **niente SaaS**; (2) **non ha ancora la Partita IVA** e vuole prima verificare se l'idea funziona → si parte da una **Fase 0 di validazione senza P.IVA e senza incassi** (§8).
 >
 > **Metodo.** Skill del pacchetto *founder*: board (3 lenti), offer, pricing, CFO
 > (`unit_economics.py`), ops, consumer, plan. Limiti onesti:
@@ -78,7 +79,7 @@
 **Disaccordo da conservare:** la lente Offerte pensa che un'offerta forte possa rendere profittevole anche un prodotto non difendibile per qualche mese; la lente Monopolio pensa che senza difese i margini vengano erosi comunque e che il lavoro migliore sia costruire un *brand* (unica difesa accessibile a un singolo). Entrambe hanno ragione su orizzonti diversi.
 
 **Checklist delle condizioni (da spuntare nel resto del lavoro):**
-- [ ] Nicchia scelta su "dolore + capacità di spesa + raggiungibilità + acquisto ripetuto", non su "virale" (§6, settimana 1–2).
+- [ ] Nicchia scelta su "dolore + capacità di spesa + raggiungibilità + acquisto ripetuto", non su "virale" (§8.2, Fase 0).
 - [ ] Contribuzione per ordine positiva **dopo** CPA e resi con preventivi reali (`02-unit-economics.md`).
 - [ ] Break-even ROAS calcolato e ROAS reale misurato sopra soglia su almeno 50 ordini prima di scalare.
 - [ ] Fornitore con consegna UE ≤ 7 giorni lavorativi e responsabile UE ai fini GPSR (`03-operazioni-e-compliance.md`).
@@ -156,6 +157,8 @@ Ordine di grandezza (IPOTESI, solo per illustrare la dinamica): a 29 €/mese, p
 3. Se i gate non passano, il SaaS non si fa: l'app resta uno strumento personale.
 
 **Raccomandazione:** **Opzione C**, partendo da **A2 (brand di micro-nicchia)**. Motivo: è l'unico percorso compatibile con 2.000 € e una persona, e produce i dati che servirebbero anche al SaaS. Il SaaS subito significherebbe vendere "pale per cercare l'oro" senza aver mai scavato, in un mercato già pieno di pale.
+
+**Decisione del fondatore (aggiornamento):** store proprio, **niente SaaS**. È coerente con la raccomandazione (fase 1 = A2) e la semplifica: il SaaS esce dal perimetro e l'app resta **strumento interno**. I gate del §4.3 restano utili solo come promemoria nel caso l'idea venga riaperta in futuro.
 
 ---
 
@@ -277,19 +280,20 @@ Il controllo "panel consumatori" non è incluso perché il panel non è stato es
 - **Verdetto:** *Not yet* nello scenario base. Diventa sostenibile solo se si ottengono insieme scontrino ≥ ~45 € e CPA ≤ ~11–12 € (doc 02 §5).
 - **La variabile che decide tutto:** il **CPA** (costo pubblicitario per ordine). Ogni euro di CPA in più è un euro di margine in meno.
 - **Il rischio più grande:** blocco di account ads o pagamenti (ferma le vendite e la cassa). Mitigazione: compliance completa *prima* del lancio, due canali, riserva di cassa, lista email propria.
-- **Cosa serve per partire:** 2.000 € (IPOTESI) di cui ~1.165 € spesi in setup e test e il resto come riserva; partita IVA attiva; 15–20 h/settimana.
-- **La cosa da fare questa settimana:** scegliere 3 micro-nicchie candidate e, per ognuna, trovare 2 fornitori con magazzino UE e chiedere preventivo (prodotto + spedizione IT) e documentazione GPSR/CE.
+- **Cosa serve per partire:** Fase 0 di validazione **senza P.IVA** con ~500 € (IPOTESI, §8.3); solo se passa, apertura della P.IVA e ~1.165 € di setup e test (IPOTESI), il resto del budget di 2.000 € come riserva; 15–20 h/settimana.
+- **La cosa da fare questa settimana:** raccogliere dalle discussioni online i problemi ricorrenti (§8.2), ridurli a 3 micro-nicchie candidate e, per ognuna, chiedere preventivo (prodotto + spedizione IT) e documentazione GPSR/CE a 2 fornitori con magazzino UE. Tutto questo si fa senza P.IVA.
 
-### 7.3 Piano a 90 giorni con gate e criteri di stop
+### 7.3 Piano a ~16 settimane con gate e criteri di stop
 
 | Settimane | Obiettivo | Gate per proseguire |
 | --- | --- | --- |
-| 1–2 | Scelta nicchia (3 candidate → 1); preventivi fornitori UE; consulto commercialista su regime fiscale | Costo sbarcato ≤ 1/3 del prezzo target; fornitore con responsabile UE GPSR e documentazione |
-| 3–4 | Partita IVA/SCIA, store, policy legali, cookie banner, campioni ricevuti e provati; panel `--quick` | Campione conforme alle foto; panel non boccia l'offerta |
-| 5–8 | Test: 2–3 prodotti/angoli, budget ads ~25 €/giorno (IPOTESI), stop per prodotto a ~2x il CPA massimo senza vendite | Almeno un prodotto con ROAS ≥ break-even su ≥ 20 ordini |
-| 9–12 | Ottimizzazione offerta/bundle; email post-acquisto; misura resi e dispute | ROAS sopra break-even su ≥ 50 ordini; tasso dispute sotto ~0,5% (IPOTESI di sicurezza) |
+| 0–6 (**Fase 0, senza P.IVA**, §8) | Nicchia dai dati (problemi reali da discussioni online); interviste; preventivi fornitori UE; campioni; landing con lista d'attesa senza incasso; test ads verso la waitlist; consulto commercialista | Gate della Fase 0 (§8.4): CPA implicito ≤ CPA massimo, costo sbarcato ≤ 1/3 del prezzo target, fornitore con responsabile UE GPSR |
+| 7–8 | **Solo se la Fase 0 passa:** Partita IVA, Registro Imprese, INPS, SCIA; store, policy legali, cookie banner; KYC pagamenti; panel `--quick` | Campione conforme alle foto; KYC approvato; panel non boccia l'offerta |
+| 9–12 | Test di vendita: 2–3 prodotti/angoli (partendo dalla waitlist), budget ads ~25 €/giorno (IPOTESI), stop per prodotto a ~2x il CPA massimo senza vendite | Almeno un prodotto con ROAS ≥ break-even su ≥ 20 ordini |
+| 13–16 | Ottimizzazione offerta/bundle; email post-acquisto; misura resi e dispute | ROAS sopra break-even su ≥ 50 ordini; tasso dispute sotto ~0,5% (IPOTESI di sicurezza) |
 
 **Criteri di stop (decisi ora, prima di spendere):**
+- Fase 0: gate del §8.4 non superati dopo il budget di validazione → **non aprire la P.IVA**; cambiare nicchia o fermarsi (costo massimo ~500 €, IPOTESI);
 - perdita cumulata pari al **budget di test** (IPOTESI 1.000–1.200 €) senza alcun prodotto sopra break-even ROAS → fermarsi e rivalutare nicchia o modello;
 - account ads o pagamenti sospesi due volte → fermarsi e rivedere compliance prima di riaprire;
 - dispute/chargeback in crescita oltre ~1% → stop alle ads finché la causa non è risolta.
@@ -302,3 +306,65 @@ Il controllo "panel consumatori" non è incluso perché il panel non è stato es
 - **Evidenze:** nessuna ancora (nessun panel, nessuna vendita, nessun preventivo). Questo è il punto debole principale.
 - **A cosa servono i soldi:** campioni, test ads su più prodotti, setup legale/fiscale, riserva di cassa per payout ritardati e rimborsi.
 - **La richiesta:** nessuna richiesta di capitale esterno raccomandata prima di 50 ordini reali sopra break-even.
+
+---
+
+## 8. Validare senza P.IVA (Fase 0)
+
+> Aggiornamento richiesto dal fondatore: non ha la Partita IVA e vuole prima
+> verificare se l'idea funziona. Questa sezione dice **cosa si può fare prima** e
+> **quando bisogna aprirla**. Gli aspetti legali sono dettagliati nel doc 03 §9; il
+> budget nel doc 02 §10. Tutti i costi sono IPOTESI; il confine tra "validazione" e
+> "attività d'impresa" va confermato con un **commercialista**.
+
+### 8.1 Perché ha senso (anche in base ai numeri)
+
+Aprire la P.IVA da ditta individuale commerciale fa partire costi fissi che corrono anche senza vendite, soprattutto i contributi INPS minimi (IPOTESI ~370 €/mese, doc 02 §2.2). Nello scenario base i costi fissi sono 551 €/mese e la contribuzione per ordine è 1,00 €: aprire "per provare" significa pagare la parte più pesante del conto prima di sapere se c'è domanda. Una Fase 0 di ~6 settimane e ~500 € (IPOTESI) può dire **no** a costo molto più basso. Non può dire **sì** con certezza (§8.6).
+
+### 8.2 La nicchia la scelgono i dati: "prodotti che risolvono problemi reali"
+
+Metodo (eseguibile in parte dall'app, decisione finale umana):
+1. **Raccolta:** discussioni pubbliche in cui le persone descrivono un problema con parole proprie — forum e community italiane, gruppi tematici, thread di domande/risposte, recensioni negative (1–3 stelle) di prodotti esistenti sui marketplace, commenti sotto video tutorial. Usare API ufficiali o raccolta manuale nel rispetto dei termini d'uso di ogni sito; **non salvare dati personali** (nomi utente, profili): solo il testo del problema, aggregato (doc 03 §9.3).
+2. **Estrazione:** per ogni problema: chi lo ha, quanto spesso compare, quanto è intenso ("non dormo", "ho buttato soldi in…"), cosa hanno già provato, perché le soluzioni esistenti deludono.
+3. **Punteggio** (criteri del board, 1–5 ciascuno): frequenza; intensità; capacità di spesa del pubblico; raggiungibilità con ads in Italia; esiste un prodotto fisico che lo risolve e che si può vendere a ≥ 3x il costo sbarcato (doc 01 §6); conformità semplice (no elettronica con batterie, giocattoli, cosmetici, integratori, dispositivi medici — doc 03 §6.3); acquisto ripetuto o accessori.
+4. **Shortlist:** 3 micro-nicchie → interviste (§8.3) → 1.
+
+Limiti da tenere presenti: chi scrive online non è un campione rappresentativo dei compratori; "ne parlano in tanti" non significa "comprerebbero da un'inserzione"; un problema reale può avere già una soluzione economica e soddisfacente su un marketplace. Per questo il passo successivo è misurare comportamenti (iscrizioni, risposte a un prezzo), non opinioni.
+
+### 8.3 Cosa si può fare prima della P.IVA (senza incassare nulla)
+
+| Attività | Lecita senza P.IVA? | Condizioni |
+| --- | --- | --- |
+| Ricerca e analisi dati da discussioni online | Sì | Rispetto dei termini d'uso dei siti; nessun dato personale conservato |
+| Interviste a potenziali clienti (10–20) | Sì | Consenso a usare le risposte; nessuna vendita durante l'intervista |
+| Richiesta preventivi e documentazione ai fornitori | Sì | Ci si presenta come privato in fase di valutazione |
+| Acquisto di campioni come privato | Sì (IPOTESI: per uso di valutazione, non per rivendita) | Non rivendere i campioni |
+| **Landing di validazione con lista d'attesa** | Sì, se **non c'è incasso** | Dichiarazione chiara e visibile: *"Prodotto non ancora in vendita. Iscrivendoti ricevi solo un'email quando (e se) sarà disponibile."* Nessun carrello, nessun pagamento, **nessuna raccolta di dati di carta**, nessuna "prenotazione" vincolante. Informativa privacy e consenso (GDPR valido anche per i privati che trattano dati di terzi) |
+| Test di domanda con ads verso la waitlist | Sì (IPOTESI, da verificare con le policy della piattaforma) | L'inserzione non deve far credere che il prodotto sia acquistabile; nessun prezzo barrato o scarsità finta |
+| Domanda di prezzo nella landing ("Lo compreresti a 44,90 €?") o mini-sondaggio | Sì | È una domanda, non un'offerta vincolante |
+| Panel simulato (`/founder-consumer --quick`) | Sì | Risultati come limite superiore, non prova |
+| **Pre-ordini con pagamento, "solo una vendita di prova", vendita su marketplace come privato di merce comprata per rivenderla** | **No** | È vendita: rientra nell'attività d'impresa (§8.5) |
+
+**Trasparenza:** è un test "a porta finta" onesto solo se la persona sa, **prima** di lasciare l'email, che il prodotto non è in vendita. Un checkout finto che si interrompe al pagamento non va fatto (è ingannevole e raccoglie intenzioni di acquisto sotto falsa rappresentazione).
+
+### 8.4 Gate della Fase 0 (decisi prima di spendere)
+
+Metriche (IPOTESI di soglia, da tarare):
+- **Costo per iscrizione (CPL)** alla waitlist e **tasso di conversione** visita → iscrizione.
+- **CPA implicito** = CPL ÷ tasso iscritto→acquirente ipotizzato (IPOTESI prudente 5–10%; storicamente le waitlist convertono meno di quanto promettono). Deve risultare **≤ CPA massimo** del doc 02 §4 (16 € base; per essere sostenibile servono ~11–12 €, doc 02 §5).
+- **Risposta al prezzo:** quota di iscritti che dichiara di accettare il prezzo target.
+- **Interviste:** almeno metà degli intervistati descrive il problema senza imbeccata e lo considera da risolvere a pagamento.
+- **Fornitore:** costo sbarcato ≤ 1/3 del prezzo target; responsabile UE GPSR; consegna UE ≤ 7 giorni lavorativi.
+
+**Si apre la P.IVA solo se tutti i gate passano.** Calcolo ed esempi nel doc 02 §10.
+
+### 8.5 Quando invece serve aprirla
+
+- **Prima della prima vendita.** Vendere online in modo **abituale e organizzato** (store, ads, fornitore, ripetizione degli ordini) è **attività d'impresa commerciale**: servono **Partita IVA**, iscrizione al **Registro delle Imprese** (Camera di Commercio), **INPS gestione commercianti**, SCIA/comunicazione al Comune per il commercio elettronico. La "prestazione occasionale" non copre la vendita organizzata di beni (doc 03 §6.1).
+- **Prima del KYC dei pagamenti.** Stripe, PayPal business e il gateway della piattaforma chiedono i dati dell'attività; dichiarare un'attività commerciale come privato o con dati incoerenti espone a blocchi dei fondi.
+- **Regime forfettario:** opzione da valutare con un commercialista (effetti su IVA e costo delle ads nel doc 02 §7.3; limiti e compatibilità OSS/IOSS da verificare).
+- **Costi indicativi di apertura e primo anno:** doc 03 §9.4 (tutti IPOTESI).
+
+### 8.6 Cosa la Fase 0 non dimostra
+
+Un'email non è un acquisto. La Fase 0 riduce il rischio di aprire la P.IVA per un prodotto che nessuno vuole, ma **non** misura il CPA reale, il tasso di resi, le dispute né la tenuta degli account ads/pagamenti: questi si vedono solo vendendo (settimane 9–16 del §7.3). Il verdetto *Not yet* dello scenario base (§7.1) resta valido finché i numeri reali non lo cambiano.
