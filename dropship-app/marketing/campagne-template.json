@@ -1,0 +1,271 @@
+{
+  "_meta": {
+    "schema_version": "0.1.0",
+    "descrizione": "Struttura dati delle campagne generate dall'app. Il blocco 'esempio' contiene un prodotto e numeri di ESEMPIO, non dati reali.",
+    "ESEMPIO": true,
+    "avviso": "ESEMPIO: prodotto, prezzi, costi e soglie sono ipotesi illustrative. Nessun dato di performance reale. Prima della pubblicazione ogni creativita' richiede approvazione umana.",
+    "valuta": "EUR",
+    "riferimenti": [
+      "piano-marketing.md sezioni 3 (economia), 7 (regole), 8 (cosa non automatizzare)",
+      "copy-libreria.md (hook e varianti)",
+      "tracking.md (eventi, UTM, consenso)"
+    ]
+  },
+
+  "schema": {
+    "campagna": {
+      "id": "string, formato {PIATTAFORMA}_{OBIETTIVO}_{PRODOTTO}_{AAAAMMGG}",
+      "stato": "enum: bozza | in_attesa_approvazione | approvata | attiva | in_pausa | chiusa",
+      "piattaforma": "enum: tiktok | meta | google_shopping | google_pmax",
+      "fase": "enum: test | validazione | scaling | retargeting",
+      "obiettivo": "enum: vendite",
+      "evento_ottimizzazione": "enum: Purchase | InitiateCheckout | AddToCart (fallback temporaneo)",
+      "finestra_attribuzione": "string, es. 7d_click (le decisioni usano sempre la stessa finestra)",
+      "prodotto": "oggetto: id, nome, url, prezzo_ivato, aliquota_iva, costo_merce_spedizione, commissione_pagamento, accantonamento_resi_pct, costo_app_per_ordine, profitto_minimo_per_ordine, tempi_consegna_giorni_lavorativi, categoria_regolamentata (bool)",
+      "economia": "oggetto calcolato dall'app: prezzo_netto, contribuzione, be_cpa, be_roas, target_cpa, target_roas, idoneo_ads (false se be_roas > 3.0)",
+      "pubblico": "oggetto: paesi, lingue, eta_min, eta_max, genere, targeting (ampio | interessi | lookalike | retargeting), esclusioni",
+      "budget": "oggetto: giornaliero, cap_giornaliero_account, tetto_prodotto, cap_progetto, riserva_non_spendibile, aumento_max_pct, intervallo_min_aumenti_ore",
+      "gruppi_annunci": "array di oggetti: id, nome, posizionamenti, annunci (array di id creativita')",
+      "creativita": "array di oggetti: id, formato, angolo, hook (testo detto + testo a schermo + immagine iniziale), varianti, testo_annuncio, titolo, cta, url_destinazione, utm, fonte_grounding, controlli_policy, stato_approvazione, approvato_da, approvato_il",
+      "regole": "array di oggetti: id, livello, condizione (espressione), azione, modalita (auto | proposta), attesa_minima_ore, note",
+      "compliance": "oggetto: checklist con esito (ok | da_verificare | ko) per ogni voce",
+      "log_decisioni": "array: timestamp, regola_id, metriche_al_momento, azione, eseguita_da (app | nome_persona)"
+    }
+  },
+
+  "esempio": {
+    "ESEMPIO": true,
+    "id": "TIKTOK_VENDITE_LAMPADACLIP_20261020",
+    "stato": "in_attesa_approvazione",
+    "piattaforma": "tiktok",
+    "fase": "test",
+    "obiettivo": "vendite",
+    "evento_ottimizzazione": "Purchase",
+    "evento_fallback": {
+      "evento": "InitiateCheckout",
+      "condizione": "zero eventi Purchase dopo 72 ore e almeno 10 InitiateCheckout",
+      "modalita": "proposta"
+    },
+    "finestra_attribuzione": "7d_click",
+
+    "prodotto": {
+      "ESEMPIO": true,
+      "id": "PRD-ESEMPIO-001",
+      "nome": "Lampada da lettura a clip ricaricabile (ESEMPIO)",
+      "url": "https://negozio-esempio.example/prodotti/lampada-clip",
+      "prezzo_ivato": 34.90,
+      "aliquota_iva": 0.22,
+      "costo_merce_spedizione": 11.00,
+      "commissione_pagamento": 0.77,
+      "accantonamento_resi_pct": 0.05,
+      "costo_app_per_ordine": 0.50,
+      "profitto_minimo_per_ordine": 4.91,
+      "tempi_consegna_giorni_lavorativi": "DATO MANCANTE: misurare con ordine di prova",
+      "categoria_regolamentata": false,
+      "note_conformita": "Prodotto elettrico con batteria: verificare marcatura CE, istruzioni in italiano e responsabile UE (GPSR) prima del lancio."
+    },
+
+    "economia": {
+      "calcolato_da_app": true,
+      "prezzo_netto": 28.61,
+      "contribuzione": 14.91,
+      "be_cpa": 14.91,
+      "be_roas": 1.92,
+      "target_cpa": 10.00,
+      "target_roas": 2.86,
+      "idoneo_ads": true,
+      "valore_conversione_inviato": "subtotale prodotti IVA esclusa"
+    },
+
+    "pubblico": {
+      "paesi": ["IT"],
+      "lingue": ["it"],
+      "eta_min": 18,
+      "eta_max": null,
+      "genere": "tutti",
+      "targeting": "ampio",
+      "interessi": [],
+      "esclusioni": [
+        "acquirenti ultimi 180 giorni (lista caricata solo per clienti con consenso marketing)",
+        "visitatori sotto 10 secondi"
+      ],
+      "nota": "Pubblico ampio: la creativita' fa il targeting. Interessi solo se dopo 7 giorni la consegna e' palesemente fuori target."
+    },
+
+    "budget": {
+      "giornaliero": 25.00,
+      "cap_giornaliero_account": 40.00,
+      "tetto_prodotto": 150.00,
+      "cap_progetto": 1600.00,
+      "riserva_non_spendibile": 400.00,
+      "aumento_max_pct": 20,
+      "intervallo_min_aumenti_ore": 72,
+      "minimi_piattaforma": "DATO MANCANTE: verificare in TikTok Ads Manager il budget minimo per campagna e gruppo annunci al momento della creazione"
+    },
+
+    "gruppi_annunci": [
+      {
+        "id": "AG-01",
+        "nome": "IT_ampio_18+_test",
+        "posizionamenti": ["tiktok_feed"],
+        "annunci": ["CR-01", "CR-02", "CR-03", "CR-04"]
+      }
+    ],
+
+    "creativita": [
+      {
+        "id": "CR-01",
+        "formato": "video 9:16, 15-25 s, girato con il prodotto reale",
+        "angolo": "problema quotidiano",
+        "hook": {
+          "detto": "Leggo a letto e la luce del soffitto sveglia chi dorme accanto a me.",
+          "testo_schermo": "Leggere a letto senza accendere la stanza",
+          "immagine_iniziale": "stanza buia, solo il libro illuminato dalla lampada agganciata"
+        },
+        "varianti": [
+          { "id": "CR-01a", "testo_schermo": "Luce sul libro, stanza al buio" },
+          { "id": "CR-01b", "testo_schermo": "Per chi legge mentre l'altro dorme" }
+        ],
+        "testo_annuncio": "Si aggancia al libro o alla testiera e illumina solo la pagina. Si ricarica via USB-C.",
+        "titolo": "Lampada da lettura a clip",
+        "cta": "Acquista",
+        "url_destinazione": "https://negozio-esempio.example/prodotti/lampada-clip",
+        "utm": "utm_source=tiktok&utm_medium=paid_social&utm_campaign=TIKTOK_VENDITE_LAMPADACLIP_20261020&utm_content=CR-01",
+        "fonte_grounding": "ESEMPIO: commento ricevuto su video organico del 2026-10-15 (da sostituire con fonte reale)",
+        "controlli_policy": {
+          "claim_salute": "nessuno",
+          "prima_dopo": "no",
+          "attributi_personali": "no (il testo parla di chi parla, non presume nulla dello spettatore)",
+          "prezzo_o_sconto": "nessuno",
+          "scarsita": "nessuna",
+          "dati_da_verificare": ["durata batteria non citata finche' non misurata"]
+        },
+        "stato_approvazione": "da_approvare",
+        "approvato_da": null,
+        "approvato_il": null
+      },
+      {
+        "id": "CR-02",
+        "formato": "video 9:16, dimostrazione senza voce con sottotitoli",
+        "angolo": "dimostrazione in 3 passaggi",
+        "hook": {
+          "detto": null,
+          "testo_schermo": "Aggancio, accendo, scelgo l'intensita'",
+          "immagine_iniziale": "mano che aggancia la lampada alla copertina"
+        },
+        "varianti": [
+          { "id": "CR-02a", "testo_schermo": "Tre gesti e si legge" }
+        ],
+        "testo_annuncio": "Tre livelli di luce, braccio flessibile, ricarica USB-C. Spedizione in Italia con tracciamento.",
+        "titolo": "Si aggancia dove leggi",
+        "cta": "Acquista",
+        "url_destinazione": "https://negozio-esempio.example/prodotti/lampada-clip",
+        "utm": "utm_source=tiktok&utm_medium=paid_social&utm_campaign=TIKTOK_VENDITE_LAMPADACLIP_20261020&utm_content=CR-02",
+        "fonte_grounding": "ESEMPIO: scheda tecnica del fornitore (verificare livelli di luce sul campione)",
+        "controlli_policy": {
+          "claim_salute": "nessuno",
+          "prima_dopo": "no",
+          "attributi_personali": "no",
+          "prezzo_o_sconto": "nessuno",
+          "scarsita": "nessuna",
+          "dati_da_verificare": ["numero livelli di luce", "tipo di porta di ricarica"]
+        },
+        "stato_approvazione": "da_approvare",
+        "approvato_da": null,
+        "approvato_il": null
+      },
+      {
+        "id": "CR-03",
+        "formato": "video 9:16, risposta a un commento (FAQ)",
+        "angolo": "obiezione: tempi di consegna",
+        "hook": {
+          "detto": "Mi avete chiesto quanto ci mette ad arrivare. Ecco il pacco che ho ordinato io.",
+          "testo_schermo": "Quanto ci mette ad arrivare?",
+          "immagine_iniziale": "screenshot del commento sopra il pacco aperto"
+        },
+        "varianti": [],
+        "testo_annuncio": "Spedizione in [N] giorni lavorativi con numero di tracciamento. Reso entro 14 giorni.",
+        "titolo": "Tempi di consegna reali",
+        "cta": "Scopri di piu'",
+        "url_destinazione": "https://negozio-esempio.example/pages/spedizioni",
+        "utm": "utm_source=tiktok&utm_medium=paid_social&utm_campaign=TIKTOK_VENDITE_LAMPADACLIP_20261020&utm_content=CR-03",
+        "fonte_grounding": "ESEMPIO: [N] da sostituire con i giorni misurati sull'ordine di prova. Bloccato finche' [N] e' DATO MANCANTE.",
+        "controlli_policy": {
+          "claim_salute": "nessuno",
+          "prima_dopo": "no",
+          "attributi_personali": "no",
+          "prezzo_o_sconto": "nessuno",
+          "scarsita": "nessuna",
+          "dati_da_verificare": ["tempi di consegna reali"]
+        },
+        "stato_approvazione": "bloccata_dato_mancante",
+        "approvato_da": null,
+        "approvato_il": null
+      },
+      {
+        "id": "CR-04",
+        "formato": "video 9:16 UGC creator (Spark Ad)",
+        "angolo": "uso reale da parte di un creator",
+        "hook": {
+          "detto": "scritto dal creator, nessun copione imposto oltre al brief",
+          "testo_schermo": "deciso dal creator",
+          "immagine_iniziale": "deciso dal creator"
+        },
+        "varianti": [],
+        "testo_annuncio": "Contenuto pubblicitario realizzato in collaborazione con @[creator]. #adv",
+        "titolo": null,
+        "cta": "Acquista",
+        "url_destinazione": "https://negozio-esempio.example/prodotti/lampada-clip",
+        "utm": "utm_source=tiktok&utm_medium=paid_social&utm_campaign=TIKTOK_VENDITE_LAMPADACLIP_20261020&utm_content=CR-04",
+        "fonte_grounding": "ESEMPIO: contratto creator con diritti d'uso pubblicitario 6 mesi (DATO MANCANTE finche' non firmato)",
+        "controlli_policy": {
+          "claim_salute": "verificare nel video finale",
+          "prima_dopo": "verificare nel video finale",
+          "attributi_personali": "verificare",
+          "prezzo_o_sconto": "verificare",
+          "scarsita": "verificare",
+          "disclosure_pubblicita": "obbligatoria",
+          "dati_da_verificare": ["contratto firmato", "codice Spark Ad autorizzato"]
+        },
+        "stato_approvazione": "bloccata_dato_mancante",
+        "approvato_da": null,
+        "approvato_il": null
+      }
+    ],
+
+    "regole": [
+      { "id": "G1", "livello": "account", "condizione": "spesa_oggi_account >= budget.cap_giornaliero_account", "azione": "pausa_tutte_fino_mezzanotte", "modalita": "auto", "attesa_minima_ore": 0 },
+      { "id": "G2", "livello": "progetto", "condizione": "spesa_cumulata_progetto >= budget.cap_progetto", "azione": "pausa_totale_e_notifica", "modalita": "auto", "attesa_minima_ore": 0, "note": "Nessuna ripartenza automatica." },
+      { "id": "G3", "livello": "prodotto", "condizione": "spesa_cumulata_prodotto >= budget.tetto_prodotto", "azione": "pausa_prodotto", "modalita": "auto", "attesa_minima_ore": 0 },
+      { "id": "G4", "livello": "account", "condizione": "purchase_24h == 0 AND spesa_24h > 2 * economia.be_cpa", "azione": "pausa_e_allarme_tracciamento", "modalita": "auto", "attesa_minima_ore": 24 },
+      { "id": "G5", "livello": "campagna", "condizione": "annuncio_rifiutato OR account_limitato", "azione": "pausa_collegate_e_notifica", "modalita": "auto", "attesa_minima_ore": 0, "note": "Mai reinviare in automatico un annuncio rifiutato." },
+      { "id": "G6", "livello": "prodotto", "condizione": "ordini >= 20 AND tasso_rimborsi > 0.08", "azione": "pausa_ads_prodotto_e_notifica", "modalita": "auto", "attesa_minima_ore": 0 },
+
+      { "id": "S1", "livello": "annuncio", "condizione": "ore_attivo >= 48 AND spesa_annuncio < 0.3 * (spesa_gruppo / annunci_attivi_gruppo)", "azione": "pausa_annuncio", "modalita": "auto", "attesa_minima_ore": 48 },
+      { "id": "S2", "livello": "annuncio", "condizione": "spesa_annuncio >= 1 * economia.be_cpa AND add_to_cart == 0 AND ctr < mediana_ctr_gruppo", "azione": "pausa_annuncio", "modalita": "auto", "attesa_minima_ore": 24 },
+      { "id": "S3", "livello": "annuncio", "condizione": "spesa_annuncio >= 2 * economia.be_cpa AND purchase == 0", "azione": "pausa_annuncio", "modalita": "auto", "attesa_minima_ore": 72 },
+      { "id": "S4", "livello": "annuncio", "condizione": "spesa_annuncio >= 3 * economia.be_cpa AND cpa > 1.5 * economia.be_cpa", "azione": "pausa_annuncio", "modalita": "auto", "attesa_minima_ore": 72 },
+      { "id": "S5", "livello": "prodotto", "condizione": "spesa_prodotto >= 3 * economia.be_cpa AND cpa_prodotto > 1.3 * economia.be_cpa", "azione": "pausa_prodotto_esito_test_fallito", "modalita": "auto", "attesa_minima_ore": 72 },
+      { "id": "S6", "livello": "annuncio", "condizione": "fase == 'scaling' AND (frequenza > 3.5 OR ctr_7g < 0.7 * ctr_picco)", "azione": "pausa_e_richiesta_nuova_variante", "modalita": "auto", "attesa_minima_ore": 0 },
+
+      { "id": "U1", "livello": "campagna", "condizione": "cpa_3g <= economia.target_cpa AND purchase_7g >= 10 AND frequenza < 2.5 AND mer_7g >= economia.be_roas AND ore_da_ultimo_aumento >= 72 AND annunci_provati >= 3", "azione": "aumenta_budget_pct(20)", "modalita": "proposta", "attesa_minima_ore": 72 },
+      { "id": "U2", "livello": "campagna", "condizione": "ultimo_evento == 'U1' AND cpa_2g > 1.3 * economia.target_cpa", "azione": "riduci_budget_pct(20) e blocca U1 per 7 giorni", "modalita": "proposta", "attesa_minima_ore": 48, "note": "Puo' diventare automatica: e' una riduzione di spesa." },
+      { "id": "U3", "livello": "annuncio", "condizione": "fase == 'test' AND purchase_annuncio >= 5 AND cpa_annuncio <= economia.target_cpa AND giorni_attivo >= 7", "azione": "duplica_in_campagna_scaling", "modalita": "proposta", "attesa_minima_ore": 168 },
+      { "id": "U4", "livello": "prodotto", "condizione": "purchase_totali_tracciati >= 30", "azione": "proponi_google_shopping", "modalita": "proposta", "attesa_minima_ore": 0 },
+      { "id": "U5", "livello": "campagna", "condizione": "annunci_provati < 3", "azione": "blocca_U1_e_richiedi_creativita", "modalita": "auto", "attesa_minima_ore": 0 }
+    ],
+
+    "compliance": {
+      "pagine_legali_online": "da_verificare",
+      "recesso_14_giorni_spiegato": "da_verificare",
+      "tempi_consegna_reali_pubblicati": "da_verificare",
+      "consenso_cookie_e_consent_mode": "da_verificare",
+      "creativita_approvate_da_persona": "da_verificare",
+      "prezzo_barrato_conforme_omnibus": "non_applicabile",
+      "gpsr_responsabile_ue_e_marcatura": "da_verificare",
+      "disclosure_creator": "da_verificare"
+    },
+
+    "log_decisioni": []
+  }
+}

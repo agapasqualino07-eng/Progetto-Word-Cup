@@ -1,0 +1,120 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Token per store e-commerce mobile-first (tema di default). Tre livelli: primitive -> semantic -> component. Gli store personalizzano SOLO il gruppo semantic.brand-*; tutto il resto resta fisso per garantire contrasto e leggibilita'. Le CSS custom properties corrispondenti sono in template/assets/store.css.",
+  "primitive": {
+    "color": {
+      "pine":       { "50": { "$value": "#E6F2F0", "$type": "color" }, "700": { "$value": "#0F5E57", "$type": "color" }, "800": { "$value": "#0B4A44", "$type": "color" } },
+      "terracotta": { "50": { "$value": "#FFF7ED", "$type": "color" }, "700": { "$value": "#C2410C", "$type": "color" }, "800": { "$value": "#9A3412", "$type": "color" } },
+      "stone":      { "0": { "$value": "#FFFFFF", "$type": "color" }, "50": { "$value": "#F7F6F3", "$type": "color" }, "200": { "$value": "#E7E5E4", "$type": "color" }, "500": { "$value": "#78716C", "$type": "color" }, "600": { "$value": "#57534E", "$type": "color" }, "900": { "$value": "#1C1917", "$type": "color" } },
+      "green":      { "50": { "$value": "#F0FDF4", "$type": "color" }, "700": { "$value": "#15803D", "$type": "color" } },
+      "red":        { "50": { "$value": "#FEF2F2", "$type": "color" }, "700": { "$value": "#B91C1C", "$type": "color" } },
+      "amber":      { "50": { "$value": "#FFFBEB", "$type": "color" }, "800": { "$value": "#92400E", "$type": "color" } }
+    },
+    "font": {
+      "family": {
+        "display": { "$value": "'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif", "$type": "fontFamily" },
+        "body":    { "$value": "'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif", "$type": "fontFamily" }
+      },
+      "size": {
+        "xs":  { "$value": "0.875rem", "$type": "dimension", "$description": "14px - minimo assoluto, anche note legali" },
+        "sm":  { "$value": "0.9375rem", "$type": "dimension", "$description": "15px" },
+        "md":  { "$value": "1rem", "$type": "dimension", "$description": "16px - base, evita zoom iOS sugli input" },
+        "lg":  { "$value": "1.125rem", "$type": "dimension", "$description": "18px" },
+        "xl":  { "$value": "1.375rem", "$type": "dimension", "$description": "22px" },
+        "2xl": { "$value": "1.625rem", "$type": "dimension", "$description": "26px - H1 mobile" },
+        "3xl": { "$value": "2rem", "$type": "dimension", "$description": "32px - H1 desktop" },
+        "4xl": { "$value": "2.5rem", "$type": "dimension", "$description": "40px - hero home desktop" }
+      },
+      "weight": { "regular": { "$value": 400, "$type": "fontWeight" }, "semibold": { "$value": 600, "$type": "fontWeight" }, "bold": { "$value": 700, "$type": "fontWeight" } },
+      "lineHeight": { "tight": { "$value": 1.2, "$type": "number" }, "snug": { "$value": 1.35, "$type": "number" }, "normal": { "$value": 1.5, "$type": "number" } }
+    },
+    "space": {
+      "0":  { "$value": "0", "$type": "dimension" },
+      "1":  { "$value": "0.25rem", "$type": "dimension", "$description": "4px" },
+      "2":  { "$value": "0.5rem", "$type": "dimension", "$description": "8px" },
+      "3":  { "$value": "0.75rem", "$type": "dimension", "$description": "12px" },
+      "4":  { "$value": "1rem", "$type": "dimension", "$description": "16px - gutter mobile" },
+      "5":  { "$value": "1.5rem", "$type": "dimension", "$description": "24px" },
+      "6":  { "$value": "2rem", "$type": "dimension", "$description": "32px" },
+      "7":  { "$value": "3rem", "$type": "dimension", "$description": "48px - tra sezioni" },
+      "8":  { "$value": "4rem", "$type": "dimension", "$description": "64px" }
+    },
+    "radius": {
+      "sm":   { "$value": "6px", "$type": "dimension" },
+      "md":   { "$value": "10px", "$type": "dimension" },
+      "lg":   { "$value": "16px", "$type": "dimension" },
+      "pill": { "$value": "999px", "$type": "dimension" }
+    },
+    "shadow": {
+      "sm": { "$value": "0 1px 2px rgba(28,25,23,.06), 0 1px 3px rgba(28,25,23,.08)", "$type": "shadow" },
+      "md": { "$value": "0 4px 12px rgba(28,25,23,.10)", "$type": "shadow" },
+      "up": { "$value": "0 -4px 16px rgba(28,25,23,.10)", "$type": "shadow", "$description": "barra acquisto sticky in basso" }
+    },
+    "motion": {
+      "duration": { "fast": { "$value": "150ms", "$type": "duration" }, "base": { "$value": "220ms", "$type": "duration" } },
+      "easing":   { "standard": { "$value": "cubic-bezier(.2,0,0,1)", "$type": "cubicBezier" } }
+    },
+    "breakpoint": {
+      "sm": { "$value": "480px", "$type": "dimension" },
+      "md": { "$value": "768px", "$type": "dimension" },
+      "lg": { "$value": "1024px", "$type": "dimension" },
+      "xl": { "$value": "1280px", "$type": "dimension" }
+    }
+  },
+  "semantic": {
+    "color": {
+      "brand":            { "$value": "{primitive.color.pine.700}", "$description": "Personalizzabile per store. Deve avere contrasto >= 4.5:1 con text-on-brand." },
+      "brand-strong":     { "$value": "{primitive.color.pine.800}", "$description": "Personalizzabile. Hover/pressed." },
+      "brand-soft":       { "$value": "{primitive.color.pine.50}", "$description": "Personalizzabile. Sfondo box informativi." },
+      "text-on-brand":    { "$value": "{primitive.color.stone.0}" },
+      "cta":              { "$value": "{primitive.color.terracotta.700}", "$description": "Solo il pulsante d'acquisto principale. Un solo CTA primario per vista." },
+      "cta-strong":       { "$value": "{primitive.color.terracotta.800}" },
+      "text-on-cta":      { "$value": "{primitive.color.stone.0}" },
+      "bg":               { "$value": "{primitive.color.stone.0}" },
+      "surface":          { "$value": "{primitive.color.stone.50}" },
+      "border":           { "$value": "{primitive.color.stone.200}", "$description": "Non usare per testo (contrasto 1.2:1)." },
+      "text":             { "$value": "{primitive.color.stone.900}" },
+      "text-muted":       { "$value": "{primitive.color.stone.600}", "$description": "7.6:1 su bianco: ok per testo piccolo." },
+      "text-subtle":      { "$value": "{primitive.color.stone.500}", "$description": "4.8:1 su bianco: solo testo >= 16px." },
+      "success":          { "$value": "{primitive.color.green.700}" },
+      "success-soft":     { "$value": "{primitive.color.green.50}" },
+      "danger":           { "$value": "{primitive.color.red.700}" },
+      "danger-soft":      { "$value": "{primitive.color.red.50}" },
+      "notice":           { "$value": "{primitive.color.amber.800}", "$description": "Avvisi neutri (es. 'spedito da fuori UE')." },
+      "notice-soft":      { "$value": "{primitive.color.amber.50}" },
+      "focus-ring":       { "$value": "{primitive.color.pine.700}" }
+    },
+    "typography": {
+      "h1":    { "$value": { "fontFamily": "{primitive.font.family.display}", "fontSize": "{primitive.font.size.2xl}", "fontWeight": 600, "lineHeight": 1.2 }, "$type": "typography", "$description": "da md in su: 3xl" },
+      "h2":    { "$value": { "fontFamily": "{primitive.font.family.display}", "fontSize": "{primitive.font.size.xl}", "fontWeight": 600, "lineHeight": 1.2 }, "$type": "typography" },
+      "h3":    { "$value": { "fontFamily": "{primitive.font.family.display}", "fontSize": "{primitive.font.size.lg}", "fontWeight": 600, "lineHeight": 1.35 }, "$type": "typography" },
+      "price": { "$value": { "fontFamily": "{primitive.font.family.display}", "fontSize": "{primitive.font.size.2xl}", "fontWeight": 700, "lineHeight": 1.2 }, "$type": "typography" },
+      "body":  { "$value": { "fontFamily": "{primitive.font.family.body}", "fontSize": "{primitive.font.size.md}", "fontWeight": 400, "lineHeight": 1.5 }, "$type": "typography" },
+      "small": { "$value": { "fontFamily": "{primitive.font.family.body}", "fontSize": "{primitive.font.size.xs}", "fontWeight": 400, "lineHeight": 1.5 }, "$type": "typography" }
+    },
+    "layout": {
+      "gutter":        { "$value": "{primitive.space.4}" },
+      "section-gap":   { "$value": "{primitive.space.7}" },
+      "container-max": { "$value": "1200px", "$type": "dimension" },
+      "measure":       { "$value": "68ch", "$type": "dimension", "$description": "larghezza massima testi lunghi" },
+      "tap-target":    { "$value": "48px", "$type": "dimension", "$description": ">= 44px WCAG 2.5.5 / linee guida mobile" }
+    }
+  },
+  "component": {
+    "button-primary": {
+      "bg": { "$value": "{semantic.color.cta}" }, "bg-hover": { "$value": "{semantic.color.cta-strong}" },
+      "fg": { "$value": "{semantic.color.text-on-cta}" }, "radius": { "$value": "{primitive.radius.md}" },
+      "height": { "$value": "52px", "$type": "dimension" }, "font-weight": { "$value": 700 }
+    },
+    "button-secondary": {
+      "bg": { "$value": "{semantic.color.bg}" }, "fg": { "$value": "{semantic.color.brand}" },
+      "border": { "$value": "2px solid {semantic.color.brand}" }, "radius": { "$value": "{primitive.radius.md}" }, "height": { "$value": "48px", "$type": "dimension" }
+    },
+    "card":        { "bg": { "$value": "{semantic.color.bg}" }, "border": { "$value": "1px solid {semantic.color.border}" }, "radius": { "$value": "{primitive.radius.lg}" }, "padding": { "$value": "{primitive.space.4}" } },
+    "info-row":    { "icon-size": { "$value": "24px", "$type": "dimension" }, "gap": { "$value": "{primitive.space.3}" }, "bg": { "$value": "{semantic.color.surface}" }, "radius": { "$value": "{primitive.radius.md}" } },
+    "gallery":     { "aspect-ratio": { "$value": "1 / 1" }, "radius": { "$value": "{primitive.radius.lg}" }, "bg": { "$value": "{semantic.color.surface}" } },
+    "sticky-buy-bar": { "bg": { "$value": "{semantic.color.bg}" }, "shadow": { "$value": "{primitive.shadow.up}" }, "padding": { "$value": "{primitive.space.3} {primitive.space.4}" }, "visible-until": { "$value": "{primitive.breakpoint.md}", "$description": "solo mobile" } },
+    "focus":       { "outline": { "$value": "3px solid {semantic.color.focus-ring}" }, "offset": { "$value": "2px" } },
+    "badge":       { "radius": { "$value": "{primitive.radius.pill}" }, "font-size": { "$value": "{primitive.font.size.xs}" }, "padding": { "$value": "2px 10px" } }
+  }
+}

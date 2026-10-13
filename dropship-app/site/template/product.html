@@ -1,0 +1,213 @@
+<!doctype html>
+<!--
+  TEMPLATE PAGINA PRODOTTO — sintassi Mustache (logic-less).
+  {{var}} = testo con escape HTML · {{{var}}} = HTML già sanificato dal generatore
+  {{#x}}…{{/x}} = mostra se x è vero/lista non vuota · {{^x}}…{{/x}} = mostra se x è falso/vuoto
+  Elenco completo dei segnaposto e regole: ../design-system.md §6.
+  REGOLE NON NEGOZIABILI (vedi design-system.md §7):
+   - recensioni SOLO se reali e verificabili (has_reviews=false → messaggio neutro, niente stelle, niente JSON-LD rating);
+   - niente countdown, niente "ultimi N pezzi", niente "X persone stanno guardando";
+   - prezzo barrato SOLO con price_reference = prezzo più basso degli ultimi 30 giorni (art. 17-bis Cod. Consumo);
+   - tempi di consegna come intervallo reale fornito dal fornitore, mai inventati.
+-->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} | {{store_name}}</title>
+<meta name="description" content="{{meta_description}}">
+<link rel="canonical" href="{{canonical_url}}">
+<meta property="og:type" content="product">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{meta_description}}">
+{{#og_image}}<meta property="og:image" content="{{og_image}}">{{/og_image}}
+<link rel="preload" href="{{assets_base}}fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{assets_base}}store.css">
+<style>:root{--c-brand:{{theme_brand}};--c-brand-strong:{{theme_brand_strong}};--c-brand-soft:{{theme_brand_soft}};}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{title}}",
+  "description": "{{meta_description}}",
+  "sku": "{{sku}}",
+  "image": [{{#images}}"{{src}}"{{^last}},{{/last}}{{/images}}],
+  "offers": {
+    "@type": "Offer",
+    "url": "{{canonical_url}}",
+    "priceCurrency": "EUR",
+    "price": "{{price_number}}",
+    "availability": "{{#in_stock}}https://schema.org/InStock{{/in_stock}}{{^in_stock}}https://schema.org/OutOfStock{{/in_stock}}",
+    "hasMerchantReturnPolicy": { "@type": "MerchantReturnPolicy", "applicableCountry": "IT", "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow", "merchantReturnDays": {{return_days}} }
+  }{{#has_reviews}},
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "{{reviews_avg}}", "reviewCount": "{{reviews_count}}" }{{/has_reviews}}
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<div class="topbar">Spedizione {{shipping_cost_label}} · Consegna stimata {{shipping_days_min}}–{{shipping_days_max}} giorni lavorativi · <a href="{{base_url}}legal/resi.html">Resi entro {{return_days}} giorni</a></div>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="{{base_url}}index.html">
+      {{#store_logo_url}}<img src="{{store_logo_url}}" alt="" width="32" height="32">{{/store_logo_url}}
+      <span>{{store_name}}</span>
+    </a>
+    <nav class="nav" aria-label="Principale">
+      <a href="{{base_url}}index.html#prodotti">Prodotti</a>
+      <a class="nav-secondary" href="{{base_url}}legal/spedizioni.html">Spedizioni</a>
+      <a class="nav-secondary" href="{{base_url}}legal/resi.html">Resi</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+  <nav class="breadcrumb" aria-label="Percorso">
+    <ol>
+      <li><a href="{{base_url}}index.html">Home</a></li>
+      {{#category}}<li><a href="{{category_url}}">{{category}}</a></li>{{/category}}
+      <li aria-current="page">{{title}}</li>
+    </ol>
+  </nav>
+
+  <article class="product">
+    <!-- Galleria: il generatore imposta loading="eager" + fetchpriority="high" sulla prima immagine, "lazy"/"auto" sulle altre. width/height obbligatori (niente layout shift). -->
+    <section class="gallery" aria-label="Immagini del prodotto">
+      <ul class="gallery-track">
+        {{#images}}<li><img src="{{src}}" {{#srcset}}srcset="{{srcset}}" sizes="(min-width: 768px) 50vw, 88vw"{{/srcset}} alt="{{alt}}" width="{{width}}" height="{{height}}" loading="{{loading}}" fetchpriority="{{fetchpriority}}" decoding="async"></li>{{/images}}
+        {{^images}}<li><div class="gallery-ph" role="img" aria-label="Immagine non disponibile"></div></li>{{/images}}
+      </ul>
+      <p class="gallery-hint">Scorri per vedere tutte le foto</p>
+    </section>
+
+    <div class="product-info">
+      <h1 class="product-title">{{title}}</h1>
+      {{#subtitle}}<p class="muted">{{subtitle}}</p>{{/subtitle}}
+      {{#has_reviews}}<p class="small"><a href="#recensioni"><span aria-hidden="true">★</span> {{reviews_avg}}/5 · {{reviews_count}} recensioni verificate</a></p>{{/has_reviews}}
+
+      <div class="price-block">
+        <span class="price">{{price}}</span>
+        {{#price_reference}}<span class="price-ref">Prezzo più basso degli ultimi 30 giorni: <s>{{price_reference}}</s> ({{discount_label}})</span>{{/price_reference}}
+      </div>
+      <p class="price-note">IVA inclusa. Spedizione {{shipping_cost_label}}. {{#duties_included}}Nessun dazio o costo aggiuntivo alla consegna.{{/duties_included}}</p>
+
+      {{#in_stock}}<p class="stock"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor" opacity=".15"/><path d="M6 10.5l2.5 2.5L14 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Disponibile</p>{{/in_stock}}
+      {{^in_stock}}<p class="notice">Al momento non disponibile.</p>{{/in_stock}}
+
+      <ul class="bullets">
+        {{#bullets}}<li>{{.}}</li>{{/bullets}}
+      </ul>
+
+      <form id="buy-form" class="buy" action="{{cart_url}}" method="post">
+        <input type="hidden" name="sku" value="{{sku}}">
+        <div class="qty">
+          <label for="qty">Quantità</label>
+          <select id="qty" name="qty">
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          </select>
+        </div>
+        {{#in_stock}}<button class="btn btn-primary buy-main" type="submit">Aggiungi al carrello</button>{{/in_stock}}
+        {{^in_stock}}<button class="btn btn-primary buy-main" type="button" aria-disabled="true">Non disponibile</button>{{/in_stock}}
+        {{#payment_methods_label}}<p class="pay-note">Pagamento sicuro: {{payment_methods_label}}</p>{{/payment_methods_label}}
+      </form>
+
+      <ul class="info-list" aria-label="Spedizione, resi e assistenza">
+        <li class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+          <div><strong>Consegna in {{shipping_days_min}}–{{shipping_days_max}} giorni lavorativi</strong>Spedito da {{ships_from}} con {{carrier}}. Ricevi il numero di tracciamento via email. <a href="{{base_url}}legal/spedizioni.html">Dettagli spedizione</a></div>
+        </li>
+        <li class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>
+          <div><strong>Reso entro {{return_days}} giorni</strong>Puoi recedere senza dare motivazioni. {{return_cost_label}} <a href="{{base_url}}legal/resi.html">Come fare il reso</a></div>
+        </li>
+        <li class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><strong>Garanzia legale di 2 anni</strong>Per i difetti di conformità, come previsto dal Codice del Consumo.</div>
+        </li>
+      </ul>
+      {{#ships_from_outside_eu}}<p class="notice">Questo prodotto viene spedito da {{ships_from}}, fuori dall'Unione europea: per questo i tempi di consegna sono più lunghi. {{duties_label}}</p>{{/ships_from_outside_eu}}
+    </div>
+  </article>
+
+  <section class="section" aria-labelledby="h-desc">
+    <h2 id="h-desc">Descrizione</h2>
+    <div class="prose">{{{description_html}}}</div>
+    <div class="prose">
+      {{#specs}}<details class="acc"><summary>{{label}}</summary><div>{{{value_html}}}</div></details>{{/specs}}
+      <details class="acc"><summary>Spedizione e consegna</summary><div><p>Costo: {{shipping_cost_label}}. Tempi stimati: {{shipping_days_min}}–{{shipping_days_max}} giorni lavorativi dalla conferma dell'ordine. I tempi sono una stima del corriere, non una garanzia: se il pacco non arriva entro {{shipping_days_late}} giorni scrivici e troviamo una soluzione.</p></div></details>
+      <details class="acc"><summary>Resi e rimborsi</summary><div><p>Hai {{return_days}} giorni dal ricevimento per recedere, senza motivazione. Rimborsiamo entro 14 giorni dalla tua comunicazione di recesso, con lo stesso metodo di pagamento. {{return_cost_label}}</p></div></details>
+    </div>
+  </section>
+
+  <section id="recensioni" class="section-alt" aria-labelledby="h-rev">
+    <div class="container">
+      <h2 id="h-rev">Recensioni</h2>
+      {{#has_reviews}}
+      <div class="reviews-summary">
+        <span class="price" aria-hidden="true">{{reviews_avg}}</span>
+        <p><span class="visually-hidden">Valutazione media {{reviews_avg}} su 5, </span>{{reviews_count}} recensioni di clienti che hanno acquistato su questo store. {{reviews_policy_label}}</p>
+      </div>
+      <ul class="review-list">
+        {{#reviews}}<li class="review">
+          <div class="review-head"><span><strong>{{author}}</strong> · <time datetime="{{date_iso}}">{{date}}</time></span><span class="stars" aria-label="{{rating}} su 5">{{stars}}</span></div>
+          <p>{{text}}</p>
+          {{#verified}}<span class="verified">Acquisto verificato</span>{{/verified}}
+        </li>{{/reviews}}
+      </ul>
+      {{/has_reviews}}
+      {{^has_reviews}}<p class="reviews-empty">Questo prodotto non ha ancora recensioni. Le recensioni compariranno qui solo da clienti che lo hanno acquistato davvero.</p>{{/has_reviews}}
+    </div>
+  </section>
+
+  <section id="contatti" class="section" aria-labelledby="h-contact">
+    <div class="contact-card">
+      <h2 id="h-contact">Hai una domanda?</h2>
+      <p class="muted">Ti risponde una persona entro {{contact_response_time}}.</p>
+      <p><strong>Email:</strong> <a href="mailto:{{contact_email}}">{{contact_email}}</a>{{#contact_phone}}<br><strong>Telefono:</strong> <a href="tel:{{contact_phone_e164}}">{{contact_phone}}</a> ({{contact_hours}}){{/contact_phone}}</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>{{store_name}}</h2>
+        <p>{{store_tagline}}</p>
+        <p><a href="mailto:{{contact_email}}">{{contact_email}}</a></p>
+      </div>
+      <div>
+        <h2>Assistenza</h2>
+        <ul>
+          <li><a href="{{base_url}}legal/spedizioni.html">Spedizioni</a></li>
+          <li><a href="{{base_url}}legal/resi.html">Resi e rimborsi</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Note legali</h2>
+        <ul>
+          <li><a href="{{base_url}}legal/privacy.html">Privacy</a></li>
+          <li><a href="{{base_url}}legal/cookie.html">Cookie</a></li>
+          <li><a href="{{base_url}}legal/termini.html">Condizioni di vendita</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Pagamenti</h2>
+        <p>{{payment_methods_label}}</p>
+      </div>
+    </div>
+    <p class="legal-line">© {{year}} {{company_name}} · {{company_address}} · P.IVA {{vat_number}}{{#rea}} · REA {{rea}}{{/rea}}{{#pec}} · PEC {{pec}}{{/pec}}{{#share_capital}} · Cap. soc. {{share_capital}}{{/share_capital}}</p>
+  </div>
+</footer>
+
+<div class="buy-bar" aria-hidden="false">
+  <span class="price">{{price}}</span>
+  {{#in_stock}}<button class="btn btn-primary" type="submit" form="buy-form">Aggiungi al carrello</button>{{/in_stock}}
+  {{^in_stock}}<button class="btn btn-primary" type="button" aria-disabled="true">Non disponibile</button>{{/in_stock}}
+</div>
+</body>
+</html>

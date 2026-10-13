@@ -1,0 +1,116 @@
+<!doctype html>
+<!-- TEMPLATE HOME STORE — sintassi Mustache. Segnaposto: ../design-system.md §6. Stesse regole di onestà della pagina prodotto. -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{store_name}} — {{store_tagline}}</title>
+<meta name="description" content="{{meta_description}}">
+<link rel="canonical" href="{{canonical_url}}">
+<link rel="preload" href="{{assets_base}}fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{assets_base}}store.css">
+<style>:root{--c-brand:{{theme_brand}};--c-brand-strong:{{theme_brand_strong}};--c-brand-soft:{{theme_brand_soft}};}</style>
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Organization", "name": "{{company_name}}", "url": "{{base_url}}", "email": "{{contact_email}}", "vatID": "{{vat_number}}" }
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<div class="topbar">Spedizione {{shipping_cost_label}} · Consegna stimata {{shipping_days_min}}–{{shipping_days_max}} giorni lavorativi · <a href="legal/resi.html">Resi entro {{return_days}} giorni</a></div>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html" aria-current="page">
+      {{#store_logo_url}}<img src="{{store_logo_url}}" alt="" width="32" height="32">{{/store_logo_url}}
+      <span>{{store_name}}</span>
+    </a>
+    <nav class="nav" aria-label="Principale">
+      <a href="#prodotti">Prodotti</a>
+      <a class="nav-secondary" href="legal/spedizioni.html">Spedizioni</a>
+      <a class="nav-secondary" href="legal/resi.html">Resi</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="container hero">
+    <div>
+      <h1>{{hero_title}}</h1>
+      <p class="lead">{{hero_text}}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="{{hero_cta_url}}">{{hero_cta_label}}</a>
+        <a class="btn btn-secondary" href="#come-funziona">Spedizioni e resi</a>
+      </div>
+    </div>
+    {{#hero_image}}<img class="hero-img" src="{{hero_image.src}}" alt="{{hero_image.alt}}" width="{{hero_image.width}}" height="{{hero_image.height}}" fetchpriority="high">{{/hero_image}}
+  </section>
+
+  <div class="container">
+    <ul class="trust-strip" aria-label="In breve">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Spedizione {{shipping_cost_label}}</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Reso entro {{return_days}} giorni</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Garanzia legale 2 anni</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>Risposta entro {{contact_response_time}}</li>
+    </ul>
+  </div>
+
+  <section id="prodotti" class="container section" aria-labelledby="h-prod">
+    <h2 id="h-prod">{{products_title}}</h2>
+    <ul class="grid-products">
+      {{#products}}<li class="card-product">
+        <a href="{{url}}">
+          <img src="{{image_src}}" alt="{{image_alt}}" width="600" height="600" loading="lazy" decoding="async">
+          <span class="name">{{title}}</span>
+          <span class="p">{{price}}</span>
+          {{#price_reference}}<span class="small muted">Prezzo più basso ultimi 30 gg: <s>{{price_reference}}</s></span>{{/price_reference}}
+        </a>
+      </li>{{/products}}
+    </ul>
+    {{^products}}<p class="muted">Nuovi prodotti in arrivo.</p>{{/products}}
+  </section>
+
+  <section id="come-funziona" class="section-alt" aria-labelledby="h-how">
+    <div class="container">
+      <h2 id="h-how">Come funziona un ordine</h2>
+      <ol class="steps">
+        <li><div><h3>Ordini e paghi</h3><p class="muted">Prezzi IVA inclusa, nessun costo nascosto al checkout.</p></div></li>
+        <li><div><h3>Spediamo da {{ships_from}}</h3><p class="muted">Consegna stimata {{shipping_days_min}}–{{shipping_days_max}} giorni lavorativi, con tracciamento via email.</p></div></li>
+        <li><div><h3>Hai {{return_days}} giorni per ripensarci</h3><p class="muted">Recesso senza motivazione, rimborso con lo stesso metodo di pagamento. <a href="legal/resi.html">Leggi come</a>.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  {{#has_reviews}}
+  <section class="container section" aria-labelledby="h-rev">
+    <h2 id="h-rev">Cosa dicono i clienti</h2>
+    <p class="muted">Solo recensioni di clienti che hanno acquistato su questo store. {{reviews_policy_label}}</p>
+    <ul class="review-list">
+      {{#reviews}}<li class="review"><div class="review-head"><span><strong>{{author}}</strong> · {{product}}</span><span class="stars" aria-label="{{rating}} su 5">{{stars}}</span></div><p>{{text}}</p></li>{{/reviews}}
+    </ul>
+  </section>
+  {{/has_reviews}}
+
+  <section id="contatti" class="container section" aria-labelledby="h-contact">
+    <div class="contact-card">
+      <h2 id="h-contact">Contatti</h2>
+      <p class="muted">Siamo {{company_name}}. Ti risponde una persona entro {{contact_response_time}}.</p>
+      <p><strong>Email:</strong> <a href="mailto:{{contact_email}}">{{contact_email}}</a>{{#contact_phone}}<br><strong>Telefono:</strong> <a href="tel:{{contact_phone_e164}}">{{contact_phone}}</a> ({{contact_hours}}){{/contact_phone}}</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h2>{{store_name}}</h2><p>{{store_tagline}}</p><p><a href="mailto:{{contact_email}}">{{contact_email}}</a></p></div>
+      <div><h2>Assistenza</h2><ul><li><a href="legal/spedizioni.html">Spedizioni</a></li><li><a href="legal/resi.html">Resi e rimborsi</a></li><li><a href="#contatti">Contatti</a></li></ul></div>
+      <div><h2>Note legali</h2><ul><li><a href="legal/privacy.html">Privacy</a></li><li><a href="legal/cookie.html">Cookie</a></li><li><a href="legal/termini.html">Condizioni di vendita</a></li></ul></div>
+      <div><h2>Pagamenti</h2><p>{{payment_methods_label}}</p></div>
+    </div>
+    <p class="legal-line">© {{year}} {{company_name}} · {{company_address}} · P.IVA {{vat_number}}{{#rea}} · REA {{rea}}{{/rea}}{{#pec}} · PEC {{pec}}{{/pec}}{{#share_capital}} · Cap. soc. {{share_capital}}{{/share_capital}}</p>
+  </div>
+</footer>
+</body>
+</html>
