@@ -27,7 +27,7 @@ class ApprovalRequest:
     action: str
     subject: str
     summary: str
-    status: str  # PENDING | APPROVED | REJECTED
+    status: str  # PENDING | APPROVED | REJECTED | USED
     created_at: str
     approver: Optional[str] = None
     decided_at: Optional[str] = None
@@ -102,6 +102,16 @@ class ApprovalStore:
             it.action == action and it.subject == subject and it.status == "APPROVED"
             for it in self._load()
         )
+
+    def consume(self, action, subject):
+        """Segna come USATA un'approvazione: ogni approvazione vale UNA sola esecuzione."""
+        items = self._load()
+        for it in items:
+            if it.action == action and it.subject == subject and it.status == "APPROVED":
+                it.status = "USED"
+                self._save(items)
+                return True
+        return False
 
     def pending(self):
         return [it for it in self._load() if it.status == "PENDING"]

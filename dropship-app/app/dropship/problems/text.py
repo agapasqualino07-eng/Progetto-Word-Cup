@@ -90,24 +90,27 @@ STOPWORDS = frozenset(
     into is it its just me my no not of on or our so some than that the their them then there
     these they this to too up us was we were what when where which who why will with you your
     anyone know there's product products keeps keep breaking break hate way thanks help problem
-    issue issues any get got really very also would could should one
+    issue issues any get got really very also would could should one like under behind
+    sotto sopra dietro dentro fuori giorno giorni tenere posso puoi vorrei volevo devo
     """.split()
 )
 
-_IT_SUFFIXES = ("amenti", "imenti", "azione", "azioni", "mente", "atore", "atori", "ando", "endo",
-                "ata", "ate", "ati", "ato", "ita", "ite", "iti", "ito", "are", "ere", "ire",
-                "i", "e", "a", "o")
-_EN_SUFFIXES = ("ingly", "ings", "ing", "edly", "ed", "ies", "es", "s")
+STEM_LEN = 6
+_VOWELS = "aeiou"
 
 
 def stem(token):
-    """Stemming leggerissimo (non linguistico): basta per far collidere singolare/plurale."""
-    if len(token) <= 4 or token.isdigit():
+    """Stemming "a prefisso" (non linguistico, ma robusto e bilingue quanto basta):
+    toglie plurale inglese e vocale finale, poi tronca a 6 caratteri.
+    organizzare/organizer/organize -> "organi"; cavi/cavo -> "cav"; cables -> "cabl".
+    """
+    if token.isdigit():
         return token
-    for suf in _IT_SUFFIXES + _EN_SUFFIXES:
-        if token.endswith(suf) and len(token) - len(suf) >= 4:
-            return token[: -len(suf)]
-    return token
+    if len(token) > 4 and token.endswith("s"):
+        token = token[:-1]
+    if len(token) >= 4 and token[-1] in _VOWELS:
+        token = token[:-1]
+    return token[:STEM_LEN]
 
 
 def tokenize(text):
@@ -115,5 +118,7 @@ def tokenize(text):
     for tok in _TOKEN_RE.findall(fold(text)):
         if len(tok) < 3 or tok in STOPWORDS or tok.isdigit():
             continue
-        out.append(stem(tok))
+        st = stem(tok)
+        if len(st) >= 3:
+            out.append(st)
     return tuple(out)

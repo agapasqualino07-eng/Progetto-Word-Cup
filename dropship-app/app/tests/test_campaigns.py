@@ -153,6 +153,42 @@ class TestCampaignManager(unittest.TestCase):
         self.assertEqual(paused, [cmp.campaign_id])
         self.assertEqual(self.ads["meta"].campaigns[cmp.external_id]["status"], "PAUSED")
 
+    def test_reactivation_after_kill_switch_needs_new_approval(self):
+        cmp = self._draft("10")
+        out = self.mgr.activate(cmp.campaign_id)
+        self.approvals.approve(out.request_id, approver="Mario")
+        self.assertEqual(self.mgr.activate(cmp.campaign_id).status, "ACTIVE")
+        self.ks.activate("stop")
+        self.mgr.pause_all()
+        self.ks.deactivate()
+        self.assertEqual(self.mgr.activate(cmp.campaign_id).status, "PENDING_APPROVAL")
+
+    def test_budget_raise_approval_is_single_use(self):
+        cmp = self._draft("10")
+        out = self.mgr.change_budget(cmp.campaign_id, Decimal("15"))
+        self.approvals.approve(out.request_id, approver="Mario")
+        self.mgr.change_budget(cmp.campaign_id, Decimal("15"))
+        self.mgr.change_budget(cmp.campaign_id, Decimal("5"))
+        self.assertEqual(self.mgr.change_budget(cmp.campaign_id, Decimal("15")).status, "PENDING_APPROVAL")
+
+    def test_pause_all_works_with_fresh_mock_adapter(self):
+        # nuova esecuzione CLI = nuovo MockAds senza memoria delle campagne
+        cmp = self._draft("10")
+        self.mgr.ads["meta"] = MockAds("meta")
+        self.assertEqual(self.mgr.pause_all(), [cmp.campaign_id])
+
+    def test_pause_all_continues_when_one_platform_fails(self):
+        class Broken(MockAds):
+            def set_status(self, external_id, active):
+                raise RuntimeError("API giù")
+
+        a = self._draft("10", platform="tiktok", sku="A")
+        b = self._draft("10", platform="meta", sku="B")
+        self.mgr.ads["tiktok"] = Broken("tiktok")
+        paused = self.mgr.pause_all()
+        self.assertEqual(paused, [b.campaign_id])
+        self.assertEqual(self.mgr.last_pause_failures, [a.campaign_id])
+
     def test_persistence(self):
         cmp = self._draft("10")
         mgr2 = CampaignManager(

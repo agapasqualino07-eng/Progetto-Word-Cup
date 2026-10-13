@@ -1,3 +1,4 @@
+import tests  # noqa: F401  (attiva la guardia anti-rete)
 import os
 import tempfile
 import unittest

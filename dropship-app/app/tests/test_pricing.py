@@ -1,3 +1,4 @@
+import tests  # noqa: F401  (attiva la guardia anti-rete)
 import unittest
 from decimal import Decimal
 

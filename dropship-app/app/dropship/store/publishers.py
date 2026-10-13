@@ -3,7 +3,6 @@
 import hashlib
 import re
 from abc import ABC, abstractmethod
-from decimal import Decimal
 
 from dropship.http import request_json
 from dropship.models import MOCK, Customer, Order, PublishResult
@@ -116,7 +115,3 @@ class ShopifyStorePublisher(StorePublisher):
                     )
                 )
         return out
-
-
-def money(x):
-    return Decimal(str(x)).quantize(Decimal("0.01"))

@@ -21,10 +21,20 @@ class ExternalServiceError(RuntimeError):
     pass
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Non seguire redirect: inoltrerebbero gli header con i token a un altro host."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_OPENER = urllib.request.build_opener(_NoRedirect)
+
+
 def urllib_transport(method, url, headers, body, timeout):
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 (https verificato)
+        with _OPENER.open(req, timeout=timeout) as resp:  # noqa: S310 (https verificato)
             return resp.status, resp.read(MAX_RESPONSE_BYTES)
     except urllib.error.HTTPError as exc:
         return exc.code, b""
@@ -60,7 +70,7 @@ def request_json(
         hdrs["Content-Type"] = "application/x-www-form-urlencoded"
 
     status, raw = (transport or urllib_transport)(method, url, hdrs, body, timeout)
-    if status >= 400:
+    if status >= 300:  # 3xx incluso: i redirect non vengono seguiti
         raise ExternalServiceError(f"{service}: HTTP {status}")
     if not raw:
         return {}

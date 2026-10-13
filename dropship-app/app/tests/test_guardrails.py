@@ -212,6 +212,16 @@ class TestApprovals(unittest.TestCase):
         self.assertTrue(self.store.is_approved(RAISE_BUDGET, "CMP-1:15.00"))
         self.assertFalse(self.store.is_approved(RAISE_BUDGET, "CMP-1:20.00"))
 
+    def test_consumed_approval_cannot_be_reused(self):
+        req = self.store.request(RAISE_BUDGET, "CMP-1:15.00", "x")
+        self.store.approve(req.request_id, approver="Mario")
+        self.assertTrue(self.store.consume(RAISE_BUDGET, "CMP-1:15.00"))
+        self.assertFalse(self.store.is_approved(RAISE_BUDGET, "CMP-1:15.00"))
+        self.assertFalse(self.store.consume(RAISE_BUDGET, "CMP-1:15.00"))
+        # una nuova richiesta per lo stesso soggetto torna PENDING
+        again = self.store.request(RAISE_BUDGET, "CMP-1:15.00", "x")
+        self.assertEqual(again.status, "PENDING")
+
     def test_rejected_request_is_not_approved(self):
         req = self.store.request(PUBLISH_PRODUCT, "SKU-1", "x")
         self.store.reject(req.request_id, approver="Mario")

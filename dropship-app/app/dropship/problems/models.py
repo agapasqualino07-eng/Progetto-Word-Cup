@@ -79,7 +79,7 @@ class Evidence:
 
 @dataclass(frozen=True)
 class ProblemScore:
-    frequency: int  # menzioni uniche
+    frequency: int  # post unici con almeno una frase-problema nel cluster
     growth: Optional[float]  # (ultimi N gg - N gg precedenti) / max(precedenti,1); None se date mancanti
     intensity: float
     purchase_intent: float

@@ -1,5 +1,6 @@
 """Test end-to-end della CLI in modalità mock (nessuna rete, dati in tmpdir)."""
 
+import tests  # noqa: F401  (attiva la guardia anti-rete)
 import io
 import json
 import re

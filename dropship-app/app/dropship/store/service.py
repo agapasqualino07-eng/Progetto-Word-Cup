@@ -45,6 +45,7 @@ def publish_product(candidate, quote, copywriter, store, approvals, kill_switch)
 
     listing = build_listing(candidate, quote, copy, status="active")
     result = store.publish(listing)
+    approvals.consume(PUBLISH_PRODUCT, candidate.sku)
     return PublishOutcome(
         candidate.sku, "PUBLISHED", (), product_id=result.product_id, listing=listing, source=result.source
     )

@@ -37,6 +37,21 @@ class TestRequestJson(unittest.TestCase):
         self.assertNotIn("SEGRETO", msg)
         self.assertNotIn("sk-secret", msg)
 
+    def test_redirect_status_is_an_error(self):
+        t = FakeTransport([(302, b"")])
+        with self.assertRaises(ExternalServiceError):
+            request_json("GET", "https://api.example.com/x", transport=t)
+
+    def test_default_opener_does_not_follow_redirects(self):
+        # i redirect inoltrerebbero gli header con i token a un altro host
+        import urllib.request
+
+        from dropship.http import _NoRedirect
+
+        handler = _NoRedirect()
+        req = urllib.request.Request("https://api.example.com/x", headers={"X-Shopify-Access-Token": "t"})
+        self.assertIsNone(handler.redirect_request(req, None, 302, "Found", {}, "https://evil.example/"))
+
     def test_invalid_json_raises(self):
         t = FakeTransport([(200, b"not json")])
         with self.assertRaises(ExternalServiceError):
