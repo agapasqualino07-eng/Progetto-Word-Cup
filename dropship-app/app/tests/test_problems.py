@@ -351,6 +351,7 @@ class TestHackerNewsAdapter(unittest.TestCase):
         posts = HackerNewsSource(transport=t, limiter=RateLimiter(0)).fetch("cables", since=NOW - timedelta(days=30))
         self.assertEqual([p.url for p in posts], ["https://news.ycombinator.com/item?id=123"])
         self.assertIn("numericFilters=created_at_i", t.calls[0]["url"])
+        self.assertNotIn("'pg'", repr(posts[0]))
 
 
 RSS = b"""<?xml version="1.0"?><rss version="2.0"><channel>
