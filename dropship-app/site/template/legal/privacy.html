@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Informativa privacy | {{store_name}}</title>
+<link rel="stylesheet" href="../{{assets_base}}store.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<header class="site-header"><div class="container"><a class="logo" href="../index.html">{{store_name}}</a><nav class="nav" aria-label="Principale"><a href="../index.html#prodotti">Prodotti</a><a href="../index.html#contatti">Contatti</a></nav></div></header>
+
+<main id="main" class="container legal">
+  <p class="draft-banner" role="note">BOZZA — da far verificare a un professionista. Informativa generica ai sensi degli artt. 13–14 del Regolamento (UE) 2016/679 (GDPR): va adattata ai trattamenti reali, ai fornitori effettivamente usati e ai paesi in cui si trovano.</p>
+  <h1>Informativa sul trattamento dei dati personali</h1>
+  <p class="muted">Ultimo aggiornamento: <span class="ph">{{legal_updated_at}}</span></p>
+
+  <h2>1. Titolare del trattamento</h2>
+  <p><span class="ph">{{company_name}}</span>, <span class="ph">{{company_address}}</span>, P.IVA <span class="ph">{{vat_number}}</span>. Contatto per la privacy: <span class="ph">{{privacy_email}}</span>.</p>
+
+  <h2>2. Quali dati, perché e su quale base</h2>
+  <table>
+    <thead><tr><th scope="col">Finalità</th><th scope="col">Dati</th><th scope="col">Base giuridica</th><th scope="col">Conservazione</th></tr></thead>
+    <tbody>
+      <tr><td>Gestire ordine, pagamento, spedizione, resi e assistenza</td><td>nome, indirizzo, email, telefono, dati d'ordine</td><td>esecuzione del contratto (art. 6.1.b GDPR)</td><td><span class="ph">durata del rapporto + termini di legge</span></td></tr>
+      <tr><td>Adempimenti fiscali e contabili</td><td>dati di fatturazione</td><td>obbligo di legge (art. 6.1.c)</td><td><span class="ph">10 anni (art. 2220 c.c.) — verificare</span></td></tr>
+      <tr><td>Newsletter e offerte</td><td>email</td><td>consenso (art. 6.1.a), revocabile in ogni momento</td><td><span class="ph">fino alla revoca</span></td></tr>
+      <tr><td>Sicurezza del sito e prevenzione frodi</td><td>dati tecnici, IP</td><td>legittimo interesse (art. 6.1.f)</td><td><span class="ph">…</span></td></tr>
+    </tbody>
+  </table>
+  <p>Non usiamo i tuoi dati per decisioni automatizzate che ti riguardino in modo significativo. <span class="ph">Eliminare la riga newsletter se non prevista.</span></p>
+
+  <h2>3. A chi comunichiamo i dati</h2>
+  <p>Solo a chi serve per eseguire l'ordine, nominati ove necessario responsabili del trattamento: piattaforma e-commerce/hosting (<span class="ph">{{platform_provider}}</span>), fornitore che prepara e spedisce il prodotto (<span class="ph">{{supplier_name_country}}</span>), corriere (<span class="ph">{{carrier}}</span>), servizio di pagamento (<span class="ph">{{payment_provider}}</span>), consulente fiscale. Non vendiamo i tuoi dati.</p>
+
+  <h2>4. Trasferimenti fuori dall'UE</h2>
+  <p><span class="ph">Nel dropshipping il fornitore è spesso extra-UE (es. Cina): indicare il paese e la garanzia usata (clausole contrattuali standard, art. 46 GDPR, o decisione di adeguatezza, art. 45). Senza una garanzia valida il trasferimento non è lecito.</span></p>
+
+  <h2>5. I tuoi diritti</h2>
+  <p>Puoi chiedere accesso, rettifica, cancellazione, limitazione, portabilità dei dati e opporti al trattamento (artt. 15–22 GDPR), scrivendo a <span class="ph">{{privacy_email}}</span>. Puoi revocare il consenso in ogni momento. Hai diritto di proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+
+  <h2>6. Cookie</h2>
+  <p>Vedi la <a href="cookie.html">cookie policy</a>.</p>
+</main>
+
+<footer class="site-footer"><div class="container"><p class="legal-line">© {{year}} {{company_name}} · {{company_address}} · P.IVA {{vat_number}} · <a href="resi.html">Resi</a> · <a href="cookie.html">Cookie</a> · <a href="termini.html">Condizioni di vendita</a></p></div></footer>
+</body>
+</html>

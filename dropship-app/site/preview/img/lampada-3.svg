@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+<rect width="800" height="800" fill="#FFF7ED"/>
+<g fill="none" stroke="#9A3412" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".55">
+<path d="M280.0 550.0 h240"/><path d="M400.0 550.0 V380.0"/><path d="M400.0 380.0 L490.0 290.0"/><path d="M440.0 250.0 l110 50 l-40 60 z"/>
+</g>
+<text x="400.0" y="730" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#9A3412">IMMAGINE DI ESEMPIO · Foto 3</text>
+</svg>

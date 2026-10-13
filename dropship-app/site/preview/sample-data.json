@@ -1,0 +1,84 @@
+{
+  "_nota": "DATI DI ESEMPIO per l'anteprima. Nessun valore qui è reale: azienda, P.IVA, prezzi, tempi e prodotto sono inventati e marcati ESEMPIO. 'reviews' è volutamente vuoto: il template mostra lo stato senza recensioni.",
+  "store_name": "Negozio Esempio",
+  "store_tagline": "Oggetti utili per la casa, spediti con tempi chiari.",
+  "store_logo_url": null,
+  "theme_brand": "#0F5E57",
+  "theme_brand_strong": "#0B4A44",
+  "theme_brand_soft": "#E6F2F0",
+  "assets_base": "../template/assets/",
+  "base_url": "../template/",
+  "canonical_url": "https://esempio.invalid/prodotti/lampada-led-pieghevole",
+  "meta_description": "ESEMPIO — Lampada LED da scrivania pieghevole con 3 tonalità di luce. Spedizione e resi chiari.",
+  "og_image": null,
+  "year": "2026",
+
+  "title": "Lampada LED da scrivania pieghevole (ESEMPIO)",
+  "subtitle": "Prodotto di esempio per l'anteprima del template",
+  "sku": "ESEMPIO-001",
+  "category": "Casa e ufficio",
+  "category_url": "../template/index.html#prodotti",
+  "price": "€ 29,90",
+  "price_number": "29.90",
+  "price_reference": "€ 34,90",
+  "discount_label": "-14%",
+  "in_stock": true,
+  "images": [
+    { "src": "img/lampada-1.svg", "alt": "Immagine di esempio: lampada aperta sulla scrivania", "width": 800, "height": 800 },
+    { "src": "img/lampada-2.svg", "alt": "Immagine di esempio: lampada piegata", "width": 800, "height": 800 },
+    { "src": "img/lampada-3.svg", "alt": "Immagine di esempio: dettaglio dei comandi touch", "width": 800, "height": 800 },
+    { "src": "img/lampada-4.svg", "alt": "Immagine di esempio: porta USB-C", "width": 800, "height": 800 }
+  ],
+  "bullets": [
+    "3 tonalità di luce e 5 livelli di intensità (dato di esempio)",
+    "Si piega fino a 4 cm di spessore: entra in uno zaino",
+    "Batteria ricaricabile via USB-C, cavo incluso",
+    "Dimensioni aperta: 38 × 14 cm · peso 480 g"
+  ],
+  "description_html": "<p>Testo di <strong>esempio</strong>. Qui il generatore inserisce la descrizione del prodotto, riscritta in italiano chiaro: cosa fa, per chi è, cosa c'è nella confezione. Nessuna affermazione non verificabile (\"il migliore\", \"certificato\" senza certificato).</p>",
+  "specs": [
+    { "label": "Caratteristiche tecniche", "value_html": "<p>Potenza 5 W · Batteria 2000 mAh · Ingresso USB-C 5 V (valori di esempio).</p>" },
+    { "label": "Cosa c'è nella confezione", "value_html": "<p>Lampada, cavo USB-C, istruzioni in italiano (esempio).</p>" }
+  ],
+  "payment_methods_label": "carta di credito/debito, PayPal (esempio)",
+
+  "shipping_cost_label": "gratuita",
+  "shipping_days_min": 7,
+  "shipping_days_max": 12,
+  "shipping_days_late": 15,
+  "handling_days": 2,
+  "ships_from": "Cina (magazzino del fornitore)",
+  "ships_from_outside_eu": true,
+  "duties_included": true,
+  "duties_label": "IVA inclusa nel prezzo tramite regime IOSS: nessun costo alla consegna (esempio).",
+  "carrier": "corriere tracciato (esempio)",
+  "return_days": 14,
+  "return_cost_label": "Le spese di restituzione sono a carico nostro (esempio).",
+
+  "contact_email": "assistenza@esempio.invalid",
+  "contact_phone": null,
+  "contact_response_time": "1 giorno lavorativo",
+
+  "reviews": [],
+  "reviews_policy_label": "",
+
+  "company_name": "Azienda Esempio S.r.l.",
+  "company_address": "Via Esempio 1, 00000 Città (XX)",
+  "vat_number": "IT00000000000 (esempio)",
+  "rea": "XX-000000 (esempio)",
+  "pec": "esempio@pec.invalid",
+  "share_capital": null,
+
+  "hero_title": "Oggetti utili, prezzi chiari, resi semplici.",
+  "hero_text": "Testo di esempio: pochi prodotti scelti, con tempi di consegna reali e 14 giorni per ripensarci.",
+  "hero_cta_url": "#prodotti",
+  "hero_cta_label": "Vedi i prodotti",
+  "hero_image": { "src": "img/hero.svg", "alt": "Immagine di esempio", "width": 800, "height": 600 },
+  "products_title": "I nostri prodotti",
+  "products": [
+    { "url": "product.html", "title": "Lampada LED pieghevole (esempio)", "price": "€ 29,90", "price_reference": "€ 34,90", "image_src": "img/prod-a.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Organizer da scrivania (esempio)", "price": "€ 19,90", "image_src": "img/prod-b.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Supporto per laptop (esempio)", "price": "€ 24,90", "image_src": "img/prod-c.svg", "image_alt": "Immagine di esempio" },
+    { "url": "product.html", "title": "Tappetino da scrivania (esempio)", "price": "€ 14,90", "image_src": "img/prod-d.svg", "image_alt": "Immagine di esempio" }
+  ]
+}

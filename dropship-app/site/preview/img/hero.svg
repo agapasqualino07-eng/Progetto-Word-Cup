@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect width="800" height="600" fill="#E6F2F0"/>
+<g fill="none" stroke="#0F5E57" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".55">
+<path d="M280.0 450.0 h240"/><path d="M400.0 450.0 V280.0"/><path d="M400.0 280.0 L490.0 190.0"/><path d="M440.0 150.0 l110 50 l-40 60 z"/>
+</g>
+<text x="400.0" y="530" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0F5E57">IMMAGINE DI ESEMPIO · Hero</text>
+</svg>

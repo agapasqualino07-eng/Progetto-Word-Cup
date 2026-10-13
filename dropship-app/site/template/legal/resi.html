@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Resi e rimborsi | {{store_name}}</title>
+<link rel="stylesheet" href="../{{assets_base}}store.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<header class="site-header"><div class="container"><a class="logo" href="../index.html">{{store_name}}</a><nav class="nav" aria-label="Principale"><a href="../index.html#prodotti">Prodotti</a><a href="spedizioni.html">Spedizioni</a><a href="../index.html#contatti">Contatti</a></nav></div></header>
+
+<main id="main" class="container legal">
+  <p class="draft-banner" role="note">BOZZA — da far verificare a un professionista. Questo testo è un modello generico, non è consulenza legale e non va pubblicato così com'è. I campi evidenziati vanno compilati.</p>
+  <h1>Resi, recesso e rimborsi</h1>
+  <p class="muted">Ultimo aggiornamento: <span class="ph">{{legal_updated_at}}</span></p>
+
+  <h2>In breve</h2>
+  <ul>
+    <li>Hai <strong>14 giorni</strong> dal giorno in cui ricevi il prodotto per recedere dall'acquisto, <strong>senza dover dare una motivazione</strong> (artt. 52 ss. D.Lgs. 206/2005, Codice del Consumo).</li>
+    <li>Ti rimborsiamo <strong>entro 14 giorni</strong> dalla tua comunicazione di recesso, incluse le spese di consegna standard pagate.</li>
+    <li>Costi di restituzione: <span class="ph">{{return_cost_policy}}</span> <em>(scegliere: "a nostro carico" oppure "a tuo carico, circa € X" — se non indicati prima dell'acquisto restano a carico del venditore).</em></li>
+  </ul>
+
+  <h2>1. Come esercitare il recesso</h2>
+  <p>Invia entro 14 giorni dal ricevimento una dichiarazione esplicita a <span class="ph">{{contact_email}}</span> (oppure per raccomandata a <span class="ph">{{company_address}}</span>). Puoi usare il modulo qui sotto, ma non è obbligatorio.</p>
+  <p>Ti risponderemo con le istruzioni e l'indirizzo per il reso. <strong>Indirizzo di restituzione:</strong> <span class="ph">{{return_address}}</span> <em>(dropshipping: verificare se l'indirizzo è in UE o presso il fornitore; un reso verso un paese extra-UE può costare molto al cliente e va dichiarato chiaramente prima dell'acquisto).</em></p>
+
+  <h2>2. Restituzione del prodotto</h2>
+  <p>Devi spedire il prodotto entro 14 giorni dalla comunicazione di recesso. Ti chiediamo di restituirlo integro e, se possibile, nella confezione originale. Sei responsabile solo della diminuzione di valore dovuta a una manipolazione diversa da quella necessaria per verificarne natura, caratteristiche e funzionamento.</p>
+
+  <h2>3. Rimborso</h2>
+  <p>Rimborsiamo con lo stesso metodo di pagamento usato per l'ordine, senza costi per te. Possiamo attendere di ricevere il prodotto, o la prova che l'hai spedito, prima di rimborsare. Se hai scelto una spedizione più costosa di quella standard, rimborsiamo solo il costo standard.</p>
+
+  <h2>4. Eccezioni</h2>
+  <p>Il recesso non si applica, tra gli altri, ai prodotti personalizzati o confezionati su misura e ai prodotti sigillati non restituibili per motivi igienici se aperti dopo la consegna (art. 59 Cod. Consumo). <span class="ph">Indicare qui quali prodotti dello store rientrano nelle eccezioni, o eliminare il paragrafo.</span></p>
+
+  <h2>5. Prodotto difettoso o diverso dall'ordine</h2>
+  <p>È un caso diverso dal recesso: vale la <strong>garanzia legale di conformità di 2 anni</strong> dalla consegna (artt. 128 ss. Cod. Consumo). Scrivici con foto del difetto: ripariamo, sostituiamo o, se non possibile, riduciamo il prezzo o rimborsiamo. Le spese di restituzione in questo caso sono a nostro carico. Verso di te il venditore responsabile siamo noi, anche se il prodotto è spedito da un fornitore. <span class="ph">Verificare con il professionista i termini aggiornati di denuncia del difetto.</span></p>
+
+  <h2>6. Modulo di recesso tipo</h2>
+  <div class="contact-card">
+    <p>Destinatario: <span class="ph">{{company_name}}</span>, <span class="ph">{{company_address}}</span>, <span class="ph">{{contact_email}}</span></p>
+    <p>Con la presente notifico il recesso dal mio contratto di vendita dei seguenti beni: ______</p>
+    <p>Ordinato il ______ / ricevuto il ______ · Numero ordine: ______</p>
+    <p>Nome del consumatore: ______ · Indirizzo: ______</p>
+    <p>Data: ______ · Firma (solo se il modulo è inviato in versione cartacea): ______</p>
+  </div>
+
+  <h2>7. Risoluzione delle controversie</h2>
+  <p>Per qualsiasi problema scrivici prima a <span class="ph">{{contact_email}}</span>. <span class="ph">Indicare eventuali organismi ADR a cui il venditore aderisce. Nota: la piattaforma europea ODR è stata dismessa nel 2025 — far verificare quali informazioni sono oggi obbligatorie.</span></p>
+</main>
+
+<footer class="site-footer"><div class="container"><p class="legal-line">© {{year}} {{company_name}} · {{company_address}} · P.IVA {{vat_number}} · <a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <a href="termini.html">Condizioni di vendita</a></p></div></footer>
+</body>
+</html>

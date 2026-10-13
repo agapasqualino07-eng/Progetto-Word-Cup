@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Condizioni di vendita | {{store_name}}</title>
+<link rel="stylesheet" href="../{{assets_base}}store.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+<header class="site-header"><div class="container"><a class="logo" href="../index.html">{{store_name}}</a><nav class="nav" aria-label="Principale"><a href="../index.html#prodotti">Prodotti</a><a href="../index.html#contatti">Contatti</a></nav></div></header>
+
+<main id="main" class="container legal">
+  <p class="draft-banner" role="note">BOZZA — da far verificare a un professionista. Indice minimo delle condizioni generali di vendita B2C (informazioni precontrattuali, art. 49 Cod. Consumo; D.Lgs. 70/2003). Ogni sezione va scritta sul caso reale.</p>
+  <h1>Condizioni generali di vendita</h1>
+  <p class="muted">Ultimo aggiornamento: <span class="ph">{{legal_updated_at}}</span></p>
+
+  <h2>1. Chi vende</h2>
+  <p><span class="ph">{{company_name}}</span>, <span class="ph">{{company_address}}</span>, P.IVA <span class="ph">{{vat_number}}</span>, REA <span class="ph">{{rea}}</span>, PEC <span class="ph">{{pec}}</span>, email <span class="ph">{{contact_email}}</span>. Il venditore è responsabile verso il cliente per l'intero ordine, anche quando il prodotto è spedito da un fornitore terzo.</p>
+  <h2>2. Prodotti e prezzi</h2>
+  <p>Prezzi in euro, IVA inclusa. Le spese di spedizione sono indicate prima della conferma dell'ordine. Eventuali riduzioni di prezzo indicano il prezzo più basso applicato nei 30 giorni precedenti (art. 17-bis Cod. Consumo).</p>
+  <h2>3. Ordine e conclusione del contratto</h2>
+  <p><span class="ph">Descrivere i passaggi del checkout. Il pulsante finale deve indicare chiaramente l'obbligo di pagare (es. "Ordine con obbligo di pagamento" / "Paga ora"). Conferma d'ordine via email su supporto durevole.</span></p>
+  <h2>4. Pagamenti</h2>
+  <p><span class="ph">{{payment_methods_label}}</span></p>
+  <h2>5. Consegna</h2>
+  <p>Vedi <a href="spedizioni.html">Spedizioni e consegna</a>.</p>
+  <h2>6. Diritto di recesso</h2>
+  <p>Vedi <a href="resi.html">Resi, recesso e rimborsi</a> (14 giorni, modulo tipo incluso).</p>
+  <h2>7. Garanzia legale di conformità</h2>
+  <p>2 anni dalla consegna, artt. 128 ss. Cod. Consumo. <span class="ph">Eventuale garanzia convenzionale aggiuntiva: descriverla o eliminare.</span></p>
+  <h2>8. Legge applicabile e foro</h2>
+  <p><span class="ph">Legge italiana, ferme le tutele inderogabili del paese di residenza del consumatore; foro del consumatore.</span></p>
+</main>
+
+<footer class="site-footer"><div class="container"><p class="legal-line">© {{year}} {{company_name}} · {{company_address}} · P.IVA {{vat_number}} · <a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <a href="resi.html">Resi</a></p></div></footer>
+</body>
+</html>

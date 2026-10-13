@@ -55,6 +55,8 @@ Esempio numerico (IPOTESI, prodotto di esempio):
 | Target CPA | 10,00 |
 | Target ROAS | 2,86 |
 
+Il BE CPA copre solo i costi variabili dell'ordine. I costi fissi mensili stimati in `docs/02-unit-economics.md` (circa 551 €/mese, IPOTESI, di cui la voce più pesante sono i contributi INPS) vanno coperti dal profitto per ordine moltiplicato per gli ordini del mese. Con lo scenario base di quel documento (prezzo 39,90 €, contribuzione prima delle ads 16,00 €, CPA ipotizzato 15,00 €) resta circa 1 € per ordine: servirebbero oltre 500 ordini al mese solo per pagare i fissi. Il target CPA va quindi fissato abbastanza sotto il BE CPA da lasciare un profitto reale, e il prodotto va scartato se non ci arriva.
+
 Due regole che l'app applica:
 
 1. Il valore di conversione inviato alle piattaforme è il subtotale prodotti IVA esclusa. Così il ROAS mostrato da Meta/TikTok/Google è confrontabile con il BE ROAS. Se si invia il lordo IVA, il ROAS di piattaforma risulta gonfiato del 22%.
