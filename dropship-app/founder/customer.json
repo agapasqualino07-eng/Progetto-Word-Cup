@@ -1,0 +1,37 @@
+{
+  "business": "Store dropshipping 'problemi reali' (nome di lavoro), esempio di prodotto: organizer cavi da scrivania (ESEMPIO, scelto da dati MOCK)",
+  "target": "Consumatori italiani che scoprono su TikTok/Instagram/Facebook un prodotto da circa 40 euro che risolve un problema pratico, venduto da uno store online che non conoscono, con spedizione da magazzino UE (redditi indicati in euro lordi annui)",
+  "where": "Italia, acquisto online",
+  "age": [20, 55],
+  "segments": [
+    {"name": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)", "share": 0.30, "income": [8000, 24000]},
+    {"name": "Impiegato o freelance in smart working (reddito in euro)", "share": 0.45, "income": [24000, 45000]},
+    {"name": "Professionista o manager con studio in casa (reddito in euro)", "share": 0.25, "income": [45000, 90000]}
+  ],
+  "behaviours": [
+    {"name": "Compra solo su Amazon", "share": 0.25, "how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile."},
+    {"name": "Impulsivo da social", "share": 0.15, "how": "Compra di getto da TikTok/Instagram se il video lo convince, poi a volte se ne pente."},
+    {"name": "Legge tutte le recensioni", "share": 0.15, "how": "Prima di comprare da un sito nuovo cerca recensioni Trustpilot, Google e commenti sotto l'ad."},
+    {"name": "Cacciatore di prezzi", "share": 0.15, "how": "Confronta su Temu, AliExpress e Amazon; sa che molti gadget costano un quarto altrove."},
+    {"name": "Diffidente verso gli e-commerce sconosciuti", "share": 0.15, "how": "Ha già ricevuto pacchi tardivi o merce diversa; paga solo con PayPal o in contrassegno."},
+    {"name": "Pratico che risolve il problema", "share": 0.15, "how": "Se il problema gli dà fastidio ogni giorno compra la prima soluzione decente senza pensarci troppo."}
+  ],
+  "objections": [
+    "40 euro per un organizer? Su Amazon o Temu ne trovo uno simile a 10-15",
+    "Non conosco questo sito: e se è una truffa o non arriva niente?",
+    "Quanto ci mette ad arrivare? Su Amazon arriva domani",
+    "Se non mi piace, il reso è facile e chi lo paga?",
+    "Sembra il solito prodotto dropshipping da AliExpress con ricarico",
+    "Il disordine dei cavi mi dà fastidio, ma non così tanto da spendere",
+    "Le recensioni sul sito potrebbero essere finte",
+    "Basterebbero due fascette e un po' di pazienza"
+  ],
+  "habits": [
+    "lavori al PC da casa tre giorni a settimana e i cavi sotto la scrivania ti finiscono tra i piedi",
+    "scrolli TikTok la sera sul divano",
+    "hai un account Amazon Prime e lo usi più volte al mese",
+    "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane",
+    "hai appena sistemato la scrivania per una postazione da gaming o da lavoro",
+    "paghi quasi tutto con PayPal"
+  ]
+}

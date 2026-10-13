@@ -1,0 +1,222 @@
+[
+ {
+  "id": "P001",
+  "name": "Mason",
+  "age": 54,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 23000,
+  "behaviour": "Cacciatore di prezzi",
+  "behaviour_how": "Confronta su Temu, AliExpress e Amazon; sa che molti gadget costano un quarto altrove.",
+  "objection": "Il disordine dei cavi mi dà fastidio, ma non così tanto da spendere",
+  "habit": "scrolli TikTok la sera sul divano"
+ },
+ {
+  "id": "P002",
+  "name": "Elle",
+  "age": 20,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 13000,
+  "behaviour": "Compra solo su Amazon",
+  "behaviour_how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile.",
+  "objection": "Basterebbero due fascette e un po' di pazienza",
+  "habit": "paghi quasi tutto con PayPal"
+ },
+ {
+  "id": "P003",
+  "name": "Dana",
+  "age": 28,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 17000,
+  "behaviour": "Cacciatore di prezzi",
+  "behaviour_how": "Confronta su Temu, AliExpress e Amazon; sa che molti gadget costano un quarto altrove.",
+  "objection": "Basterebbero due fascette e un po' di pazienza",
+  "habit": "hai appena sistemato la scrivania per una postazione da gaming o da lavoro"
+ },
+ {
+  "id": "P004",
+  "name": "Noah",
+  "age": 28,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 23000,
+  "behaviour": "Diffidente verso gli e-commerce sconosciuti",
+  "behaviour_how": "Ha già ricevuto pacchi tardivi o merce diversa; paga solo con PayPal o in contrassegno.",
+  "objection": "Sembra il solito prodotto dropshipping da AliExpress con ricarico",
+  "habit": "lavori al PC da casa tre giorni a settimana e i cavi sotto la scrivania ti finiscono tra i piedi"
+ },
+ {
+  "id": "P005",
+  "name": "Ana",
+  "age": 46,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 38000,
+  "behaviour": "Pratico che risolve il problema",
+  "behaviour_how": "Se il problema gli dà fastidio ogni giorno compra la prima soluzione decente senza pensarci troppo.",
+  "objection": "Quanto ci mette ad arrivare? Su Amazon arriva domani",
+  "habit": "hai appena sistemato la scrivania per una postazione da gaming o da lavoro"
+ },
+ {
+  "id": "P006",
+  "name": "Nadia",
+  "age": 39,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 16000,
+  "behaviour": "Legge tutte le recensioni",
+  "behaviour_how": "Prima di comprare da un sito nuovo cerca recensioni Trustpilot, Google e commenti sotto l'ad.",
+  "objection": "Le recensioni sul sito potrebbero essere finte",
+  "habit": "scrolli TikTok la sera sul divano"
+ },
+ {
+  "id": "P007",
+  "name": "Isla",
+  "age": 53,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 41000,
+  "behaviour": "Compra solo su Amazon",
+  "behaviour_how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile.",
+  "objection": "Le recensioni sul sito potrebbero essere finte",
+  "habit": "lavori al PC da casa tre giorni a settimana e i cavi sotto la scrivania ti finiscono tra i piedi"
+ },
+ {
+  "id": "P008",
+  "name": "Tariq",
+  "age": 26,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 32000,
+  "behaviour": "Compra solo su Amazon",
+  "behaviour_how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile.",
+  "objection": "Non conosco questo sito: e se è una truffa o non arriva niente?",
+  "habit": "lavori al PC da casa tre giorni a settimana e i cavi sotto la scrivania ti finiscono tra i piedi"
+ },
+ {
+  "id": "P009",
+  "name": "Caleb",
+  "age": 42,
+  "segment": "Professionista o manager con studio in casa (reddito in euro)",
+  "income": 74000,
+  "behaviour": "Impulsivo da social",
+  "behaviour_how": "Compra di getto da TikTok/Instagram se il video lo convince, poi a volte se ne pente.",
+  "objection": "40 euro per un organizer? Su Amazon o Temu ne trovo uno simile a 10-15",
+  "habit": "lavori al PC da casa tre giorni a settimana e i cavi sotto la scrivania ti finiscono tra i piedi"
+ },
+ {
+  "id": "P010",
+  "name": "Freya",
+  "age": 52,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 34000,
+  "behaviour": "Pratico che risolve il problema",
+  "behaviour_how": "Se il problema gli dà fastidio ogni giorno compra la prima soluzione decente senza pensarci troppo.",
+  "objection": "Sembra il solito prodotto dropshipping da AliExpress con ricarico",
+  "habit": "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane"
+ },
+ {
+  "id": "P011",
+  "name": "Sara",
+  "age": 40,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 43000,
+  "behaviour": "Impulsivo da social",
+  "behaviour_how": "Compra di getto da TikTok/Instagram se il video lo convince, poi a volte se ne pente.",
+  "objection": "Basterebbero due fascette e un po' di pazienza",
+  "habit": "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane"
+ },
+ {
+  "id": "P012",
+  "name": "Aria",
+  "age": 30,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 27000,
+  "behaviour": "Diffidente verso gli e-commerce sconosciuti",
+  "behaviour_how": "Ha già ricevuto pacchi tardivi o merce diversa; paga solo con PayPal o in contrassegno.",
+  "objection": "Se non mi piace, il reso è facile e chi lo paga?",
+  "habit": "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane"
+ },
+ {
+  "id": "P013",
+  "name": "Jordan",
+  "age": 41,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 34000,
+  "behaviour": "Impulsivo da social",
+  "behaviour_how": "Compra di getto da TikTok/Instagram se il video lo convince, poi a volte se ne pente.",
+  "objection": "Se non mi piace, il reso è facile e chi lo paga?",
+  "habit": "paghi quasi tutto con PayPal"
+ },
+ {
+  "id": "P014",
+  "name": "Rafael",
+  "age": 24,
+  "segment": "Professionista o manager con studio in casa (reddito in euro)",
+  "income": 70000,
+  "behaviour": "Legge tutte le recensioni",
+  "behaviour_how": "Prima di comprare da un sito nuovo cerca recensioni Trustpilot, Google e commenti sotto l'ad.",
+  "objection": "40 euro per un organizer? Su Amazon o Temu ne trovo uno simile a 10-15",
+  "habit": "scrolli TikTok la sera sul divano"
+ },
+ {
+  "id": "P015",
+  "name": "Liam",
+  "age": 31,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 25000,
+  "behaviour": "Cacciatore di prezzi",
+  "behaviour_how": "Confronta su Temu, AliExpress e Amazon; sa che molti gadget costano un quarto altrove.",
+  "objection": "40 euro per un organizer? Su Amazon o Temu ne trovo uno simile a 10-15",
+  "habit": "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane"
+ },
+ {
+  "id": "P016",
+  "name": "Sofia",
+  "age": 32,
+  "segment": "Professionista o manager con studio in casa (reddito in euro)",
+  "income": 67000,
+  "behaviour": "Compra solo su Amazon",
+  "behaviour_how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile.",
+  "objection": "40 euro per un organizer? Su Amazon o Temu ne trovo uno simile a 10-15",
+  "habit": "scrolli TikTok la sera sul divano"
+ },
+ {
+  "id": "P017",
+  "name": "Poppy",
+  "age": 53,
+  "segment": "Professionista o manager con studio in casa (reddito in euro)",
+  "income": 55000,
+  "behaviour": "Diffidente verso gli e-commerce sconosciuti",
+  "behaviour_how": "Ha già ricevuto pacchi tardivi o merce diversa; paga solo con PayPal o in contrassegno.",
+  "objection": "Quanto ci mette ad arrivare? Su Amazon arriva domani",
+  "habit": "scrolli TikTok la sera sul divano"
+ },
+ {
+  "id": "P018",
+  "name": "Yara",
+  "age": 31,
+  "segment": "Professionista o manager con studio in casa (reddito in euro)",
+  "income": 63000,
+  "behaviour": "Pratico che risolve il problema",
+  "behaviour_how": "Se il problema gli dà fastidio ogni giorno compra la prima soluzione decente senza pensarci troppo.",
+  "objection": "Le recensioni sul sito potrebbero essere finte",
+  "habit": "hai appena sistemato la scrivania per una postazione da gaming o da lavoro"
+ },
+ {
+  "id": "P019",
+  "name": "Lena",
+  "age": 46,
+  "segment": "Impiegato o freelance in smart working (reddito in euro)",
+  "income": 42000,
+  "behaviour": "Legge tutte le recensioni",
+  "behaviour_how": "Prima di comprare da un sito nuovo cerca recensioni Trustpilot, Google e commenti sotto l'ad.",
+  "objection": "Le recensioni sul sito potrebbero essere finte",
+  "habit": "hai un account Amazon Prime e lo usi più volte al mese"
+ },
+ {
+  "id": "P020",
+  "name": "Pablo",
+  "age": 31,
+  "segment": "Studente o giovane lavoratore con scrivania in camera (reddito in euro)",
+  "income": 14000,
+  "behaviour": "Compra solo su Amazon",
+  "behaviour_how": "Se vede un prodotto in un ad lo cerca su Amazon e lo compra lì, con Prime e reso facile.",
+  "objection": "Sembra il solito prodotto dropshipping da AliExpress con ricarico",
+  "habit": "una volta hai comprato da un ad Instagram e il pacco è arrivato dopo tre settimane"
+ }
+]
